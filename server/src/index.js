@@ -20,6 +20,10 @@ app.use(express.json());
 const authRoutes = require("./routes/auth");
 app.use("/api/auth", authRoutes);
 
+const authMiddleware = require("./middlewares/auth");
+const vehicleRoutes = require("./routes/vehicles");
+app.use("/api/vehicles", authMiddleware, vehicleRoutes);
+
 // Créer une route GET / qui retourne { message: "MyDriveLog API is running" }
 app.get("/", (req, res) => {
   res.json({ message: "MyDriveLog API is running" });
