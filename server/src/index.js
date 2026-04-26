@@ -24,6 +24,9 @@ const authMiddleware = require("./middlewares/auth");
 const vehicleRoutes = require("./routes/vehicles");
 app.use("/api/vehicles", authMiddleware, vehicleRoutes);
 
+const interventionRoutes = require("./routes/interventions");
+app.use("/api/interventions", authMiddleware, interventionRoutes);
+
 // Créer une route GET / qui retourne { message: "MyDriveLog API is running" }
 app.get("/", (req, res) => {
   res.json({ message: "MyDriveLog API is running" });
