@@ -35,7 +35,10 @@ export default function Dashboard() {
       <h2>Your Vehicles</h2>
       <ul>
         {vehicles.map((vehicle) => (
-          <li key={vehicle.id}>
+          <li
+            key={vehicle.id}
+            onClick={() => navigate(`/vehicles/${vehicle.id}`)}
+          >
             {vehicle.nickname} {vehicle.brand} {vehicle.model} ({vehicle.year})
           </li>
         ))}

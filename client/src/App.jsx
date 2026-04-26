@@ -4,6 +4,7 @@ import RegisterPage from "./pages/Register";
 import Dashboard from "./pages/Dashboard";
 import VehicleNew from "./pages/VehicleNew";
 import ProtectedRoute from "./components/ProtectedRoute";
+import VehicleDetail from "./pages/VehicleDetail";
 
 function App() {
   return (
@@ -24,6 +25,14 @@ function App() {
           element={
             <ProtectedRoute>
               <VehicleNew />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/vehicles/:id"
+          element={
+            <ProtectedRoute>
+              <VehicleDetail />
             </ProtectedRoute>
           }
         />
