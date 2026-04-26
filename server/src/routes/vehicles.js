@@ -48,4 +48,86 @@ router.post("/", async (req, res) => {
   }
 });
 
+// Recuperer un véhicule spécifique de l'utilisateur connecté
+router.get("/:id", async (req, res) => {
+  try {
+    const userId = req.userId;
+    const vehicleId = req.params.id;
+
+    const vehicleResult = await db.query(
+      "SELECT * FROM vehicles WHERE id = $1 AND user_id = $2",
+      [vehicleId, userId],
+    );
+
+    if (vehicleResult.rows.length === 0) {
+      return res.status(404).json({ message: "Vehicle not found" });
+    }
+
+    res.json(vehicleResult.rows[0]);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: "Erreur serveur" });
+  }
+});
+
+// Modifier un véhicule de l'utilisateur connecté
+router.put("/:id", async (req, res) => {
+  try {
+    const userId = req.userId;
+    const vehicleId = req.params.id;
+    const { nickname, license_plate, brand, model, year, fuel_type } = req.body;
+
+    const vehicleResult = await db.query(
+      "SELECT * FROM vehicles WHERE id = $1 AND user_id = $2",
+      [vehicleId, userId],
+    );
+
+    if (vehicleResult.rows.length === 0) {
+      return res.status(404).json({ message: "Vehicle not found" });
+    }
+
+    const updatedVehicle = await db.query(
+      "UPDATE vehicles SET nickname = COALESCE($1, nickname), license_plate = COALESCE($2, license_plate), brand = COALESCE($3, brand), model = COALESCE($4, model), year = COALESCE($5, year), fuel_type = COALESCE($6, fuel_type) WHERE id = $7 AND user_id = $8 RETURNING *",
+      [
+        nickname,
+        license_plate,
+        brand,
+        model,
+        year,
+        fuel_type,
+        vehicleId,
+        userId,
+      ],
+    );
+    res.json(updatedVehicle.rows[0]);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: "Erreur serveur" });
+  }
+});
+
+// Supprimer un véhicule de l'utilisateur connecté
+router.delete("/:id", async (req, res) => {
+  try {
+    const userId = req.userId;
+    const vehicleId = req.params.id;
+
+    const vehicleResult = await db.query(
+      "SELECT * FROM vehicles WHERE id = $1 AND user_id = $2",
+      [vehicleId, userId],
+    );
+    if (vehicleResult.rows.length === 0) {
+      return res.status(404).json({ message: "Vehicle not found" });
+    }
+    await db.query("DELETE FROM vehicles WHERE id = $1 AND user_id = $2", [
+      vehicleId,
+      userId,
+    ]);
+    res.json({ message: "Vehicle deleted successfully" });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: "Erreur serveur" });
+  }
+});
+
 module.exports = router;
