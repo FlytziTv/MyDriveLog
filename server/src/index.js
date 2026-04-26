@@ -30,6 +30,9 @@ app.use("/api/interventions", authMiddleware, interventionRoutes);
 const reminderRoutes = require("./routes/reminders");
 app.use("/api/reminders", authMiddleware, reminderRoutes);
 
+const tripRoutes = require("./routes/trips");
+app.use("/api/trips", authMiddleware, tripRoutes);
+
 // Créer une route GET / qui retourne { message: "MyDriveLog API is running" }
 app.get("/", (req, res) => {
   res.json({ message: "MyDriveLog API is running" });
