@@ -36,6 +36,9 @@ app.use("/api/trips", authMiddleware, tripRoutes);
 const tripStepsRoutes = require("./routes/tripSteps");
 app.use("/api/trips/:tripId/steps", authMiddleware, tripStepsRoutes);
 
+const expensesRoutes = require("./routes/expenses");
+app.use("/api/trips/:tripId/expenses", authMiddleware, expensesRoutes);
+
 // Créer une route GET / qui retourne { message: "MyDriveLog API is running" }
 app.get("/", (req, res) => {
   res.json({ message: "MyDriveLog API is running" });
