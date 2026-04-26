@@ -7,6 +7,8 @@ import ProtectedRoute from "./components/ProtectedRoute";
 import VehicleDetail from "./pages/VehicleDetail";
 import VehicleInterventions from "./pages/Interventions";
 import InterventionNew from "./pages/InterventionNew";
+import TripNew from "./pages/TripNew";
+import Trips from "./pages/Trips";
 
 function App() {
   return (
@@ -52,6 +54,22 @@ function App() {
           element={
             <ProtectedRoute>
               <InterventionNew />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/trips/new"
+          element={
+            <ProtectedRoute>
+              <TripNew />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/trips"
+          element={
+            <ProtectedRoute>
+              <Trips />
             </ProtectedRoute>
           }
         />

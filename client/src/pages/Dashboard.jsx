@@ -46,6 +46,8 @@ export default function Dashboard() {
       <button onClick={() => navigate("/vehicles/new")}>
         Ajouter un véhicule
       </button>
+
+      <button onClick={() => navigate("/trips")}>Mes road trips</button>
     </div>
   );
 }
