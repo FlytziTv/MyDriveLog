@@ -22,34 +22,64 @@ export default function LoginPage() {
   };
 
   return (
-    <div>
-      <h1>Se connecter</h1>
-      <form onSubmit={handleSubmit}>
-        <div>
-          <label htmlFor="email">Email</label>
-          <input
-            type="email"
-            id="email"
-            name="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            required
-          />
+    <div className="min-h-screen flex items-center justify-center bg-app-bg">
+      <div className="bg-white rounded-2xl shadow-card p-8 w-full max-w-md">
+        {/* Logo / Titre */}
+        <div className="mb-8 text-center">
+          <h1 className="text-2xl font-semibold text-app-text">MyDriveLog</h1>
+          <p className="text-muted text-sm mt-1">Connecte-toi à ton espace</p>
         </div>
-        <div>
-          <label htmlFor="password">Mot de passe</label>
-          <input
-            type="password"
-            id="password"
-            name="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            required
-          />
-        </div>
-        <button type="submit">Se connecter</button>
-      </form>
-      {error && <p style={{ color: "red" }}>{error}</p>}
+
+        <form onSubmit={handleSubmit} className="flex flex-col gap-4">
+          <div className="flex flex-col gap-1">
+            <label htmlFor="email" className="label">
+              Email
+            </label>
+            <input
+              type="email"
+              id="email"
+              name="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              className="input"
+              placeholder="ton@email.com"
+              required
+            />
+          </div>
+
+          <div className="flex flex-col gap-1">
+            <label htmlFor="password" className="label">
+              Mot de passe
+            </label>
+            <input
+              type="password"
+              id="password"
+              name="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              className="input"
+              placeholder="••••••••"
+              required
+            />
+          </div>
+
+          {error && <p className="text-red-500 text-sm">{error}</p>}
+
+          <button type="submit" className="btn-primary">
+            Se connecter
+          </button>
+        </form>
+
+        <p className="text-center text-sm text-muted mt-6">
+          Pas encore de compte ?{" "}
+          <span
+            className="text-primary cursor-pointer hover:underline"
+            onClick={() => navigate("/register")}
+          >
+            S'inscrire
+          </span>
+        </p>
+      </div>
     </div>
   );
 }
