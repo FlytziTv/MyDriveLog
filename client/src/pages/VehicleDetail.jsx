@@ -1,11 +1,12 @@
 import { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import api from "../services/api";
 
 export default function VehicleDetail() {
   const { id } = useParams();
   const [vehicle, setVehicle] = useState(null);
   const token = localStorage.getItem("token");
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchVehicle = async () => {
@@ -31,6 +32,10 @@ export default function VehicleDetail() {
       <p>Année: {vehicle.year}</p>
       <p>Plaque d'immatriculation: {vehicle.license_plate}</p>
       <p>Type de carburant: {vehicle.fuel_type}</p>
+
+      <button onClick={() => navigate(`/vehicles/${id}/interventions`)}>
+        Voir les interventions
+      </button>
     </div>
   );
 }
