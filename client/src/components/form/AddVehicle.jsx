@@ -2,6 +2,7 @@ import * as Dialog from "@radix-ui/react-dialog";
 import { useState } from "react";
 import api from "../../services/api";
 import InputGroup from "../ui/InputGroup";
+import { Plus } from "lucide-react";
 
 export default function AddVehicleDialog({ onSuccess }) {
   const [open, setOpen] = useState(false);
@@ -46,8 +47,13 @@ export default function AddVehicleDialog({ onSuccess }) {
   return (
     <Dialog.Root open={open} onOpenChange={setOpen}>
       {/* Bouton qui ouvre le dialog */}
-      <Dialog.Trigger asChild>
-        <button className="btn-primary">+ Ajouter un véhicule</button>
+      <Dialog.Trigger
+        asChild
+        className="flex flex-row items-center justify-center gap-2"
+      >
+        <button className="btn-primary">
+          <Plus size={16} /> Ajouter un véhicule
+        </button>
       </Dialog.Trigger>
 
       <Dialog.Portal>

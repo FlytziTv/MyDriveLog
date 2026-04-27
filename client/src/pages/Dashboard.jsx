@@ -3,6 +3,12 @@ import { useNavigate } from "react-router-dom";
 import api from "../services/api";
 import SideBar from "../components/layout/SideBar";
 import AddVehicleDialog from "../components/form/AddVehicle";
+import { Bell } from "lucide-react";
+import VehicleWidget from "../components/dashboard/VehicleWidget";
+import OverviewWidget from "../components/dashboard/OverviewWidget";
+import CostWidget from "../components/dashboard/CostWidget";
+import LastInterWidget from "../components/dashboard/LastInterWidget";
+import RappelWidget from "../components/dashboard/RappelWidget";
 
 export default function Dashboard() {
   const navigate = useNavigate();
@@ -44,21 +50,44 @@ export default function Dashboard() {
     <div className="min-h-screen flex bg-app-bg">
       <SideBar user={user?.username} />
 
-      <main className="ml-[260px] flex-1 p-8">
-        <h2>Your Vehicles</h2>
-        <ul>
-          {vehicles.map((vehicle) => (
-            <li
-              key={vehicle.id}
-              onClick={() => navigate(`/vehicles/${vehicle.id}`)}
-            >
-              {vehicle.nickname} {vehicle.brand} {vehicle.model} ({vehicle.year}
-              )
-            </li>
-          ))}
-        </ul>
+      <main className="ml-[260px] flex-1 p-4 gap-4 flex flex-col">
+        <div className="w-full flex flex-row items-center justify-between">
+          <div className="flex flex-col gap-0 items-start">
+            <h1 className="text-2xl font-bold">Bonjour, {user?.username}</h1>
+            <p className="text-app-text/70 text-sm ">
+              Voici un aperçu de vos véhicules et activités
+            </p>
+          </div>
 
-        <AddVehicleDialog onSuccess={fetchVehicles} />
+          <div className="flex flex-row items-stretch gap-2 h-10">
+            <AddVehicleDialog onSuccess={fetchVehicles} />
+
+            <div className="w-px bg-app-border my-1" />
+
+            <button
+              onClick={() => console.log("Ouverture des notifications")}
+              className="flex items-center justify-center border border-app-border text-app-text rounded-lg h-full aspect-square hover:bg-surface-hover transition-all duration-200 active:scale-95 relative"
+              title="Notifications"
+            >
+              <Bell size={18} />
+              <span className="absolute top-2 right-2 w-3 h-3 bg-primary rounded-full border-2 border-app-bg" />
+            </button>
+          </div>
+        </div>
+
+        <div className="grid grid-cols-3 gap-4 h-full overflow-y-hidden">
+          {/* Widget a gauche */}
+          <div className="col-span-2 flex flex-col gap-4">
+            <VehicleWidget vehicles={vehicles} />
+            <OverviewWidget />
+          </div>
+          {/* Widget a droite */}
+          <div className="col-span-1 flex flex-col gap-4">
+            <CostWidget />
+            <LastInterWidget />
+            <RappelWidget />
+          </div>
+        </div>
       </main>
     </div>
   );
