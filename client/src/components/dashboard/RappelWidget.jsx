@@ -1,25 +1,35 @@
-import { FileText, Droplets } from "lucide-react";
+import { useEffect, useState } from "react";
+import { FileText, Droplets, Wrench } from "lucide-react";
+import api from "../../services/api";
 
-const fake = [
-  {
-    id: 1,
-    title: "Vidange",
-    type: "",
-    icon: Droplets,
-    vehicle: "Renault Clio",
-    duekilo: 15000,
-  },
-  {
-    id: 2,
-    title: "Contrôle technique",
-    type: "",
-    icon: FileText,
-    vehicle: "Peugeot 208",
-    dueDate: "2024-07-30",
-  },
-];
+const iconMap = {
+  Vidange: Droplets,
+  "Contrôle technique": FileText,
+  default: Wrench,
+};
 
 export default function RappelWidget() {
+  const [reminders, setReminders] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchReminders = async () => {
+      try {
+        const token = localStorage.getItem("token");
+        const response = await api.get("/reminders/recent", {
+          headers: { Authorization: `Bearer ${token}` },
+        });
+        setReminders(response.data);
+      } catch (error) {
+        console.error("Erreur API:", error);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    fetchReminders();
+  }, []);
+
   return (
     <div className="w-full bg-card-bg border border-app-border p-4 rounded-xl shadow-card flex flex-col gap-4">
       <div className="flex flex-row items-center justify-between">
@@ -35,17 +45,23 @@ export default function RappelWidget() {
         </a>
       </div>
 
-      <div>
-        {fake.slice(0, 3).map((vehicle) => (
-          <InterventionCard key={vehicle.id} intervention={vehicle} />
-        ))}
+      <div className="flex flex-col gap-1">
+        {isLoading ? (
+          <p className="text-sm text-app-muted p-4">Chargement...</p>
+        ) : reminders.length > 0 ? (
+          reminders.map((reminder) => (
+            <RemindersCard key={reminder.id} reminder={reminder} />
+          ))
+        ) : (
+          <p className="text-sm text-app-muted p-4">Aucun rappel à venir.</p>
+        )}
       </div>
     </div>
   );
 }
 
-function InterventionCard({ intervention }) {
-  const Icon = intervention.icon;
+function RemindersCard({ reminder }) {
+  const Icon = iconMap[reminder.title] || iconMap["default"];
 
   return (
     <div className="flex flex-row items-center justify-between p-2">
@@ -54,14 +70,20 @@ function InterventionCard({ intervention }) {
           <Icon size={18} className="text-orange-500" />
         </div>
         <div>
-          <p className="text-sm font-medium text-app-text">
-            {intervention.title}
-          </p>
-          <p className="text-xs text-app-muted">{intervention.vehicle}</p>
+          <p className="text-sm font-medium text-app-text">{reminder.title}</p>
+          <p className="text-xs text-app-muted">{reminder.vehicle_name}</p>
         </div>
       </div>
       <p className="text-sm font-semibold text-orange-500">
-        {intervention.dueDate || intervention.duekilo}
+        {reminder.due_date
+          ? new Date(reminder.due_date).toLocaleDateString("fr-FR", {
+              day: "numeric",
+              month: "short",
+              year: "numeric",
+            })
+          : reminder.mileage_threshold
+            ? `${reminder.mileage_threshold} km`
+            : "—"}
       </p>
     </div>
   );

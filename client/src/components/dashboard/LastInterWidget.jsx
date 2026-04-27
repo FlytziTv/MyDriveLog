@@ -1,27 +1,35 @@
-import { FileText, Droplets } from "lucide-react";
+import { useEffect, useState } from "react";
+import { FileText, Droplets, Wrench } from "lucide-react";
+import api from "../../services/api";
 
-const fake = [
-  {
-    id: 1,
-    title: "Vidange + Filtre à huile",
-    type: "",
-    icon: Droplets,
-    date: "2024-06-15",
-    vehicle: "Renault Clio",
-    price: 1500,
-  },
-  {
-    id: 2,
-    title: "Contrôle technique",
-    type: "",
-    icon: FileText,
-    date: "2024-07-30",
-    vehicle: "Peugeot 208",
-    price: 2000,
-  },
-];
+const iconMap = {
+  Vidange: Droplets,
+  "Contrôle technique": FileText,
+  default: Wrench,
+};
 
 export default function LastInterWidget() {
+  const [interventions, setInterventions] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchInterventions = async () => {
+      try {
+        const token = localStorage.getItem("token");
+        const response = await api.get("/interventions/recent", {
+          headers: { Authorization: `Bearer ${token}` },
+        });
+        setInterventions(response.data);
+      } catch (error) {
+        console.error("Erreur API:", error);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    fetchInterventions();
+  }, []);
+
   return (
     <div className="w-full bg-card-bg border border-app-border p-4 rounded-xl shadow-card flex flex-col gap-4">
       <div className="flex flex-row items-center justify-between">
@@ -37,17 +45,28 @@ export default function LastInterWidget() {
         </a>
       </div>
 
-      <div>
-        {fake.slice(0, 3).map((intervention) => (
-          <InterventionCard key={intervention.id} intervention={intervention} />
-        ))}
+      <div className="flex flex-col gap-1">
+        {isLoading ? (
+          <p className="text-sm text-app-muted p-4">Chargement...</p>
+        ) : interventions.length > 0 ? (
+          interventions.map((intervention) => (
+            <InterventionCard
+              key={intervention.id}
+              intervention={intervention}
+            />
+          ))
+        ) : (
+          <p className="text-sm text-app-muted p-4">
+            Aucune intervention récente.
+          </p>
+        )}
       </div>
     </div>
   );
 }
 
 function InterventionCard({ intervention }) {
-  const Icon = intervention.icon;
+  const Icon = iconMap[intervention.title] || iconMap["default"];
 
   return (
     <div className="flex flex-row items-center justify-between p-2">
@@ -59,11 +78,20 @@ function InterventionCard({ intervention }) {
           <p className="text-sm font-medium text-app-text">
             {intervention.title}
           </p>
-          <p className="text-xs text-app-muted">{intervention.date}</p>
-          <p className="text-xs text-app-muted">{intervention.vehicle}</p>
+          <p className="text-xs text-app-muted">
+            {new Date(intervention.intervention_date).toLocaleDateString(
+              "fr-FR",
+              {
+                day: "numeric",
+                month: "short",
+                year: "numeric",
+              },
+            )}
+          </p>
+          <p className="text-xs text-app-muted">{intervention.vehicle_name}</p>
         </div>
       </div>
-      <p className="text-sm text-app-text">{intervention.price} €</p>
+      <p className="text-sm text-app-text">{intervention.cost} €</p>
     </div>
   );
 }

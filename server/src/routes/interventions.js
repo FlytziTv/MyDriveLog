@@ -2,6 +2,25 @@ const express = require("express");
 const router = express.Router();
 const db = require("../utils/db");
 
+router.get("/recent", async (req, res) => {
+  try {
+    const userId = req.userId;
+    const result = await db.query(
+      `SELECT i.*, v.nickname as vehicle_name 
+      FROM interventions i
+      JOIN vehicles v ON i.vehicle_id = v.id
+      WHERE v.user_id = $1
+      ORDER BY i.intervention_date DESC
+      LIMIT 5`,
+      [userId],
+    );
+    res.json(result.rows);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: "Erreur serveur" });
+  }
+});
+
 router.get("/:vehicleId", async (req, res) => {
   try {
     const userId = req.userId;

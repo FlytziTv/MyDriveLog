@@ -2,6 +2,25 @@ const express = require("express");
 const router = express.Router();
 const db = require("../utils/db");
 
+router.get("/recent", async (req, res) => {
+  try {
+    const userId = req.userId;
+    const result = await db.query(
+      `SELECT r.*, v.nickname as vehicle_name 
+      FROM reminders r
+      JOIN vehicles v ON r.vehicle_id = v.id
+      WHERE v.user_id = $1 AND r.is_done = false
+      ORDER BY r.due_date ASC NULLS LAST
+      LIMIT 5`,
+      [userId],
+    );
+    res.json(result.rows);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: "Erreur serveur" });
+  }
+});
+
 router.get("/:vehicleId", async (req, res) => {
   try {
     const userId = req.userId;
@@ -93,7 +112,7 @@ router.delete("/:id", async (req, res) => {
     }
 
     await db.query("DELETE FROM reminders WHERE id = $1", [reminderId]);
-    res.json({ message: "Intervention deleted successfully" });
+    res.json({ message: "Reminder deleted successfully" });
   } catch (err) {
     console.error(err);
     res.status(500).json({ message: "Erreur serveur" });
