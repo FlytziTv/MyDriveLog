@@ -1,5 +1,4 @@
 import { useState, useEffect, useCallback } from "react";
-import { useNavigate } from "react-router-dom";
 import api from "../services/api";
 import SideBar from "../components/layout/SideBar";
 import AddVehicleDialog from "../components/form/AddVehicle";
@@ -7,11 +6,10 @@ import { Bell } from "lucide-react";
 import VehicleWidget from "../components/dashboard/VehicleWidget";
 import OverviewWidget from "../components/dashboard/OverviewWidget";
 import CostWidget from "../components/dashboard/CostWidget";
-import LastInterWidget from "../components/dashboard/LastInterWidget";
-import RappelWidget from "../components/dashboard/RappelWidget";
+import NextInterWidget from "../components/dashboard/NextInterWidget";
+import RemindersWidget from "../components/dashboard/RemindersWidget";
 
 export default function Dashboard() {
-  const navigate = useNavigate();
   const [vehicles, setVehicles] = useState([]);
   const [user, setUser] = useState(null);
 
@@ -84,8 +82,8 @@ export default function Dashboard() {
           {/* Widget a droite */}
           <div className="col-span-1 flex flex-col gap-4">
             <CostWidget />
-            <LastInterWidget />
-            <RappelWidget />
+            <NextInterWidget />
+            <RemindersWidget />
           </div>
         </div>
       </main>

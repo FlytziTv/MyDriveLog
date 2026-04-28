@@ -8,7 +8,7 @@ const iconMap = {
   default: Wrench,
 };
 
-export default function LastInterWidget() {
+export default function NextInterWidget({ vehicleId }) {
   const [interventions, setInterventions] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
@@ -16,7 +16,10 @@ export default function LastInterWidget() {
     const fetchInterventions = async () => {
       try {
         const token = localStorage.getItem("token");
-        const response = await api.get("/interventions/recent", {
+        const url = vehicleId
+          ? `/interventions/${vehicleId}`
+          : `/interventions/recent`;
+        const response = await api.get(url, {
           headers: { Authorization: `Bearer ${token}` },
         });
         setInterventions(response.data);
@@ -28,7 +31,7 @@ export default function LastInterWidget() {
     };
 
     fetchInterventions();
-  }, []);
+  }, [vehicleId]);
 
   return (
     <div className="w-full bg-card-bg border border-app-border p-4 rounded-xl shadow-card flex flex-col gap-4">

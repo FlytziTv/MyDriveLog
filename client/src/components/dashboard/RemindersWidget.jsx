@@ -8,7 +8,7 @@ const iconMap = {
   default: Wrench,
 };
 
-export default function RappelWidget() {
+export default function RemindersWidget({ vehicleId }) {
   const [reminders, setReminders] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
@@ -16,7 +16,11 @@ export default function RappelWidget() {
     const fetchReminders = async () => {
       try {
         const token = localStorage.getItem("token");
-        const response = await api.get("/reminders/recent", {
+        const url = vehicleId
+          ? `/interventions/${vehicleId}`
+          : `/interventions/recent`;
+
+        const response = await api.get(url, {
           headers: { Authorization: `Bearer ${token}` },
         });
         setReminders(response.data);
@@ -28,7 +32,7 @@ export default function RappelWidget() {
     };
 
     fetchReminders();
-  }, []);
+  }, [vehicleId]);
 
   return (
     <div className="w-full bg-card-bg border border-app-border p-4 rounded-xl shadow-card flex flex-col gap-4">
