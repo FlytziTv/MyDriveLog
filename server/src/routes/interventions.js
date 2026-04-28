@@ -41,6 +41,41 @@ router.get("/cost", async (req, res) => {
   }
 });
 
+router.get("/stats", async (req, res) => {
+  try {
+    const userId = req.userId;
+    const result = await db.query(
+      `SELECT 
+        COUNT(*) as total_interventions,
+        COUNT(CASE WHEN DATE_TRUNC('month', i.intervention_date) = DATE_TRUNC('month', NOW()) THEN 1 END) as this_month_interventions,
+        COUNT(CASE WHEN DATE_TRUNC('month', i.intervention_date) = DATE_TRUNC('month', NOW() - INTERVAL '1 month') THEN 1 END) as last_month_interventions,
+        SUM(i.cost) as total_cost,
+        SUM(CASE WHEN DATE_TRUNC('month', i.intervention_date) = DATE_TRUNC('month', NOW()) THEN i.cost ELSE 0 END) as this_month_cost,
+        SUM(CASE WHEN DATE_TRUNC('month', i.intervention_date) = DATE_TRUNC('month', NOW() - INTERVAL '1 month') THEN i.cost ELSE 0 END) as last_month_cost
+      FROM interventions i
+      JOIN vehicles v ON i.vehicle_id = v.id
+      WHERE v.user_id = $1`,
+      [userId],
+    );
+
+    const reminders = await db.query(
+      `SELECT COUNT(*) as upcoming_reminders
+      FROM reminders r
+      JOIN vehicles v ON r.vehicle_id = v.id
+      WHERE v.user_id = $1 AND r.is_done = false`,
+      [userId],
+    );
+
+    res.json({
+      ...result.rows[0],
+      upcoming_reminders: reminders.rows[0].upcoming_reminders,
+    });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: "Erreur serveur" });
+  }
+});
+
 router.get("/:vehicleId", async (req, res) => {
   try {
     const userId = req.userId;
