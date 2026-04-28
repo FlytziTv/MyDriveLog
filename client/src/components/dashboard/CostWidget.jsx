@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 
 import api from "../../services/api";
 
-export default function CostWidget() {
+export default function CostWidget({ vehicleId }) {
   const [costs, setCosts] = useState({});
   const [isLoading, setIsLoading] = useState(true);
 
@@ -11,7 +11,9 @@ export default function CostWidget() {
     const fetchCosts = async () => {
       try {
         const token = localStorage.getItem("token");
-        const response = await api.get("/interventions/cost", {
+        const url = vehicleId ? `/reminders/${vehicleId}` : `/reminders/recent`;
+
+        const response = await api.get(url, {
           headers: { Authorization: `Bearer ${token}` },
         });
         console.log(response.data);
@@ -24,7 +26,7 @@ export default function CostWidget() {
     };
 
     fetchCosts();
-  }, []);
+  }, [vehicleId]);
 
   const percent =
     costs.last_month > 0
