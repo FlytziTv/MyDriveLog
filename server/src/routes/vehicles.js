@@ -6,12 +6,19 @@ const db = require("../utils/db");
 router.get("/", async (req, res) => {
   try {
     const userId = req.userId;
-
-    const vehiclesResult = await db.query(
-      "SELECT * FROM vehicles WHERE user_id = $1",
+    const result = await db.query(
+      `SELECT v.*, 
+        COUNT(DISTINCT i.id) as interventions_count,
+        COUNT(DISTINCT r.id) FILTER (WHERE r.is_done = false) as reminders_count,
+        COALESCE(SUM(i.cost), 0) as total_cost
+      FROM vehicles v
+      LEFT JOIN interventions i ON i.vehicle_id = v.id
+      LEFT JOIN reminders r ON r.vehicle_id = v.id
+      WHERE v.user_id = $1
+      GROUP BY v.id`,
       [userId],
     );
-    res.json(vehiclesResult.rows);
+    res.json(result.rows);
   } catch (err) {
     console.error(err);
     res.status(500).json({ message: "Erreur serveur" });

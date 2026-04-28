@@ -9,6 +9,7 @@ import VehicleInterventions from "./pages/Interventions";
 import InterventionNew from "./pages/InterventionNew";
 import TripNew from "./pages/TripNew";
 import Trips from "./pages/Trips";
+import Vehicles from "./pages/Vehicles";
 
 function App() {
   return (
@@ -22,6 +23,14 @@ function App() {
           element={
             <ProtectedRoute>
               <Dashboard />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/vehicles"
+          element={
+            <ProtectedRoute>
+              <Vehicles />
             </ProtectedRoute>
           }
         />
