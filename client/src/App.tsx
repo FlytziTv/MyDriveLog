@@ -11,6 +11,7 @@ import DashboardPage from "./pages/Dashboard.tsx";
 // import Trips from "./pages/Trips";
 import VehiclesPage from "./pages/Vehicles";
 import AnalyticsPage from "./pages/Analytics";
+import Maintenance from "./pages/Maintenance.tsx";
 
 function App() {
   return (
@@ -40,6 +41,14 @@ function App() {
           element={
             <ProtectedRoute>
               <AnalyticsPage />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/maintenance"
+          element={
+            <ProtectedRoute>
+              <Maintenance />
             </ProtectedRoute>
           }
         />
