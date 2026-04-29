@@ -2,12 +2,13 @@ import { HeaderDashboard } from "../components/layout/HeaderDashboard";
 import { PredictionCard } from "../components/analytics/PredictionCard";
 import { MiniStatsCard } from "../components/layout/MiniStatsCard";
 import { BlockCard } from "../components/layout/BlockCard";
+import Sidebar from "../components/layout/SideBar";
 
 export default function AnalyticsPage() {
   return (
     <div className="h-screen w-full flex">
-      <div className="w-64 h-full p-2 bg-sidebar border-r border-sidebar-border"></div>
-      <div className="flex-1 px-6 py-4 flex flex-col gap-6 ">
+      <Sidebar />
+      <div className="flex-1 px-6 py-4 flex flex-col gap-6 overflow-y-auto">
         <HeaderDashboard
           title="Analytics"
           description="Deep insights into your vehicle expenses"
