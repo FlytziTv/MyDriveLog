@@ -1,7 +1,8 @@
 import { HeaderDashboard } from "../components/layout/HeaderDashboard";
-import { DocsCard, DocsMessage } from "../components/documents/DocsCard";
-import { StatsCard } from "../components/documents/StatsCard";
+import { DocsMessage } from "../components/documents/DocsCard";
 import UploadCard from "../components/documents/UploadCard";
+import { MiniStatsCard } from "../components/layout/MiniStatsCard";
+import { BlockCard } from "../components/layout/BlockCard";
 
 export default function DocumentsPage() {
   return (
@@ -14,13 +15,13 @@ export default function DocumentsPage() {
           buttonText="Upload Document"
         />
         <div className="w-full grid grid-cols-4 gap-4">
-          <StatsCard title="Total Documents" amount="4" />
-          <StatsCard title="Insurance" amount="1" />
-          <StatsCard title="Maintenance" amount="2" />
-          <StatsCard title="Fuel" amount="1" />
+          <MiniStatsCard title="Total Documents" amount="4" />
+          <MiniStatsCard title="Insurance" amount="1" />
+          <MiniStatsCard title="Maintenance" amount="2" />
+          <MiniStatsCard title="Fuel" amount="1" />
         </div>
 
-        <DocsCard title="All Documents">
+        <BlockCard title="All Documents">
           <DocsMessage
             name="Insurance Policy.pdf"
             type="PDF"
@@ -28,10 +29,11 @@ export default function DocumentsPage() {
             date="2024-05-01"
             size="1.2 MB"
           />
-        </DocsCard>
-        <DocsCard title="Upload New Document">
+        </BlockCard>
+
+        <BlockCard title="Upload New Document">
           <UploadCard />
-        </DocsCard>
+        </BlockCard>
       </div>
     </div>
   );

@@ -1,13 +1,13 @@
 import { TrendingDown, TrendingUp, TrendingUpDown } from "lucide-react";
 
-export function StatsCard({
+export function MiniStatsCard({
   title,
   amount,
   pourcentage,
 }: {
   title: string;
   amount: string;
-  pourcentage: string;
+  pourcentage?: string;
 }) {
   return (
     <div className="flex flex-col gap-6 rounded-xl border bg-card p-6 text-card-foreground shadow-sm">
@@ -16,7 +16,7 @@ export function StatsCard({
           <h2 className="text-sm text-muted-foreground">{title}</h2>
           <p className="font-semibold tabular-nums text-3xl">{amount}</p>
         </div>
-        <PourcentageCard pourcentage={pourcentage} />
+        {pourcentage && <PourcentageCard pourcentage={pourcentage} />}
       </div>
     </div>
   );

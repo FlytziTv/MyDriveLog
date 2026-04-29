@@ -3,12 +3,6 @@ import ProtectedRoute from "./components/ProtectedRoute";
 import LoginPage from "./pages/Login";
 import RegisterPage from "./pages/Register.tsx";
 import DashboardPage from "./pages/Dashboard.tsx";
-// import VehicleNew from "./pages/VehicleNew";
-// import VehicleDetail from "./pages/VehicleDetail";
-// import VehicleInterventions from "./pages/Interventions";
-// import InterventionNew from "./pages/InterventionNew";
-// import TripNew from "./pages/TripNew";
-// import Trips from "./pages/Trips";
 import VehiclesPage from "./pages/Vehicles";
 import AnalyticsPage from "./pages/Analytics";
 import Maintenance from "./pages/Maintenance.tsx";
@@ -61,54 +55,6 @@ function App() {
             </ProtectedRoute>
           }
         />
-        {/* <Route
-          path="/vehicles/new"
-          element={
-            <ProtectedRoute>
-              <VehicleNew />
-            </ProtectedRoute>
-          }
-        />
-        <Route
-          path="/vehicles/:id"
-          element={
-            <ProtectedRoute>
-              <VehicleDetail />
-            </ProtectedRoute>
-          }
-        />
-        <Route
-          path="/vehicles/:id/interventions"
-          element={
-            <ProtectedRoute>
-              <VehicleInterventions />
-            </ProtectedRoute>
-          }
-        />
-        <Route
-          path="/vehicles/:id/interventions/new"
-          element={
-            <ProtectedRoute>
-              <InterventionNew />
-            </ProtectedRoute>
-          }
-        />
-        <Route
-          path="/trips/new"
-          element={
-            <ProtectedRoute>
-              <TripNew />
-            </ProtectedRoute>
-          }
-        />
-        <Route
-          path="/trips"
-          element={
-            <ProtectedRoute>
-              <Trips />
-            </ProtectedRoute>
-          }
-        /> */}
       </Routes>
     </BrowserRouter>
   );

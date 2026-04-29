@@ -1,7 +1,7 @@
 import { HeaderDashboard } from "../components/layout/HeaderDashboard";
-import { StatsCard } from "../components/dashboard/StatsCard";
-import { ChartCard } from "../components/dashboard/ChartCard";
 import { InsightCard } from "../components/dashboard/InsightCard";
+import { MiniStatsCard } from "../components/layout/MiniStatsCard";
+import { BlockCard } from "../components/layout/BlockCard";
 
 export default function DashboardPage() {
   return (
@@ -14,19 +14,31 @@ export default function DashboardPage() {
           buttonText="Add Expense"
         />
         <div className="w-full grid grid-cols-4 gap-4">
-          <StatsCard
+          <MiniStatsCard
             title="Total Expenses"
             amount="$1,234.56"
             pourcentage="10"
           />
-          <StatsCard title="Total Income" amount="$2,345.67" pourcentage="-5" />
-          <StatsCard title="Net Profit" amount="$1,111.11" pourcentage="15" />
-          <StatsCard title="Average Expense" amount="$123.45" pourcentage="0" />
+          <MiniStatsCard
+            title="Total Income"
+            amount="$2,345.67"
+            pourcentage="-5"
+          />
+          <MiniStatsCard
+            title="Net Profit"
+            amount="$1,111.11"
+            pourcentage="15"
+          />
+          <MiniStatsCard
+            title="Average Expense"
+            amount="$123.45"
+            pourcentage="0"
+          />
         </div>
 
         <div className="grid grid-cols-2 gap-4">
-          <ChartCard title="Expenses Over Time" description="Last 30 days" />
-          <ChartCard title="Expense Breakdown" description="By category" />
+          <BlockCard title="Expenses Over Time" description="Last 30 days" />
+          <BlockCard title="Expense Breakdown" description="By category" />
         </div>
 
         <div className="w-full flex flex-col gap-4">
