@@ -1,15 +1,15 @@
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
-import LoginPage from "./pages/Login";
-import RegisterPage from "./pages/Register";
-import Dashboard from "./pages/Dashboard";
-import VehicleNew from "./pages/VehicleNew";
 import ProtectedRoute from "./components/ProtectedRoute";
-import VehicleDetail from "./pages/VehicleDetail";
-import VehicleInterventions from "./pages/Interventions";
-import InterventionNew from "./pages/InterventionNew";
-import TripNew from "./pages/TripNew";
-import Trips from "./pages/Trips";
-import Vehicles from "./pages/Vehicles";
+import LoginPage from "./pages/Login";
+import RegisterPage from "./pages/Register.tsx";
+import DashboardPage from "./pages/Dashboard";
+// import VehicleNew from "./pages/VehicleNew";
+// import VehicleDetail from "./pages/VehicleDetail";
+// import VehicleInterventions from "./pages/Interventions";
+// import InterventionNew from "./pages/InterventionNew";
+// import TripNew from "./pages/TripNew";
+// import Trips from "./pages/Trips";
+// import Vehicles from "./pages/Vehicles";
 
 function App() {
   return (
@@ -22,11 +22,11 @@ function App() {
           path="/dashboard"
           element={
             <ProtectedRoute>
-              <Dashboard />
+              <DashboardPage />
             </ProtectedRoute>
           }
         />
-        <Route
+        {/* <Route
           path="/vehicles"
           element={
             <ProtectedRoute>
@@ -81,7 +81,7 @@ function App() {
               <Trips />
             </ProtectedRoute>
           }
-        />
+        /> */}
       </Routes>
     </BrowserRouter>
   );
