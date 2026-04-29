@@ -1,12 +1,7 @@
-import {
-  Plus,
-  TrendingDown,
-  TrendingUp,
-  TrendingUpDown,
-  AlertCircle,
-  AlertTriangle,
-  Lightbulb,
-} from "lucide-react";
+import { HeaderDashboard } from "../components/layout/HeaderDashboard";
+import { StatsCard } from "../components/dashboard/StatsCard";
+import { ChartCard } from "../components/dashboard/ChartCard";
+import { InsightCard } from "../components/dashboard/InsightCard";
 
 export default function DashboardPage() {
   return (
@@ -16,6 +11,7 @@ export default function DashboardPage() {
         <HeaderDashboard
           title="Dashboard"
           description="Track and analyze your vehicle expenses"
+          buttonText="Add Expense"
         />
         <div className="w-full grid grid-cols-4 gap-4">
           <StatsCard
@@ -58,154 +54,6 @@ export default function DashboardPage() {
             />
           </div>
         </div>
-      </div>
-    </div>
-  );
-}
-
-function HeaderDashboard({
-  title,
-  description,
-}: {
-  title: string;
-  description?: string;
-}) {
-  return (
-    <div className="w-full flex flex-row items-center justify-between">
-      <div className="flex flex-col">
-        <h1 className="text-xl font-bold">{title}</h1>
-        {description && (
-          <p className="text-sm text-muted-foreground">{description}</p>
-        )}
-      </div>
-
-      <button className="bg-primary text-primary-foreground flex flex-row items-center justify-center gap-2 text-sm hover:bg-primary/80 px-4 py-2 rounded-md transition-colors duration-200">
-        <Plus size={16} />
-        Add Expense
-      </button>
-    </div>
-  );
-}
-
-function StatsCard({
-  title,
-  amount,
-  pourcentage,
-}: {
-  title: string;
-  amount: string;
-  pourcentage: string;
-}) {
-  return (
-    <div className="flex flex-col gap-6 rounded-xl border bg-card p-6 text-card-foreground shadow-sm">
-      <div className="flex items-start justify-between">
-        <div className="flex flex-col gap-2">
-          <h2 className="text-sm text-muted-foreground">{title}</h2>
-          <p className="font-semibold tabular-nums text-3xl">{amount}</p>
-        </div>
-        <PourcentageCard pourcentage={pourcentage} />
-      </div>
-    </div>
-  );
-}
-
-function PourcentageCard({ pourcentage }: { pourcentage: string }) {
-  const Icon =
-    pourcentage > "0"
-      ? TrendingUp
-      : pourcentage < "0"
-        ? TrendingDown
-        : TrendingUpDown;
-
-  return (
-    <span className="inline-flex w-fit shrink-0 items-center justify-center gap-1.5 overflow-hidden rounded-full border px-2 py-0.5 text-xs font-medium whitespace-nowrap transition-[color,box-shadow] focus-visible:border-ring focus-visible:ring-[3px] focus-visible:ring-ring/50 aria-invalid:border-destructive aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 border-border text-foreground ">
-      <Icon size={12} />
-      {pourcentage}%
-    </span>
-  );
-}
-
-function ChartCard({
-  title,
-  description,
-}: {
-  title: string;
-  description?: string;
-}) {
-  return (
-    <div className="col-span-1 rounded-xl border bg-card p-6 text-card-foreground shadow-sm">
-      <div className="flex flex-row items-center justify-between">
-        <div className="flex flex-col gap-1">
-          <h2 className="leading-none font-semibold">{title}</h2>
-          {description && (
-            <p className="text-sm text-muted-foreground">{description}</p>
-          )}
-        </div>
-      </div>
-      {/* Chart component goes here */}
-      <div className="mt-4 h-64 w-full flex items-center justify-center border-dashed border rounded-md">
-        <p className="text-sm text-muted-foreground">
-          Graph unavailable at this time
-        </p>
-      </div>
-    </div>
-  );
-}
-
-interface InsightCardProps {
-  type: "info" | "warning" | "success" | "tip";
-  title: string;
-  description: string;
-}
-
-export function InsightCard({ type, title, description }: InsightCardProps) {
-  const config = {
-    info: {
-      icon: AlertCircle,
-      bgColor: "bg-blue-500/10",
-      iconColor: "text-blue-500",
-      borderColor: "border-blue-500/20",
-    },
-    warning: {
-      icon: AlertTriangle,
-      bgColor: "bg-yellow-500/10",
-      iconColor: "text-yellow-500",
-      borderColor: "border-yellow-500/20",
-    },
-    success: {
-      icon: TrendingUp,
-      bgColor: "bg-green-500/10",
-      iconColor: "text-green-500",
-      borderColor: "border-green-500/20",
-    },
-    tip: {
-      icon: Lightbulb,
-      bgColor: "bg-purple-500/10",
-      iconColor: "text-purple-500",
-      borderColor: "border-purple-500/20",
-    },
-  };
-
-  const { icon: Icon, bgColor, iconColor, borderColor } = config[type];
-
-  return (
-    <div
-      className={`col-span-1 rounded-xl border bg-card p-4 text-card-foreground flex flex-row gap-4 ${borderColor}`}
-    >
-      <div>
-        <div
-          className={`shrink-0 aspect-square p-2 rounded-md flex items-center justify-center ${bgColor}`}
-        >
-          <Icon className={`text-primary ${iconColor}`} size={16} />
-        </div>
-      </div>
-
-      <div className="flex flex-col gap-1">
-        <h2 className="leading-none font-semibold">{title}</h2>
-
-        <p className="text-sm text-muted-foreground line-clamp-2">
-          {description}
-        </p>
       </div>
     </div>
   );
