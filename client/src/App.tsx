@@ -2,14 +2,14 @@ import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import ProtectedRoute from "./components/ProtectedRoute";
 import LoginPage from "./pages/Login";
 import RegisterPage from "./pages/Register.tsx";
-import DashboardPage from "./pages/Dashboard";
+import DashboardPage from "./pages/Dashboard.tsx";
 // import VehicleNew from "./pages/VehicleNew";
 // import VehicleDetail from "./pages/VehicleDetail";
 // import VehicleInterventions from "./pages/Interventions";
 // import InterventionNew from "./pages/InterventionNew";
 // import TripNew from "./pages/TripNew";
 // import Trips from "./pages/Trips";
-// import Vehicles from "./pages/Vehicles";
+import Vehicles from "./pages/Vehicles";
 
 function App() {
   return (
@@ -26,7 +26,7 @@ function App() {
             </ProtectedRoute>
           }
         />
-        {/* <Route
+        <Route
           path="/vehicles"
           element={
             <ProtectedRoute>
@@ -34,7 +34,7 @@ function App() {
             </ProtectedRoute>
           }
         />
-        <Route
+        {/* <Route
           path="/vehicles/new"
           element={
             <ProtectedRoute>
