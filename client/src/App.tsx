@@ -12,6 +12,7 @@ import DashboardPage from "./pages/Dashboard.tsx";
 import VehiclesPage from "./pages/Vehicles";
 import AnalyticsPage from "./pages/Analytics";
 import Maintenance from "./pages/Maintenance.tsx";
+import DocumentsPage from "./pages/Documents.tsx";
 
 function App() {
   return (
@@ -49,6 +50,14 @@ function App() {
           element={
             <ProtectedRoute>
               <Maintenance />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/documents"
+          element={
+            <ProtectedRoute>
+              <DocumentsPage />
             </ProtectedRoute>
           }
         />
