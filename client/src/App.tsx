@@ -9,7 +9,8 @@ import DashboardPage from "./pages/Dashboard.tsx";
 // import InterventionNew from "./pages/InterventionNew";
 // import TripNew from "./pages/TripNew";
 // import Trips from "./pages/Trips";
-import Vehicles from "./pages/Vehicles";
+import VehiclesPage from "./pages/Vehicles";
+import AnalyticsPage from "./pages/Analytics";
 
 function App() {
   return (
@@ -30,7 +31,15 @@ function App() {
           path="/vehicles"
           element={
             <ProtectedRoute>
-              <Vehicles />
+              <VehiclesPage />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/analytics"
+          element={
+            <ProtectedRoute>
+              <AnalyticsPage />
             </ProtectedRoute>
           }
         />
