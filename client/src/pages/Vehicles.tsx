@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useState, useEffect, useCallback } from "react";
+import api from "../services/api"; // vérifie que ton api.ts existe
 import * as Dialog from "@radix-ui/react-dialog";
 import { useTranslation } from "react-i18next";
 import { HeaderDashboard } from "../components/layout/HeaderDashboard";
@@ -7,9 +8,39 @@ import { VehicleCard } from "../components/vehicles/VehicleCard";
 import DialogContent from "../components/layout/DialogContent";
 import { AddVehicleForm } from "../components/dialog/add/vehicle-form";
 
+type Vehicle = {
+  id: string;
+  nickname: string;
+  brand: string;
+  model: string;
+  year: number;
+  cover_photo_url: string | null;
+  current_mileage: number;
+  total_cost: string;
+  interventions_count: string;
+  reminders_count: string;
+};
+
 export default function VehiclesPage() {
   const { t } = useTranslation(["vehicles", "dialog"]);
   const [open, setOpen] = useState(false);
+  const [vehicles, setVehicles] = useState<Vehicle[]>([]);
+
+  const fetchVehicles = useCallback(async () => {
+    try {
+      const token = localStorage.getItem("token");
+      const response = await api.get("/vehicles", {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+      setVehicles(response.data);
+    } catch (error) {
+      console.error("Error fetching vehicles:", error);
+    }
+  }, []);
+
+  useEffect(() => {
+    fetchVehicles();
+  }, [fetchVehicles]);
 
   return (
     <div className="h-screen w-full flex">
@@ -24,43 +55,26 @@ export default function VehiclesPage() {
           />
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {/* Vehicle cards will go here */}
-            <VehicleCard
-              name="jeep "
-              model="Trackhawk"
-              year={2021}
-              image="https://cdn-hednb.nitrocdn.com/yYolPsxkHfeoqRKSyqGQlaFpLZMHhVYI/assets/images/optimized/rev-9cddd2c/hpe-photos.s3.us-east-2.amazonaws.com/wp-content/uploads/20220316132050/hennessey-hpe900-jeep-trackhawk-1-scaled.webp"
-              mileage={94000}
-              totalCost={110000}
-            />
-            <VehicleCard
-              name="BMW M3"
-              model="Serie 3"
-              year={2021}
-              image="https://spicymotor.fr/wp-content/uploads/jet-form-builder/f7ffbf22afdd9e39127c07c589338a72/2023/12/DSC8738-scaled.jpg"
-              mileage={32000}
-              totalCost={150000}
-            />
-            <VehicleCard
-              name="BMW M3"
-              model="Serie 3"
-              year={2021}
-              image="https://spicymotor.fr/wp-content/uploads/jet-form-builder/f7ffbf22afdd9e39127c07c589338a72/2023/12/DSC8738-scaled.jpg"
-              mileage={32000}
-              totalCost={150000}
-            />
-            <VehicleCard
-              name="BMW M3"
-              model="Serie 3"
-              year={2021}
-              mileage={32000}
-              totalCost={150000}
-            />
+            {vehicles.map((vehicle) => (
+              <VehicleCard
+                key={vehicle.id}
+                id={vehicle.id}
+                name={vehicle.nickname}
+                model={vehicle.model}
+                year={vehicle.year}
+                image={vehicle.cover_photo_url ?? undefined}
+                mileage={vehicle.current_mileage}
+                totalCost={Number(vehicle.total_cost)}
+              />
+            ))}
           </div>
 
           <DialogContent title={t("dialog:add_vehicle.title")}>
             <AddVehicleForm
-              onSuccess={() => setOpen(false)}
+              onSuccess={() => {
+                fetchVehicles();
+                setOpen(false);
+              }}
               onCancel={() => setOpen(false)}
             />
           </DialogContent>

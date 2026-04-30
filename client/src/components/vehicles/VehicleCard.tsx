@@ -1,23 +1,33 @@
 import { useTranslation } from "react-i18next";
+import { useNavigate } from "react-router-dom";
 
-export function VehicleCard({
-  name,
-  model,
-  year,
-  image,
-  mileage,
-  totalCost,
-}: {
+interface VehicleCardProps {
+  id: string;
   name: string;
   model: string;
   year: number;
   image?: string;
   mileage: number;
   totalCost: number;
-}) {
+}
+
+export function VehicleCard({
+  id,
+  name,
+  model,
+  year,
+  image,
+  mileage,
+  totalCost,
+}: VehicleCardProps) {
   const { t } = useTranslation("vehicles");
+  const navigate = useNavigate();
+
   return (
-    <div className="col-span-1 rounded-xl border bg-card text-card-foreground shadow-sm cursor-pointer hover:shadow-md transition-shadow duration-500">
+    <button
+      onClick={() => navigate(`/vehicles/${id}`)}
+      className="col-span-1 rounded-xl border bg-card text-card-foreground shadow-sm cursor-pointer hover:shadow-md transition-shadow duration-500"
+    >
       <div className="h-45 bg-muted relative overflow-hidden rounded-t-xl">
         {image ? (
           <img
@@ -50,7 +60,7 @@ export function VehicleCard({
           />
         </div>
       </div>
-    </div>
+    </button>
   );
 }
 
