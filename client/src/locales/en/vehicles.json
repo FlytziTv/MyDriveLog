@@ -1,0 +1,10 @@
+{
+  "title": "My Vehicles",
+  "subtitle": "Manage and track all your vehicles",
+  "add_expense": "Add Vehicle",
+
+  "card": {
+    "mileage": "Mileage",
+    "totalCost": "Total Cost"
+  }
+}

@@ -7,6 +7,7 @@
   },
 
   "indisponible_message": {
-    "graphs": "Currently unavailable."
+    "graphs": "Currently unavailable.",
+    "images": "No image available."
   }
 }

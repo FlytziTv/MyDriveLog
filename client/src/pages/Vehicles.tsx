@@ -1,16 +1,19 @@
+import { useTranslation } from "react-i18next";
 import { HeaderDashboard } from "../components/layout/HeaderDashboard";
 import Sidebar from "../components/layout/SideBar";
 import { VehicleCard } from "../components/vehicles/VehicleCard";
 
 export default function VehiclesPage() {
+  const { t } = useTranslation("vehicles");
+
   return (
     <div className="h-screen w-full flex">
       <Sidebar />
       <div className="flex-1 px-6 py-4 flex flex-col gap-6 overflow-y-auto">
         <HeaderDashboard
-          title="My Vehicles"
-          description="Manage and track all your vehicles"
-          buttonText="Add Vehicle"
+          title={t("title")}
+          description={t("subtitle")}
+          buttonText={t("add_expense")}
         />
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">

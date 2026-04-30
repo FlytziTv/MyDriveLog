@@ -1,0 +1,10 @@
+{
+  "title": "Mes véhicules",
+  "subtitle": "Gérez et suivez tous vos véhicules",
+  "add_expense": "Ajouter un véhicule",
+
+  "card": {
+    "mileage": "Kilométrage",
+    "totalCost": "Coût total"
+  }
+}

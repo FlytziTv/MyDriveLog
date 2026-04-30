@@ -1,3 +1,5 @@
+import { useTranslation } from "react-i18next";
+
 export function VehicleCard({
   name,
   model,
@@ -13,6 +15,7 @@ export function VehicleCard({
   mileage: number;
   totalCost: number;
 }) {
+  const { t } = useTranslation("vehicles");
   return (
     <div className="col-span-1 rounded-xl border bg-card text-card-foreground shadow-sm cursor-pointer hover:shadow-md transition-shadow duration-500">
       <div className="h-45 bg-muted relative overflow-hidden rounded-t-xl">
@@ -24,7 +27,7 @@ export function VehicleCard({
           />
         ) : (
           <div className="w-full h-full flex items-center justify-center text-muted-foreground">
-            No image available
+            {t("common:indisponible_message.images")}
           </div>
         )}
       </div>
@@ -37,12 +40,12 @@ export function VehicleCard({
         </div>
         <div className="flex flex-col gap-2">
           <VehicleStats
-            label="Mileage"
+            label={t("vehicles:card.mileage")}
             value={`${mileage.toLocaleString()} km`}
           />
 
           <VehicleStats
-            label="Total Cost"
+            label={t("vehicles:card.totalCost")}
             value={`${totalCost.toLocaleString()} €`}
           />
         </div>

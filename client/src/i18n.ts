@@ -18,6 +18,10 @@ import enDashboard from "./locales/en/dashboard.json";
 import frDashboard from "./locales/fr/dashboard.json";
 import ptDashboard from "./locales/pt/dashboard.json";
 
+import enVehicles from "./locales/en/vehicles.json";
+import frVehicles from "./locales/fr/vehicles.json";
+import ptVehicles from "./locales/pt/vehicles.json";
+
 i18n
   .use(LanguageDetector)
   .use(initReactI18next)
@@ -28,18 +32,21 @@ i18n
         login: enLogin,
         register: enRegister,
         dashboard: enDashboard,
+        vehicles: enVehicles,
       },
       fr: {
         common: frCommon,
         login: frLogin,
         register: frRegister,
         dashboard: frDashboard,
+        vehicles: frVehicles,
       },
       pt: {
         common: ptCommon,
         login: ptLogin,
         register: ptRegister,
         dashboard: ptDashboard,
+        vehicles: ptVehicles,
       },
     },
     defaultNS: "common",
