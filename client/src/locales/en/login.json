@@ -1,0 +1,16 @@
+{
+  "welcome": "Welcome to MyDriveLog",
+  "no_account": "Don't have an account yet?",
+  "register": "Sign up",
+
+  "input": {
+    "email": "Email address",
+    "email_placeholder": "Your email address",
+    "password": "Password",
+    "password_placeholder": "Your password"
+  },
+
+  "forgot_password": "Forgot?",
+
+  "submit": "Log in"
+}

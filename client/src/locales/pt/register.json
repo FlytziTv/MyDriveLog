@@ -1,0 +1,16 @@
+{
+  "welcome": "Bem-vindo ao MyDriveLog",
+  "already_have_account": "Já tem uma conta?",
+  "login": "Iniciar sessão",
+
+  "input": {
+    "username": "Nome de utilizador",
+    "username_placeholder": "O seu nome de utilizador",
+    "email": "Endereço de e-mail",
+    "email_placeholder": "O seu endereço de e-mail",
+    "password": "Palavra-passe",
+    "password_placeholder": "A sua palavra-passe"
+  },
+
+  "submit": "Registar-se"
+}

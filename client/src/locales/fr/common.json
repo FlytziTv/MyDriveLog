@@ -1,0 +1,8 @@
+{
+  "welcome": "Welcome",
+  "description": "This is my app",
+
+  "auth": {
+    "accept_terms": "En continuant, vous acceptez nos <terms>Conditions</terms> et notre <privacy>Politique de confidentialité</privacy>."
+  }
+}
