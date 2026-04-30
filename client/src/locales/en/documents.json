@@ -1,7 +1,7 @@
 {
   "title": "Documents",
   "subtitle": "Store and manage your vehicle-related documents",
-  "add_expense": "Upload Document",
+  "button": "Upload Document",
 
   "stats": {
     "total_documents": "Total Documents",

@@ -1,7 +1,7 @@
 {
   "title": "Dashboard",
   "subtitle": "Track and analyze your vehicle expenses",
-  "add_expense": "Add Expense",
+  "button": "Add Expense",
 
   "stats": {
     "total_expenses": "Total Expenses",

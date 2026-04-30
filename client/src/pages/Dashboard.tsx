@@ -15,7 +15,7 @@ export default function DashboardPage() {
         <HeaderDashboard
           title={t("title")}
           description={t("subtitle")}
-          buttonText={t("add_expense")}
+          buttonText={t("button")}
         />
         <div className="w-full grid grid-cols-4 gap-4">
           <MiniStatsCard

@@ -1,7 +1,7 @@
 {
   "title": "Entretien et rappels",
   "subtitle": "Suivre et planifier les interventions d'entretien des véhicules",
-  "add_expense": "Ajouter une tâche",
+  "button": "Ajouter une tâche",
 
   "stats": {
     "upcoming": "À venir",

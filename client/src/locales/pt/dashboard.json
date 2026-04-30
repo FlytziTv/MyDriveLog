@@ -1,7 +1,7 @@
 {
   "title": "Painel",
   "subtitle": "Acompanhe e analise as despesas do seu veículo",
-  "add_expense": "Adicionar despesa",
+  "button": "Adicionar despesa",
 
   "stats": {
     "total_expenses": "Despesas totais",

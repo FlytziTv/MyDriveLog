@@ -1,7 +1,7 @@
 {
   "title": "Documents",
   "subtitle": "Conservez et gérez vos documents relatifs à votre véhicule",
-  "add_expense": "Télécharger un document",
+  "button": "Télécharger un document",
 
   "stats": {
     "total_documents": "Nombre total de documents",

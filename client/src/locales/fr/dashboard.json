@@ -1,7 +1,7 @@
 {
   "title": "Tableau de bord",
   "subtitle": "Suivez et analysez les dépenses liées à votre véhicule",
-  "add_expense": "Ajouter une dépense",
+  "button": "Ajouter une dépense",
 
   "stats": {
     "total_expenses": "Total des dépenses",

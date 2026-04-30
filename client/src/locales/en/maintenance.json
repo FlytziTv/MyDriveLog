@@ -1,7 +1,7 @@
 {
   "title": "Maintenance & Reminders",
   "subtitle": "Track and schedule vehicle maintenance tasks",
-  "add_expense": "Add Task",
+  "button": "Add Task",
 
   "stats": {
     "upcoming": "Upcoming",

@@ -1,7 +1,7 @@
 {
   "title": "Documentos",
   "subtitle": "Armazene e faça a gestão dos seus documentos relacionados com o veículo",
-  "add_expense": "Carregar documento",
+  "button": "Carregar documento",
 
   "stats": {
     "total_documents": "Total de documentos",

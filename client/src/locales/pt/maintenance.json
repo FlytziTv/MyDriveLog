@@ -1,7 +1,7 @@
 {
   "title": "Manutenção e lembretes",
   "subtitle": "Acompanhar e agendar tarefas de manutenção de veículos",
-  "add_expense": "Adicionar tarefa",
+  "button": "Adicionar tarefa",
 
   "stats": {
     "upcoming": "Próximos",

@@ -13,7 +13,7 @@ export default function VehiclesPage() {
         <HeaderDashboard
           title={t("title")}
           description={t("subtitle")}
-          buttonText={t("add_expense")}
+          buttonText={t("button")}
         />
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">

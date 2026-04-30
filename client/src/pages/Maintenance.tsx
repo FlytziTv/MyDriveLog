@@ -16,7 +16,7 @@ export default function Maintenance() {
         <HeaderDashboard
           title={t("title")}
           description={t("subtitle")}
-          buttonText={t("add_expense")}
+          buttonText={t("button")}
         />
 
         <div className="w-full grid grid-cols-3 gap-4">
