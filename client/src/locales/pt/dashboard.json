@@ -1,5 +1,43 @@
 {
-  "title": "Dashboard",
-  "subtitle": "Track and analyze your vehicle expenses",
-  "add_expense": "Add Expense"
+  "title": "Painel",
+  "subtitle": "Acompanhe e analise as despesas do seu veículo",
+  "add_expense": "Adicionar despesa",
+
+  "stats": {
+    "total_expenses": "Despesas totais",
+    "total_income": "Rendimento total",
+    "net_profit": "Lucro líquido",
+    "average_expense": "Despesa média"
+  },
+
+  "graphs_overview": {
+    "title": "Despesas ao longo do tempo",
+    "description": "Últimos 30 dias"
+  },
+
+  "graphs_category": {
+    "title": "Discriminação de despesas",
+    "description": "Por categoria"
+  },
+
+  "smart_insights": "Informações inteligentes",
+
+  "smart_messages": {
+    "expense": {
+      "title": "As despesas aumentaram 20%",
+      "description": "As suas despesas deste mês são superiores à média dos últimos 6 meses. Reveja as transações recentes."
+    },
+    "maintenance": {
+      "title": "Manutenção a realizar em breve",
+      "description": "O seu veículo está a aproximar-se dos 15 000 km. Agende uma mudança de óleo nos próximos 500 km."
+    },
+    "fuel_efficiency": {
+      "title": "Eficiência de combustível a melhorar",
+      "description": "O seu custo por quilómetro diminuiu 8% em comparação com o mês passado."
+    },
+    "optimization": {
+      "title": "Dica de otimização de custos",
+      "description": "Considere passar a utilizar postos de abastecimento premium com menos frequência para poupar aproximadamente 45 $/mês."
+    }
+  }
 }

@@ -4,5 +4,9 @@
 
   "auth": {
     "accept_terms": "By continuing, you agree to our <terms>Terms of Service</terms> and our <privacy>Privacy Policy</privacy>."
+  },
+
+  "indisponible_message": {
+    "graphs": "Currently unavailable."
   }
 }

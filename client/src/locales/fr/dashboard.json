@@ -1,5 +1,43 @@
 {
-  "title": "Dashboard",
-  "subtitle": "Track and analyze your vehicle expenses",
-  "add_expense": "Add Expense"
+  "title": "Tableau de bord",
+  "subtitle": "Suivez et analysez les dépenses liées à votre véhicule",
+  "add_expense": "Ajouter une dépense",
+
+  "stats": {
+    "total_expenses": "Total des dépenses",
+    "total_income": "Total des revenus",
+    "net_profit": "Bénéfice net",
+    "average_expense": "Dépense moyenne"
+  },
+
+  "graphs_overview": {
+    "title": "Évolution des dépenses",
+    "description": "30 derniers jours"
+  },
+
+  "graphs_category": {
+    "title": "Répartition des dépenses",
+    "description": "Par catégorie"
+  },
+
+  "smart_insights": "Informations pertinentes",
+
+  "smart_messages": {
+    "expense": {
+      "title": "Augmentation des dépenses de 20 %",
+      "description": "Vos dépenses ce mois-ci sont supérieures à votre moyenne sur 6 mois. Vérifiez vos transactions récentes."
+    },
+    "maintenance": {
+      "title": "Entretien à effectuer prochainement",
+      "description": "Votre véhicule approche les 15 000 km. Prévoyez une vidange d'huile dans les 500 km."
+    },
+    "fuel_efficiency": {
+      "title": "Amélioration de la consommation de carburant",
+      "description": "Votre coût au kilomètre a diminué de 8 % par rapport au mois dernier."
+    },
+    "optimization": {
+      "title": "Conseil d'optimisation des coûts",
+      "description": "Envisagez de vous rendre moins souvent dans des stations-service haut de gamme pour économiser environ 45 $ par mois."
+    }
+  }
 }

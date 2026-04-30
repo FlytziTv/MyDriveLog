@@ -1,5 +1,43 @@
 {
   "title": "Dashboard",
   "subtitle": "Track and analyze your vehicle expenses",
-  "add_expense": "Add Expense"
+  "add_expense": "Add Expense",
+
+  "stats": {
+    "total_expenses": "Total Expenses",
+    "total_income": "Total Income",
+    "net_profit": "Net Profit",
+    "average_expense": "Average Expense"
+  },
+
+  "graphs_overview": {
+    "title": "Expenses Over Time",
+    "description": "Last 30 days"
+  },
+
+  "graphs_category": {
+    "title": "Expense Breakdown",
+    "description": "By category"
+  },
+
+  "smart_insights": "Smart Insights",
+
+  "smart_messages": {
+    "expense": {
+      "title": "Expenses increased by 20%",
+      "description": "Your expenses this month are higher than your 6-month average. Review recent transactions."
+    },
+    "maintenance": {
+      "title": "Maintenance due soon",
+      "description": "Your vehicle is approaching 15,000 km. Schedule an oil change within the next 500 km."
+    },
+    "fuel_efficiency": {
+      "title": "Fuel efficiency improving",
+      "description": "Your cost per kilometer has decreased by 8% compared to last month."
+    },
+    "optimization": {
+      "title": "Cost optimization tip",
+      "description": "Consider switching to premium gas stations less frequently to save approximately $45/month."
+    }
+  }
 }
