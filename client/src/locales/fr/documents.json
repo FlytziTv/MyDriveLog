@@ -1,0 +1,26 @@
+{
+  "title": "Documents",
+  "subtitle": "Conservez et gérez vos documents relatifs à votre véhicule",
+  "add_expense": "Télécharger un document",
+
+  "stats": {
+    "total_documents": "Nombre total de documents",
+    "insurance": "Assurance",
+    "maintenance": "Entretien",
+    "fuel": "Carburant"
+  },
+
+  "all_documents_block": {
+    "title": "Tous les documents"
+  },
+
+  "upload_documents_block": {
+    "title": "Télécharger un nouveau document"
+  },
+
+  "upload_card": {
+    "title": "Glissez-déposez vos fichiers ici",
+    "description": "PDF, PNG, JPG jusqu'à 10 Mo",
+    "button": "Sélectionner les fichiers"
+  }
+}

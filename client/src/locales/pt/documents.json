@@ -1,0 +1,26 @@
+{
+  "title": "Documentos",
+  "subtitle": "Armazene e faça a gestão dos seus documentos relacionados com o veículo",
+  "add_expense": "Carregar documento",
+
+  "stats": {
+    "total_documents": "Total de documentos",
+    "insurance": "Seguro",
+    "maintenance": "Manutenção",
+    "fuel": "Combustível"
+  },
+
+  "all_documents_block": {
+    "title": "Todos os documentos"
+  },
+
+  "upload_documents_block": {
+    "title": "Carregar novo documento"
+  },
+
+  "upload_card": {
+    "title": "Arraste e solte os seus ficheiros aqui",
+    "description": "PDF, PNG, JPG até 10 MB",
+    "button": "Selecionar ficheiros"
+  }
+}

@@ -1,0 +1,26 @@
+{
+  "title": "Documents",
+  "subtitle": "Store and manage your vehicle-related documents",
+  "add_expense": "Upload Document",
+
+  "stats": {
+    "total_documents": "Total Documents",
+    "insurance": "Insurance",
+    "maintenance": "Maintenance",
+    "fuel": "Fuel"
+  },
+
+  "all_documents_block": {
+    "title": "All Documents"
+  },
+
+  "upload_documents_block": {
+    "title": "Upload New Document"
+  },
+
+  "upload_card": {
+    "title": "Drag and drop your files here",
+    "description": "PDF, PNG, JPG up to 10MB",
+    "button": "Select Files"
+  }
+}

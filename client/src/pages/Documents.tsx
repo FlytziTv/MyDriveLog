@@ -4,25 +4,27 @@ import UploadCard from "../components/documents/UploadCard";
 import { MiniStatsCard } from "../components/layout/MiniStatsCard";
 import { BlockCard } from "../components/layout/BlockCard";
 import Sidebar from "../components/layout/SideBar";
+import { useTranslation } from "react-i18next";
 
 export default function DocumentsPage() {
+  const { t } = useTranslation("documents");
   return (
     <div className="h-screen w-full flex">
       <Sidebar />
       <div className="flex-1 px-6 py-4 flex flex-col gap-6 overflow-y-auto">
         <HeaderDashboard
-          title="Documents"
-          description="Store and manage your vehicle-related documents"
-          buttonText="Upload Document"
+          title={t("title")}
+          description={t("subtitle")}
+          buttonText={t("add_expense")}
         />
         <div className="w-full grid grid-cols-4 gap-4">
-          <MiniStatsCard title="Total Documents" amount="4" />
-          <MiniStatsCard title="Insurance" amount="1" />
-          <MiniStatsCard title="Maintenance" amount="2" />
-          <MiniStatsCard title="Fuel" amount="1" />
+          <MiniStatsCard title={t("stats.total_documents")} amount="4" />
+          <MiniStatsCard title={t("stats.insurance")} amount="1" />
+          <MiniStatsCard title={t("stats.maintenance")} amount="2" />
+          <MiniStatsCard title={t("stats.fuel")} amount="1" />
         </div>
 
-        <BlockCard title="All Documents">
+        <BlockCard title={t("all_documents_block.title")}>
           <DocsMessage
             name="Insurance Policy.pdf"
             type="PDF"
@@ -32,7 +34,7 @@ export default function DocumentsPage() {
           />
         </BlockCard>
 
-        <BlockCard title="Upload New Document">
+        <BlockCard title={t("upload_documents_block.title")}>
           <UploadCard />
         </BlockCard>
       </div>
