@@ -5,11 +5,13 @@ export function HeaderDashboard({
   description,
   buttonText = "Add Expense",
   button = true,
+  onButtonClick,
 }: {
   title: string;
   description?: string;
   buttonText?: string;
   button?: boolean;
+  onButtonClick?: () => void;
 }) {
   return (
     <div className="w-full flex flex-row items-center justify-between">
@@ -21,7 +23,10 @@ export function HeaderDashboard({
       </div>
 
       {button && (
-        <button className="bg-primary text-primary-foreground flex flex-row items-center justify-center gap-2 text-sm hover:bg-primary/80 px-4 py-2 rounded-md transition-colors duration-200">
+        <button
+          onClick={onButtonClick}
+          className="bg-primary text-primary-foreground flex flex-row items-center justify-center gap-2 text-sm hover:bg-primary/80 px-4 py-2 rounded-md transition-colors duration-200"
+        >
           <Plus size={16} />
           {buttonText}
         </button>

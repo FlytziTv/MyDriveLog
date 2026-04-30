@@ -1,0 +1,14 @@
+{
+  "add_vehicle": {
+    "title": "Adicionar um veículo"
+  },
+  "add_expense": {
+    "title": "Adicionar uma despesa"
+  },
+  "add_task": {
+    "title": "Adicionar uma tarefa"
+  },
+  "add_document": {
+    "title": "Adicionar um documento"
+  }
+}

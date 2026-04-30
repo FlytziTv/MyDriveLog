@@ -34,6 +34,10 @@ import enDocuments from "./locales/en/documents.json";
 import frDocuments from "./locales/fr/documents.json";
 import ptDocuments from "./locales/pt/documents.json";
 
+import enDialog from "./locales/en/dialogs.json";
+import frDialog from "./locales/fr/dialogs.json";
+import ptDialog from "./locales/pt/dialogs.json";
+
 i18n
   .use(LanguageDetector)
   .use(initReactI18next)
@@ -48,6 +52,7 @@ i18n
         analytics: enAnalytics,
         maintenance: enMaintenance,
         documents: enDocuments,
+        dialog: enDialog,
       },
       fr: {
         common: frCommon,
@@ -58,6 +63,7 @@ i18n
         analytics: frAnalytics,
         maintenance: frMaintenance,
         documents: frDocuments,
+        dialog: frDialog,
       },
       pt: {
         common: ptCommon,
@@ -68,6 +74,7 @@ i18n
         analytics: ptAnalytics,
         maintenance: ptMaintenance,
         documents: ptDocuments,
+        dialog: ptDialog,
       },
     },
     defaultNS: "common",
