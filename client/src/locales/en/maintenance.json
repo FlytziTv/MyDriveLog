@@ -1,0 +1,28 @@
+{
+  "title": "Maintenance & Reminders",
+  "subtitle": "Track and schedule vehicle maintenance tasks",
+  "add_expense": "Add Task",
+
+  "stats": {
+    "upcoming": "Upcoming",
+    "overdue": "Overdue",
+    "completed": "Completed"
+  },
+
+  "maintenance_block": {
+    "title": "All Maintenance Tasks",
+    "tasks": {
+      "1": "Oil Change",
+      "2": "Brake Inspection",
+      "3": "Tire Rotation"
+    }
+  },
+
+  "reminders_block": {
+    "title": "Smart Reminders",
+    "messages": {
+      "1": "<strong>Tesla Model 3</strong> will reach 25,000 km in approximately <strong>500 km</strong>. Schedule an oil change soon to avoid overdue maintenance.",
+      "2": "<strong>Honda Civic</strong> annual inspection is due in <strong>2 weeks</strong>. Book your appointment to stay compliant."
+    }
+  }
+}

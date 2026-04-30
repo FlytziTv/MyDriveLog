@@ -1,0 +1,28 @@
+{
+  "title": "Manutenção e lembretes",
+  "subtitle": "Acompanhar e agendar tarefas de manutenção de veículos",
+  "add_expense": "Adicionar tarefa",
+
+  "stats": {
+    "upcoming": "Próximos",
+    "overdue": "Em atraso",
+    "completed": "Concluídos"
+  },
+
+  "maintenance_block": {
+    "title": "Todas as tarefas de manutenção",
+    "tasks": {
+      "1": "Troca de óleo",
+      "2": "Inspeção dos travões",
+      "3": "Rotação dos pneus"
+    }
+  },
+
+  "reminders_block": {
+    "title": "Lembretes inteligentes",
+    "messages": {
+      "1": "<strong>Tesla Model 3</strong> atingirá os 25 000 km em aproximadamente <strong>500 km</strong>. Marque uma mudança de óleo em breve para evitar atrasos na manutenção.",
+      "2": "<strong>Honda Civic</strong> a inspeção anual está prevista para daqui a <strong>2 semanas</strong>. Marque a sua consulta para cumprir os requisitos."
+    }
+  }
+}

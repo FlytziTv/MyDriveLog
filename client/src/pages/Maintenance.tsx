@@ -4,28 +4,31 @@ import { BlockCard } from "../components/layout/BlockCard";
 import { AllMaintenance } from "../components/maintenance/AllMaintenance";
 import { SmartMessage } from "../components/maintenance/SmartMessage";
 import Sidebar from "../components/layout/SideBar";
+import { useTranslation, Trans } from "react-i18next";
 
 export default function Maintenance() {
+  const { t } = useTranslation("maintenance");
+
   return (
     <div className="h-screen w-full flex">
       <Sidebar />
       <div className="flex-1 px-6 py-4 flex flex-col gap-6 overflow-y-auto">
         <HeaderDashboard
-          title="Maintenance & Reminders"
-          description="Track and schedule vehicle maintenance tasks"
-          buttonText="Add Task"
+          title={t("title")}
+          description={t("subtitle")}
+          buttonText={t("add_expense")}
         />
 
         <div className="w-full grid grid-cols-3 gap-4">
-          <MiniStatsCard title="Upcoming" amount="2" />
-          <MiniStatsCard title="Overdue" amount="1" />
-          <MiniStatsCard title="Completed" amount="1" />
+          <MiniStatsCard title={t("stats.upcoming")} amount="2" />
+          <MiniStatsCard title={t("stats.overdue")} amount="1" />
+          <MiniStatsCard title={t("stats.completed")} amount="1" />
         </div>
 
-        <BlockCard title="All Maintenance Tasks">
+        <BlockCard title={t("maintenance_block.title")}>
           <AllMaintenance
             status="upcoming"
-            task="Oil Change"
+            task={t("maintenance_block.tasks.1")}
             vehicle="Toyota Camry"
             dueDate="2023-10-15"
             dueMileage={30000}
@@ -33,7 +36,7 @@ export default function Maintenance() {
           />
           <AllMaintenance
             status="overdue"
-            task="Brake Inspection"
+            task={t("maintenance_block.tasks.2")}
             vehicle="Honda Civic"
             dueDate="2023-09-20"
             dueMileage={25000}
@@ -41,7 +44,7 @@ export default function Maintenance() {
           />
           <AllMaintenance
             status="done"
-            task="Tire Rotation"
+            task={t("maintenance_block.tasks.3")}
             vehicle="Ford Mustang"
             dueDate="2023-10-01"
             dueMileage={28000}
@@ -49,24 +52,24 @@ export default function Maintenance() {
           />
         </BlockCard>
 
-        <BlockCard title="Smart Reminders">
+        <BlockCard title={t("reminders_block.title")}>
           <SmartMessage
             description={
-              <>
-                <strong>Tesla Model 3</strong> will reach 25,000 km in
-                approximately <strong>500 km</strong>. Schedule an oil change
-                soon to avoid overdue maintenance.
-              </>
+              <Trans
+                i18nKey="reminders_block.messages.1"
+                ns="maintenance"
+                components={{ strong: <strong /> }}
+              />
             }
             type="yellow"
           />
           <SmartMessage
             description={
-              <>
-                <strong>Honda Civic</strong> annual inspection is due in{" "}
-                <strong>2 weeks</strong>. Book your appointment to stay
-                compliant.
-              </>
+              <Trans
+                i18nKey="reminders_block.messages.2"
+                ns="maintenance"
+                components={{ strong: <strong /> }}
+              />
             }
             type="blue"
           />

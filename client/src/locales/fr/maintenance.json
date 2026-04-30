@@ -1,0 +1,28 @@
+{
+  "title": "Entretien et rappels",
+  "subtitle": "Suivre et planifier les interventions d'entretien des véhicules",
+  "add_expense": "Ajouter une tâche",
+
+  "stats": {
+    "upcoming": "À venir",
+    "overdue": "En retard",
+    "completed": "Terminé"
+  },
+
+  "maintenance_block": {
+    "title": "Toutes les tâches d'entretien",
+    "tasks": {
+      "1": "Vidange d'huile",
+      "2": "Contrôle des freins",
+      "3": "Permutation des pneus"
+    }
+  },
+
+  "reminders_block": {
+    "title": "Rappels intelligents",
+    "messages": {
+      "1": "<strong>La Tesla Model 3</strong> atteindra les 25 000 km dans environ <strong>500 km</strong>. Prévoyez une vidange d'huile prochainement pour éviter tout retard dans l'entretien.",
+      "2": "<strong>Honda Civic</strong> : le contrôle technique annuel est prévu dans <strong>2 semaines</strong>. Prenez rendez-vous pour rester en conformité."
+    }
+  }
+}

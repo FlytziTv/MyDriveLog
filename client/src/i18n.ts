@@ -26,6 +26,10 @@ import enAnalytics from "./locales/en/analytics.json";
 import frAnalytics from "./locales/fr/analytics.json";
 import ptAnalytics from "./locales/pt/analytics.json";
 
+import enMaintenance from "./locales/en/maintenance.json";
+import frMaintenance from "./locales/fr/maintenance.json";
+import ptMaintenance from "./locales/pt/maintenance.json";
+
 i18n
   .use(LanguageDetector)
   .use(initReactI18next)
@@ -38,6 +42,7 @@ i18n
         dashboard: enDashboard,
         vehicles: enVehicles,
         analytics: enAnalytics,
+        maintenance: enMaintenance,
       },
       fr: {
         common: frCommon,
@@ -46,6 +51,7 @@ i18n
         dashboard: frDashboard,
         vehicles: frVehicles,
         analytics: frAnalytics,
+        maintenance: frMaintenance,
       },
       pt: {
         common: ptCommon,
@@ -54,6 +60,7 @@ i18n
         dashboard: ptDashboard,
         vehicles: ptVehicles,
         analytics: ptAnalytics,
+        maintenance: ptMaintenance,
       },
     },
     defaultNS: "common",
