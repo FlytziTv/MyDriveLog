@@ -1,0 +1,37 @@
+{
+  "title": "Analytics",
+  "subtitle": "Deep insights into your vehicle expenses",
+
+  "stats": {
+    "avg_cost_per_km": "Avg Cost/KM",
+    "yearly_estimate": "Yearly Estimate",
+    "vs_average_user": "vs Average User",
+    "next_expense": "Next Expense"
+  },
+
+  "graphs_cost_per_km": {
+    "title": "Cost per kilometer over time"
+  },
+
+  "graphs_monthly_trends": {
+    "title": "Monthly trends by category"
+  },
+
+  "predictions_block": {
+    "title": "Predictions & Recommendations",
+    "messages": {
+      "yearly_estimate": {
+        "title": "Estimated Yearly Cost",
+        "description": "Based on your current spending patterns, your estimated yearly vehicle cost is <strong>{{amount}}</strong>. This includes fuel, maintenance, and insurance."
+      },
+      "next_expense": {
+        "title": "Next Expected Expense",
+        "description": "Your next scheduled maintenance is due in approximately <strong>7 days</strong> or <strong>500 km</strong>. Estimated cost: $180-$220."
+      },
+      "above_average": {
+        "title": "Above Average Spending",
+        "description": "You're spending <strong>18% more</strong> than average users with similar vehicles. Consider reviewing your fuel efficiency and maintenance frequency."
+      }
+    }
+  }
+}

@@ -1,0 +1,37 @@
+{
+  "title": "Analyses",
+  "subtitle": "Une analyse approfondie de vos dépenses liées à votre véhicule",
+
+  "stats": {
+    "avg_cost_per_km": "Coût moyen au km",
+    "yearly_estimate": "Estimation annuelle",
+    "vs_average_user": "par rapport à un utilisateur moyen",
+    "next_expense": "Prochaine dépense"
+  },
+
+  "graphs_cost_per_km": {
+    "title": "Évolution du coût au kilomètre"
+  },
+
+  "graphs_monthly_trends": {
+    "title": "Tendances mensuelles par catégorie"
+  },
+
+  "predictions_block": {
+    "title": "Prévisions et recommandations",
+    "messages": {
+      "yearly_estimate": {
+        "title": "Coût annuel estimé",
+        "description": "D'après vos habitudes de dépenses actuelles, le coût annuel estimé de votre véhicule est de <strong>{{amount}}</strong>. Ce montant comprend le carburant, l'entretien et l'assurance."
+      },
+      "next_expense": {
+        "title": "Prochaine dépense prévue",
+        "description": "Votre prochain entretien est prévu dans environ <strong>7 jours</strong> ou <strong>500 km</strong>. Coût estimé : 180 $ à 220 $."
+      },
+      "above_average": {
+        "title": "Dépenses supérieures à la moyenne",
+        "description": "Vous dépensez <strong>18 % de plus</strong> que les utilisateurs moyens possédant des véhicules similaires. Pensez à revoir votre consommation de carburant et la fréquence de vos entretiens."
+      }
+    }
+  }
+}

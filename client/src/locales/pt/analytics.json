@@ -1,0 +1,37 @@
+{
+  "title": "Análise",
+  "subtitle": "Informações detalhadas sobre as despesas do seu veículo",
+
+  "stats": {
+    "avg_cost_per_km": "Custo médio por km",
+    "yearly_estimate": "Estimativa anual",
+    "vs_average_user": "em comparação com o utilizador médio",
+    "next_expense": "Próxima despesa"
+  },
+
+  "graphs_cost_per_km": {
+    "title": "Evolução do custo por quilómetro"
+  },
+
+  "graphs_monthly_trends": {
+    "title": "Tendências mensais por categoria"
+  },
+
+  "predictions_block": {
+    "title": "Previsões e recomendações",
+    "messages": {
+      "yearly_estimate": {
+        "title": "Custo Anual Estimado",
+        "description": "Com base nos seus padrões de gastos atuais, o custo anual estimado do seu veículo é de <strong>{{amount}}</strong>. Isto inclui combustível, manutenção e seguro."
+      },
+      "next_expense": {
+        "title": "Próxima despesa prevista",
+        "description": "A sua próxima manutenção programada está prevista para daqui a aproximadamente <strong>7 dias</strong> ou <strong>500 km</strong>. Custo estimado: 180-220 $."
+      },
+      "above_average": {
+        "title": "Despesas acima da média",
+        "description": "Está a gastar <strong>18% mais</strong> do que os utilizadores médios com veículos semelhantes. Considere rever a sua eficiência de combustível e a frequência de manutenção."
+      }
+    }
+  }
+}
