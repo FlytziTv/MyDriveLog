@@ -9,5 +9,10 @@
   "indisponible_message": {
     "graphs": "Actuellement indisponible.",
     "images": "Aucune image disponible."
+  },
+
+  "dialog_actions": {
+    "cancel": "Annuler",
+    "confirm": "Confirmer"
   }
 }

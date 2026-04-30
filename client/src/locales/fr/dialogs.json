@@ -1,14 +1,136 @@
 {
   "add_vehicle": {
-    "title": "Ajouter un véhicule"
+    "title": "Ajouter un véhicule",
+    "input": {
+      "name": "Nom du véhicule",
+      "name_placeholder": "Entrez le nom du véhicule",
+
+      "model": "Modèle",
+      "model_placeholder": "Entrez le modèle du véhicule",
+
+      "year": "Année",
+      "year_placeholder": "Sélectionnez une année",
+
+      "mileage": "Kilométrage actuel (km)",
+      "mileage_placeholder": "Entrez le kilométrage actuel",
+
+      "purchase_date": "Date d'achat",
+      "purchase_date_placeholder": "Entrez la date d'achat",
+
+      "purchase_price": "Prix d'achat (€)",
+      "purchase_price_placeholder": "Entrez le prix d'achat"
+    },
+    "message": "Vous pouvez ajouter une photo et plus de détails après avoir créé le véhicule.",
+    "submit": "Ajouter un véhicule"
   },
+
   "add_expense": {
-    "title": "Ajouter une dépense"
+    "title": "Ajouter une dépense",
+    "input": {
+      "amount": "Montant (€)",
+      "amount_placeholder": "Saisissez le montant",
+
+      "category": "Catégorie",
+      "category_placeholder": "Sélectionnez une catégorie",
+
+      "vehicle": "Véhicule",
+      "vehicle_placeholder": "Sélectionnez un véhicule",
+
+      "date": "Date",
+      "date_placeholder": "Sélectionnez une date",
+
+      "mileage": "Kilométrage (km)",
+      "mileage_placeholder": "Entrez le kilométrage",
+
+      "location": "Lieu (facultatif)",
+      "location_placeholder": "Entrez le lieu",
+
+      "notes": "Remarques (facultatif)",
+      "notes_placeholder": "Entrez des remarques supplémentaires"
+    },
+
+    "select": {
+      "category_option": {
+        "fuel": "Carburant",
+        "maintenance": "Maintenance",
+        "insurance": "Assurance",
+        "parking": "Parking",
+        "tolls": "Péages",
+        "washing": "Lavage",
+        "other": "Autre"
+      }
+    },
+
+    "message": "Astuce : ajoutez vos reçus à vos dépenses ultérieurement depuis la page Documents.",
+    "submit": "Ajouter une dépense"
   },
   "add_task": {
-    "title": "Ajouter une tâche"
+    "title": "Ajouter une tâche",
+
+    "input": {
+      "task": "Tâche d'entretien",
+      "task_placeholder": "Sélectionnez une tâche",
+
+      "vehicle": "Véhicule",
+      "vehicle_placeholder": "Sélectionnez un véhicule",
+
+      "due_date": "Date d'échéance",
+      "due_date_placeholder": "Sélectionnez une date d'échéance",
+
+      "mileage": "Kilométrage à l'échéance (km)",
+      "mileage_placeholder": "Saisissez le kilométrage à l'échéance",
+
+      "estimated_cost": "Coût estimé (€)",
+      "estimated_cost_placeholder": "Saisissez le coût estimé",
+
+      "notes": "Remarques (facultatif)",
+      "notes_placeholder": "Saisissez toute remarque supplémentaire"
+    },
+
+    "select": {
+      "category_option": {
+        "oil-change": "Vidange d'huile",
+        "tire-rotation": "Rotation des pneus",
+        "brake-inspection": "Inspection des freins",
+        "air-filter": "Filtre à air",
+        "battery": "Batterie",
+        "alignment": "Alignement",
+        "inspection": "Inspection",
+        "other": "Autre"
+      }
+    }
   },
   "add_document": {
-    "title": "Ajouter un document"
+    "title": "Ajouter un document ",
+
+    "input": {
+      "upload": "Cliquez pour télécharger (PDF, JPG, PNG) ",
+
+      "document": "Nom du document ",
+      "document_placeholder": "Entrez le nom du document ",
+
+      "type": "Type de document ",
+      "type_placeholder ": "Sélectionnez un type de document ",
+
+      "vehicle": "Véhicule ",
+      "vehicle_placeholder ": "Sélectionnez un véhicule ",
+
+      "due_date": "Date ",
+      "due_date_placeholder ": "Sélectionnez une date ",
+
+      "notes": "Remarques (facultatif) ",
+      "notes_placeholder ": "Saisissez vos remarques supplémentaires "
+    },
+
+    "select ": {
+      "category_option ": {
+        "maintenance ": "Entretien ",
+        "fuel ": "Reçu de carburant ",
+        "assurance ": "Assurance ",
+        "immatriculation ": "Immatriculation ",
+        "achat ": "Document d'achat ",
+        "autre ": "Autre "
+      }
+    }
   }
 }

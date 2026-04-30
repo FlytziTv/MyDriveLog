@@ -2,7 +2,7 @@ import { FileUp } from "lucide-react";
 import { useTranslation } from "react-i18next";
 
 export default function UploadCard() {
-  const { t } = useTranslation("documents");
+  const { t } = useTranslation(["documents", "dialog"]);
   return (
     <div className="group h-64 w-full flex flex-col items-center gap-3 justify-center border-dashed border-2 border-muted-foreground/25 hover:border-primary/60 hover:bg-primary/2 rounded-xl transition-all duration-300 cursor-pointer">
       <div className="p-3 rounded-xl bg-muted/60 group-hover:bg-primary/10 transition-colors duration-300">
@@ -22,6 +22,21 @@ export default function UploadCard() {
       <button className="mt-1 text-xs font-medium text-primary border border-primary/30 hover:bg-primary hover:text-primary-foreground px-4 py-1.5 rounded-lg transition-all duration-200">
         {t("upload_card.button")}
       </button>
+    </div>
+  );
+}
+
+export function UplaodCardForm() {
+  const { t } = useTranslation("documents");
+  return (
+    <div className="group w-full flex flex-row items-center gap-3 p-6 justify-center border-dashed border-2 border-muted-foreground/25 hover:border-primary/60 hover:bg-primary/2 rounded-xl transition-all duration-300 cursor-pointer">
+      <FileUp
+        size={24}
+        className="text-muted-foreground group-hover:text-primary transition-colors duration-300"
+      />
+      <p className="text-xs text-muted-foreground">
+        {t("dialog:add_document.input.upload")}
+      </p>
     </div>
   );
 }

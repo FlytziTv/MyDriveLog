@@ -7,6 +7,7 @@ import { MiniStatsCard } from "../components/layout/MiniStatsCard";
 import { BlockCard } from "../components/layout/BlockCard";
 import Sidebar from "../components/layout/SideBar";
 import { useTranslation } from "react-i18next";
+import { AddExpenseForm } from "../components/dialog/add/expense-form";
 
 export default function DashboardPage() {
   const { t } = useTranslation(["dashboard", "dialog"]);
@@ -82,7 +83,12 @@ export default function DashboardPage() {
               />
             </div>
           </div>
-          <DialogContent title={t("dialog:add_expense.title")}></DialogContent>
+          <DialogContent title={t("dialog:add_expense.title")}>
+            <AddExpenseForm
+              onSuccess={() => setOpen(false)}
+              onCancel={() => setOpen(false)}
+            />
+          </DialogContent>
         </Dialog.Root>
       </div>
     </div>

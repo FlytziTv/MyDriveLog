@@ -8,6 +8,7 @@ import { AllMaintenance } from "../components/maintenance/AllMaintenance";
 import { SmartMessage } from "../components/maintenance/SmartMessage";
 import Sidebar from "../components/layout/SideBar";
 import { useTranslation, Trans } from "react-i18next";
+import { AddTaskForm } from "../components/dialog/add/task-form";
 
 export default function Maintenance() {
   const { t } = useTranslation(["maintenance", "dialog"]);
@@ -81,7 +82,12 @@ export default function Maintenance() {
             />
           </BlockCard>
 
-          <DialogContent title={t("dialog:add_task.title")}></DialogContent>
+          <DialogContent title={t("dialog:add_task.title")}>
+            <AddTaskForm
+              onSuccess={() => setOpen(false)}
+              onCancel={() => setOpen(false)}
+            />
+          </DialogContent>
         </Dialog.Root>
       </div>
     </div>

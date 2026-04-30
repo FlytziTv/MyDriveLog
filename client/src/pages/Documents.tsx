@@ -8,6 +8,7 @@ import { MiniStatsCard } from "../components/layout/MiniStatsCard";
 import { BlockCard } from "../components/layout/BlockCard";
 import Sidebar from "../components/layout/SideBar";
 import { useTranslation } from "react-i18next";
+import { AddDocumentForm } from "../components/dialog/add/document-form";
 
 export default function DocumentsPage() {
   const { t } = useTranslation(["documents", "dialogs"]);
@@ -45,7 +46,12 @@ export default function DocumentsPage() {
           <BlockCard title={t("upload_documents_block.title")}>
             <UploadCard />
           </BlockCard>
-          <DialogContent title={t("dialog:add_document.title")}></DialogContent>
+          <DialogContent title={t("dialog:add_document.title")}>
+            <AddDocumentForm
+              onSuccess={() => setOpen(false)}
+              onCancel={() => setOpen(false)}
+            />
+          </DialogContent>
         </Dialog.Root>
       </div>
     </div>

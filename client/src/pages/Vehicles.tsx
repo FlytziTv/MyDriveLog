@@ -5,6 +5,7 @@ import { HeaderDashboard } from "../components/layout/HeaderDashboard";
 import Sidebar from "../components/layout/SideBar";
 import { VehicleCard } from "../components/vehicles/VehicleCard";
 import DialogContent from "../components/layout/DialogContent";
+import { AddVehicleForm } from "../components/dialog/add/vehicle-form";
 
 export default function VehiclesPage() {
   const { t } = useTranslation(["vehicles", "dialog"]);
@@ -57,7 +58,12 @@ export default function VehiclesPage() {
             />
           </div>
 
-          <DialogContent title={t("dialog:add_vehicle.title")}></DialogContent>
+          <DialogContent title={t("dialog:add_vehicle.title")}>
+            <AddVehicleForm
+              onSuccess={() => setOpen(false)}
+              onCancel={() => setOpen(false)}
+            />
+          </DialogContent>
         </Dialog.Root>
       </div>
     </div>

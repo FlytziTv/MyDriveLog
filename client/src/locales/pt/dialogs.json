@@ -1,14 +1,108 @@
 {
   "add_vehicle": {
-    "title": "Adicionar um veículo"
+    "title": "Adicionar um veículo",
+    "input": {
+      "name": "Nome do veículo",
+      "name_placeholder": "Introduza o nome do veículo",
+      "model": "Modelo",
+      "model_placeholder": "Introduza o modelo do veículo",
+      "year": "Ano",
+      "year_placeholder": "Selecione um ano",
+      "mileage": "Quilometragem atual (km)",
+      "mileage_placeholder": "Introduza a quilometragem atual",
+      "purchase_date": "Data de compra",
+      "purchase_date_placeholder": "Introduza a data de compra",
+      "purchase_price": "Preço de compra (€)",
+      "purchase_price_placeholder": "Introduza o preço de compra"
+    },
+    "message": "Pode adicionar uma foto e mais detalhes após criar o veículo.",
+    "submit": "Adicionar veículo"
   },
   "add_expense": {
-    "title": "Adicionar uma despesa"
+    "title": "Adicionar uma despesa",
+    "input": {
+      "amount": "Montante (€)",
+      "amount_placeholder": "Introduza o montante",
+      "category": "Categoria",
+      "category_placeholder": "Selecione uma categoria",
+      "vehicle": "Veículo",
+      "vehicle_placeholder": "Selecione um veículo",
+      "date": "Data",
+      "date_placeholder": "Selecione uma data",
+      "mileage": "Quilometragem (km)",
+      "mileage_placeholder": "Introduza a quilometragem",
+      "location": "Local (opcional)",
+      "location_placeholder": "Introduza o local",
+      "notes": "Notas (opcional)",
+      "notes_placeholder": "Introduza notas adicionais"
+    },
+    "select": {
+      "category_option": {
+        "fuel": "Combustível",
+        "maintenance": "Manutenção",
+        "insurance": "Seguro",
+        "parking": "Estacionamento",
+        "tolls": "Portagens",
+        "washing": "Lavagem",
+        "other": "Outro"
+      }
+    },
+    "message": "Dica: adicione os seus recibos às despesas mais tarde a partir da página Documentos.",
+    "submit": "Adicionar despesa"
   },
   "add_task": {
-    "title": "Adicionar uma tarefa"
+    "title": "Adicionar uma tarefa",
+    "input": {
+      "task": "Tarefa de manutenção",
+      "task_placeholder": "Selecione uma tarefa",
+      "vehicle": "Veículo",
+      "vehicle_placeholder": "Selecione um veículo",
+      "due_date": "Data de vencimento",
+      "due_date_placeholder": "Selecione uma data de vencimento",
+      "mileage": "KM no vencimento (km)",
+      "mileage_placeholder": "Introduza a quilometragem prevista",
+      "estimated_cost": "Custo estimado (€)",
+      "estimated_cost_placeholder": "Introduza o custo estimado",
+      "notes": "Notas (opcional)",
+      "notes_placeholder": "Introduza quaisquer notas adicionais"
+    },
+    "select": {
+      "category_option": {
+        "oil-change": "Mudança de óleo",
+        "tire-rotation": "Rotação de pneus",
+        "brake-inspection": "Inspeção de travões",
+        "air-filter": "Filtro de ar",
+        "battery": "Bateria",
+        "alignment": "Alinhamento",
+        "inspection": "Inspeção",
+        "other": "Outro"
+      }
+    }
   },
   "add_document": {
-    "title": "Adicionar um documento"
+    "title": "Adicionar um documento",
+    "input": {
+      "upload": "Clique para carregar (PDF, JPG, PNG)",
+      "document": "Nome do documento",
+      "document_placeholder": "Introduza o nome do documento",
+      "type": "Tipo de documento",
+      "type_placeholder": "Selecione um tipo de documento",
+      "vehicle": "Veículo",
+      "vehicle_placeholder": "Selecione um veículo",
+      "due_date": "Data",
+      "due_date_placeholder": "Selecione uma data",
+      "notes": "Notas (opcional)",
+      "notes_placeholder": "Introduza as suas notas adicionais"
+    },
+    "select": {
+      "category_option": {
+        "maintenance": "Manutenção",
+        "fuel": "Recibo de combustível",
+        "insurance": "Seguro",
+        "registration": "Matrícula/Registo",
+        "purchase": "Documento de compra",
+        "other": "Outro"
+      }
+    }
   }
 }

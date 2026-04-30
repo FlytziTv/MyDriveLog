@@ -1,14 +1,108 @@
 {
   "add_vehicle": {
-    "title": "Add a vehicle"
+    "title": "Add a vehicle",
+    "input": {
+      "name": "Vehicle name",
+      "name_placeholder": "Enter vehicle name",
+      "model": "Model",
+      "model_placeholder": "Enter vehicle model",
+      "year": "Year",
+      "year_placeholder": "Select a year",
+      "mileage": "Current mileage (km)",
+      "mileage_placeholder": "Enter current mileage",
+      "purchase_date": "Purchase date",
+      "purchase_date_placeholder": "Enter purchase date",
+      "purchase_price": "Purchase price (€)",
+      "purchase_price_placeholder": "Enter purchase price"
+    },
+    "message": "You can add a photo and more details after creating the vehicle.",
+    "submit": "Add vehicle"
   },
   "add_expense": {
-    "title": "Add an expense"
+    "title": "Add an expense",
+    "input": {
+      "amount": "Amount (€)",
+      "amount_placeholder": "Enter amount",
+      "category": "Category",
+      "category_placeholder": "Select a category",
+      "vehicle": "Vehicle",
+      "vehicle_placeholder": "Select a vehicle",
+      "date": "Date",
+      "date_placeholder": "Select a date",
+      "mileage": "Mileage (km)",
+      "mileage_placeholder": "Enter mileage",
+      "location": "Location (optional)",
+      "location_placeholder": "Enter location",
+      "notes": "Notes (optional)",
+      "notes_placeholder": "Enter additional notes"
+    },
+    "select": {
+      "category_option": {
+        "fuel": "Fuel",
+        "maintenance": "Maintenance",
+        "insurance": "Insurance",
+        "parking": "Parking",
+        "tolls": "Tolls",
+        "washing": "Washing",
+        "other": "Other"
+      }
+    },
+    "message": "Tip: add your receipts to your expenses later from the Documents page.",
+    "submit": "Add expense"
   },
   "add_task": {
-    "title": "Add a task"
+    "title": "Add a task",
+    "input": {
+      "task": "Maintenance task",
+      "task_placeholder": "Select a task",
+      "vehicle": "Vehicle",
+      "vehicle_placeholder": "Select a vehicle",
+      "due_date": "Due date",
+      "due_date_placeholder": "Select a due date",
+      "mileage": "Due mileage (km)",
+      "mileage_placeholder": "Enter due mileage",
+      "estimated_cost": "Estimated cost (€)",
+      "estimated_cost_placeholder": "Enter estimated cost",
+      "notes": "Notes (optional)",
+      "notes_placeholder": "Enter any additional notes"
+    },
+    "select": {
+      "category_option": {
+        "oil-change": "Oil change",
+        "tire-rotation": "Tire rotation",
+        "brake-inspection": "Brake inspection",
+        "air-filter": "Air filter",
+        "battery": "Battery",
+        "alignment": "Alignment",
+        "inspection": "Inspection",
+        "other": "Other"
+      }
+    }
   },
   "add_document": {
-    "title": "Add a document"
+    "title": "Add a document",
+    "input": {
+      "upload": "Click to upload (PDF, JPG, PNG)",
+      "document": "Document name",
+      "document_placeholder": "Enter document name",
+      "type": "Document type",
+      "type_placeholder": "Select a document type",
+      "vehicle": "Vehicle",
+      "vehicle_placeholder": "Select a vehicle",
+      "due_date": "Date",
+      "due_date_placeholder": "Select a date",
+      "notes": "Notes (optional)",
+      "notes_placeholder": "Enter your additional notes"
+    },
+    "select": {
+      "category_option": {
+        "maintenance": "Maintenance",
+        "fuel": "Fuel receipt",
+        "insurance": "Insurance",
+        "registration": "Registration",
+        "purchase": "Purchase document",
+        "other": "Other"
+      }
+    }
   }
 }
