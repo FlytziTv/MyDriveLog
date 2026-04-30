@@ -7,6 +7,11 @@ import VehiclesPage from "./pages/Vehicles";
 import AnalyticsPage from "./pages/Analytics";
 import Maintenance from "./pages/Maintenance.tsx";
 import DocumentsPage from "./pages/Documents.tsx";
+import VehicleDetail from "./pages/VehicleDetail.tsx";
+import { TabOverview } from "./components/vehicle_detail/TabOverview.tsx";
+import { TabExpenses } from "./components/vehicle_detail/TabExpenses.tsx";
+import { TabMaintenance } from "./components/vehicle_detail/TabMaintenance.tsx";
+import { TabDocuments } from "./components/vehicle_detail/TabDocuments.tsx";
 
 function App() {
   return (
@@ -31,6 +36,21 @@ function App() {
             </ProtectedRoute>
           }
         />
+
+        <Route
+          path="/vehicles/:id"
+          element={
+            <ProtectedRoute>
+              <VehicleDetail />
+            </ProtectedRoute>
+          }
+        >
+          <Route index element={<TabOverview />} />
+          <Route path="expenses" element={<TabExpenses />} />
+          <Route path="maintenance" element={<TabMaintenance />} />
+          <Route path="documents" element={<TabDocuments />} />
+        </Route>
+
         <Route
           path="/analytics"
           element={

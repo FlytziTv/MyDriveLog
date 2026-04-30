@@ -1,0 +1,69 @@
+{
+  "title": "Detalhes do veículo",
+  "subtitle": "Faça a gestão dos detalhes, das despesas e dos lembretes do seu veículo.",
+  "button": "Adicionar uma despesa",
+
+  "status": {
+    "": "Estado",
+    "active": "Ativo",
+    "inactive": "Inativo"
+  },
+
+  "info": {
+    "make": "Marca",
+    "model": "Modelo",
+    "year": "Ano",
+    "vin": "Número de identificação do veículo",
+    "license_plate": "Matrícula"
+  },
+
+  "stats": {
+    "current_mileage": "Quilometragem atual",
+    "total_spent": "Total gasto",
+    "this_month": "Este mês",
+    "avg_cost_per_month": "Custo médio mensal"
+  },
+
+  "tabsNames": {
+    "overview": "Visão geral",
+    "expenses": "Despesas",
+    "maintenance": "Manutenção",
+    "documents": "Documentos"
+  },
+
+  "TabOverview": {
+    "cost_block": {
+      "title": "Evolução dos custos"
+    },
+
+    "fuel_block": {
+      "title": "Rendimento energético"
+    },
+
+    "coming_maintenance_block": {
+      "title": "Manutenção futura"
+    }
+  },
+
+  "TabExpenses": {
+    "history_block": {
+      "title": "Histórico de despesas"
+    }
+  },
+
+  "TabMaintenance": {
+    "schedule_block": {
+      "title": "Calendário de manutenção"
+    },
+
+    "history_block": {
+      "title": "Histórico de manutenção"
+    }
+  },
+
+  "TabDocuments": {
+    "docs_block": {
+      "title": "Documentos do veículo"
+    }
+  }
+}

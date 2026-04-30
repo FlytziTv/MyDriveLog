@@ -1,0 +1,69 @@
+{
+  "title": "Vehicle Details",
+  "subtitle": "Manage your vehicle's details, expenses, and reminders.",
+  "button": "Add an expense",
+
+  "status": {
+    "": "Status",
+    "active": "Active",
+    "inactive": "Inactive"
+  },
+
+  "info": {
+    "make": "Make",
+    "model": "Model",
+    "year": "Year",
+    "vin": "Vehicle Identification Number",
+    "license_plate": "License Plate"
+  },
+
+  "stats": {
+    "current_mileage": "Current mileage",
+    "total_spent": "Total spent",
+    "this_month": "This month",
+    "avg_cost_per_month": "Average cost per month"
+  },
+
+  "tabsNames": {
+    "overview": "Overview",
+    "expenses": "Expenses",
+    "maintenance": "Maintenance",
+    "documents": "Documents"
+  },
+
+  "TabOverview": {
+    "cost_block": {
+      "title": "Cost Trends"
+    },
+
+    "fuel_block": {
+      "title": "Fuel Efficiency"
+    },
+
+    "coming_maintenance_block": {
+      "title": "Upcoming Maintenance"
+    }
+  },
+
+  "TabExpenses": {
+    "history_block": {
+      "title": "Expense History"
+    }
+  },
+
+  "TabMaintenance": {
+    "schedule_block": {
+      "title": "Maintenance Schedule"
+    },
+
+    "history_block": {
+      "title": "Maintenance History"
+    }
+  },
+
+  "TabDocuments": {
+    "docs_block": {
+      "title": "Vehicle Documents"
+    }
+  }
+}

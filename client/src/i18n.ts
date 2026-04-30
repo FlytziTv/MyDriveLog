@@ -38,6 +38,10 @@ import enDialog from "./locales/en/dialogs.json";
 import frDialog from "./locales/fr/dialogs.json";
 import ptDialog from "./locales/pt/dialogs.json";
 
+import enVehicleDetail from "./locales/en/vehicle_detail.json";
+import frVehicleDetail from "./locales/fr/vehicle_detail.json";
+import ptVehicleDetail from "./locales/pt/vehicle_detail.json";
+
 i18n
   .use(LanguageDetector)
   .use(initReactI18next)
@@ -53,6 +57,7 @@ i18n
         maintenance: enMaintenance,
         documents: enDocuments,
         dialog: enDialog,
+        vehicle_detail: enVehicleDetail,
       },
       fr: {
         common: frCommon,
@@ -64,6 +69,7 @@ i18n
         maintenance: frMaintenance,
         documents: frDocuments,
         dialog: frDialog,
+        vehicle_detail: frVehicleDetail,
       },
       pt: {
         common: ptCommon,
@@ -75,6 +81,7 @@ i18n
         maintenance: ptMaintenance,
         documents: ptDocuments,
         dialog: ptDialog,
+        vehicle_detail: ptVehicleDetail,
       },
     },
     defaultNS: "common",

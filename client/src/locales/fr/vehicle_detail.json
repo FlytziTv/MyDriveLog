@@ -1,0 +1,69 @@
+{
+  "title": "Détails du véhicule",
+  "subtitle": "Gérez les détails, les dépenses et les rappels de votre véhicule.",
+  "button": "Ajouter une dépense",
+
+  "status": {
+    "": "Statut",
+    "active": "Actif",
+    "inactive": "Inactif"
+  },
+
+  "info": {
+    "make": "Marque",
+    "model": "Modèle",
+    "year": "Année",
+    "vin": "Numéro d'identification du véhicule",
+    "license_plate": "Plaque d'immatriculation"
+  },
+
+  "stats": {
+    "current_mileage": "Kilométrage actuel",
+    "total_spent": "Total dépensé",
+    "this_month": "Ce mois",
+    "avg_cost_per_month": "Coût moyen par mois"
+  },
+
+  "tabsNames": {
+    "overview": "Aperçu",
+    "expenses": "Dépenses",
+    "maintenance": "Entretien",
+    "documents": "Documents"
+  },
+
+  "TabOverview": {
+    "cost_block": {
+      "title": "Évolution des coûts"
+    },
+
+    "fuel_block": {
+      "title": "Rendement énergétique"
+    },
+
+    "coming_maintenance_block": {
+      "title": "Entretien à venir"
+    }
+  },
+
+  "TabExpenses": {
+    "history_block": {
+      "title": "Historique des dépenses"
+    }
+  },
+
+  "TabMaintenance": {
+    "schedule_block": {
+      "title": "Calendrier d'entretien"
+    },
+
+    "history_block": {
+      "title": "Historique d'entretien"
+    }
+  },
+
+  "TabDocuments": {
+    "docs_block": {
+      "title": "Documents du véhicule"
+    }
+  }
+}
