@@ -95,9 +95,10 @@ CREATE TABLE vehicles (
   -- Metadata
   notes TEXT,
   created_at TIMESTAMP DEFAULT NOW(),           -- Date de création de la fiche véhicule
-  updated_at TIMESTAMP DEFAULT NOW()            -- Date de dernière mise à jour de la fiche véhicule
+  updated_at TIMESTAMP DEFAULT NOW(),           -- Date de dernière mise à jour de la fiche véhicule
 
-  CHECK (mileage >= 0)
+  CHECK (purchase_mileage >= 0),
+  CHECK (current_mileage >= 0)
 );
 
 
@@ -378,7 +379,7 @@ CREATE TABLE reminders (
   snoozed_until TIMESTAMP,
 
   -- Related
-  maintenance_schedule_id UUID REFERENCES maintenance_schedule(id) ON DELETE CASCADE,
+  -- maintenance_schedule_id UUID REFERENCES maintenance_schedule(id) ON DELETE CASCADE,
 
   -- Metadata
   created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,

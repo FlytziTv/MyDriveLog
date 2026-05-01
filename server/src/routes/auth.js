@@ -11,7 +11,9 @@ router.post("/register", async (req, res) => {
     const { username, email, password } = req.body;
 
     if (!username || !email || !password) {
-      return res.status(400).json({ message: "All fields are required" });
+      return res
+        .status(400)
+        .json({ message: "Tous les champs sont obligatoires" });
     }
 
     const userExist = await db.query("SELECT * FROM users WHERE email = $1", [
@@ -19,24 +21,27 @@ router.post("/register", async (req, res) => {
     ]);
 
     if (userExist.rows.length > 0) {
-      return res.status(400).json({ message: "Email already exists" });
+      return res.status(400).json({ message: "Cet email est déjà utilisé" });
     }
 
     const hashedPassword = await bcrypt.hash(password, 10);
 
     const newUser = await db.query(
-      "INSERT INTO users (username, email, password_hash) VALUES ($1, $2, $3) RETURNING *",
+      "INSERT INTO users (username, email, password_hash) VALUES ($1, $2, $3) RETURNING id, username, email, created_at",
       [username, email, hashedPassword],
     );
 
     const user = newUser.rows[0];
 
-    delete user.password_hash;
+    // Génération du token directement à l'inscription pour connecter l'utilisateur immédiatement
+    const token = jwt.sign({ id: user.id }, process.env.JWT_SECRET, {
+      expiresIn: "7d",
+    });
 
-    res.status(201).json({ message: "User created", user });
+    res.status(201).json({ message: "Utilisateur créé", user, token });
   } catch (err) {
-    console.error(err);
-    res.status(500).json({ message: "Erreur serveur" });
+    console.error("ERREUR SQL:", err.message); // Regarde bien ce message dans ton terminal
+    res.status(500).json({ message: "Erreur serveur lors de l'inscription" });
   }
 });
 
@@ -82,18 +87,30 @@ router.post("/login", async (req, res) => {
 router.get("/me", authMiddleware, async (req, res) => {
   try {
     const result = await db.query(
-      "SELECT id, username, email, avatar_url, created_at FROM users WHERE id = $1",
+      `SELECT 
+        id, 
+        username, 
+        email, 
+        avatar_url, 
+        currency, 
+        distance_unit, 
+        language, 
+        created_at 
+      FROM users 
+      WHERE id = $1`,
       [req.userId],
     );
 
     if (result.rows.length === 0) {
-      return res.status(404).json({ message: "User not found" });
+      return res.status(404).json({ message: "Utilisateur non trouvé" });
     }
 
     res.json(result.rows[0]);
   } catch (err) {
-    console.error(err);
-    res.status(500).json({ message: "Erreur serveur" });
+    console.error("Erreur /me:", err.message);
+    res
+      .status(500)
+      .json({ message: "Erreur serveur lors de la récupération du profil" });
   }
 });
 
