@@ -4,6 +4,8 @@ import { MiniStatsCard } from "../components/layout/MiniStatsCard";
 import { BlockCard } from "../components/layout/BlockCard";
 import Sidebar from "../components/layout/SideBar";
 import { useTranslation, Trans } from "react-i18next";
+import { ChartBarMultiple } from "../components/chart/chart-bar-multiple";
+import { ChartLineDots } from "../components/chart/chart-line-dots";
 
 export default function AnalyticsPage() {
   const { t } = useTranslation("analytics");
@@ -24,8 +26,12 @@ export default function AnalyticsPage() {
           <MiniStatsCard title={t("stats.next_expense")} amount="7 days" />
         </div>
         <div className="grid grid-cols-2 gap-4">
-          <BlockCard title={t("graphs_cost_per_km.title")} />
-          <BlockCard title={t("graphs_monthly_trends.title")} />
+          <BlockCard title={t("graphs_cost_per_km.title")}>
+            <ChartLineDots />
+          </BlockCard>
+          <BlockCard title={t("graphs_monthly_trends.title")}>
+            <ChartBarMultiple />
+          </BlockCard>
         </div>
 
         <BlockCard title={t("predictions_block.title")}>

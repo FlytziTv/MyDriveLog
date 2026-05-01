@@ -8,6 +8,8 @@ import { BlockCard } from "../components/layout/BlockCard";
 import Sidebar from "../components/layout/SideBar";
 import { useTranslation } from "react-i18next";
 import { AddExpenseForm } from "../components/dialog/add/expense-form";
+import { ChartLineDots } from "../components/chart/chart-line-dots";
+import { ChartPieLegend } from "../components/chart/chart-pie-legend";
 
 export default function DashboardPage() {
   const { t } = useTranslation(["dashboard", "dialog"]);
@@ -51,11 +53,15 @@ export default function DashboardPage() {
             <BlockCard
               title={t("graphs_overview.title")}
               description={t("graphs_overview.description")}
-            />
+            >
+              <ChartLineDots />
+            </BlockCard>
             <BlockCard
               title={t("graphs_category.title")}
               description={t("graphs_category.description")}
-            />
+            >
+              <ChartPieLegend />
+            </BlockCard>
           </div>
 
           <div className="w-full flex flex-col gap-4">
