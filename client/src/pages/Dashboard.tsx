@@ -10,6 +10,7 @@ import { useTranslation } from "react-i18next";
 import { AddExpenseForm } from "../components/dialog/add/expense-form";
 import { ChartLineDots } from "../components/chart/chart-line-dots";
 import { ChartPieLegend } from "../components/chart/chart-pie-legend";
+import { useFakeInsightCard } from "../fake/InsightCard";
 
 export default function DashboardPage() {
   const { t } = useTranslation(["dashboard", "dialog"]);
@@ -67,26 +68,14 @@ export default function DashboardPage() {
           <div className="w-full flex flex-col gap-4">
             <h2 className="text-xl font-semibold">{t("smart_insights")}</h2>
             <div className="grid grid-cols-2 gap-4">
-              <InsightCard
-                type="warning"
-                title={t("smart_messages.expense.title")}
-                description={t("smart_messages.expense.description")}
-              />
-              <InsightCard
-                type="info"
-                title={t("smart_messages.maintenance.title")}
-                description={t("smart_messages.maintenance.description")}
-              />
-              <InsightCard
-                type="success"
-                title={t("smart_messages.fuel_efficiency.title")}
-                description={t("smart_messages.fuel_efficiency.description")}
-              />
-              <InsightCard
-                type="tip"
-                title={t("smart_messages.optimization.title")}
-                description={t("smart_messages.optimization.description")}
-              />
+              {useFakeInsightCard().map((card) => (
+                <InsightCard
+                  key={card.id}
+                  type={card.type}
+                  title={card.title}
+                  description={card.description}
+                />
+              ))}
             </div>
           </div>
           <DialogContent title={t("dialog:add_expense.title")}>

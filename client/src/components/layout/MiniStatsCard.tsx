@@ -1,4 +1,4 @@
-import { TrendingDown, TrendingUp, TrendingUpDown } from "lucide-react";
+import { StatsIcons } from "../../lib/icons";
 
 export function MiniStatsCard({
   title,
@@ -25,10 +25,10 @@ export function MiniStatsCard({
 function PourcentageCard({ pourcentage }: { pourcentage: string }) {
   const Icon =
     pourcentage > "0"
-      ? TrendingUp
+      ? StatsIcons.trendingUp
       : pourcentage < "0"
-        ? TrendingDown
-        : TrendingUpDown;
+        ? StatsIcons.trendingDown
+        : StatsIcons.trendingUpDown;
 
   return (
     <span className="inline-flex w-fit shrink-0 items-center justify-center gap-1.5 overflow-hidden rounded-full border px-2 py-0.5 text-xs font-medium whitespace-nowrap transition-[color,box-shadow] focus-visible:border-ring focus-visible:ring-[3px] focus-visible:ring-ring/50 aria-invalid:border-destructive aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 border-border text-foreground ">

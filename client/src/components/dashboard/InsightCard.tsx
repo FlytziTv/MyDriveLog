@@ -1,9 +1,4 @@
-import {
-  TrendingUp,
-  AlertCircle,
-  AlertTriangle,
-  Lightbulb,
-} from "lucide-react";
+import { insightColors } from "../../lib/colors";
 
 interface InsightCardProps {
   type: "info" | "warning" | "success" | "tip";
@@ -12,38 +7,13 @@ interface InsightCardProps {
 }
 
 export function InsightCard({ type, title, description }: InsightCardProps) {
-  const config = {
-    info: {
-      icon: AlertCircle,
-      bg: "bg-blue-50 border-blue-200 hover:shadow-blue-100",
-      iconWrap: "bg-blue-100 text-blue-600",
-      dot: "bg-blue-500",
-      title: "text-blue-900",
-    },
-    warning: {
-      icon: AlertTriangle,
-      bg: "bg-amber-50 border-amber-200 hover:shadow-amber-100",
-      iconWrap: "bg-amber-100 text-amber-600",
-      dot: "bg-amber-500",
-      title: "text-amber-900",
-    },
-    success: {
-      icon: TrendingUp,
-      bg: "bg-green-50 border-green-200 hover:shadow-green-100",
-      iconWrap: "bg-green-100 text-green-600",
-      dot: "bg-green-500",
-      title: "text-green-900",
-    },
-    tip: {
-      icon: Lightbulb,
-      bg: "bg-purple-50 border-purple-200 hover:shadow-purple-100",
-      iconWrap: "bg-purple-100 text-purple-600",
-      dot: "bg-purple-500",
-      title: "text-purple-900",
-    },
-  };
-
-  const { icon: Icon, bg, iconWrap, dot, title: titleColor } = config[type];
+  const {
+    icon: Icon,
+    bg,
+    iconWrap,
+    dot,
+    title: titleColor,
+  } = insightColors[type];
 
   return (
     <div

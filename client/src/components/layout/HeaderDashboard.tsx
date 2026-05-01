@@ -1,4 +1,4 @@
-import { Plus } from "lucide-react";
+import { actionIcons } from "../../lib/icons";
 
 export function HeaderDashboard({
   title,
@@ -27,7 +27,7 @@ export function HeaderDashboard({
           onClick={onButtonClick}
           className="bg-primary text-primary-foreground flex flex-row items-center justify-center gap-2 text-sm hover:bg-primary/80 px-4 py-2 rounded-md transition-colors duration-200"
         >
-          <Plus size={16} />
+          <actionIcons.add size={16} />
           {buttonText}
         </button>
       )}

@@ -1,38 +1,16 @@
 "use client";
 
 import { Bar, BarChart, CartesianGrid, XAxis } from "recharts";
-
+import { ChartContainer, ChartTooltip, ChartTooltipContent } from "../ui/chart";
 import {
-  ChartContainer,
-  ChartTooltip,
-  ChartTooltipContent,
-  type ChartConfig,
-} from "../ui/chart";
-
-const chartData = [
-  { month: "January", desktop: 186, mobile: 80 },
-  { month: "February", desktop: 305, mobile: 200 },
-  { month: "March", desktop: 237, mobile: 120 },
-  { month: "April", desktop: 73, mobile: 190 },
-  { month: "May", desktop: 209, mobile: 130 },
-  { month: "June", desktop: 214, mobile: 140 },
-];
-
-const chartConfig = {
-  desktop: {
-    label: "Desktop",
-    color: "var(--chart-1)",
-  },
-  mobile: {
-    label: "Mobile",
-    color: "var(--chart-2)",
-  },
-} satisfies ChartConfig;
+  chartMonthlytrends,
+  chartMonthlytrendsConfig,
+} from "../../fake/DataChart";
 
 export function ChartBarMultiple() {
   return (
-    <ChartContainer className="aspect-16/6" config={chartConfig}>
-      <BarChart accessibilityLayer data={chartData}>
+    <ChartContainer className="aspect-16/6" config={chartMonthlytrendsConfig}>
+      <BarChart accessibilityLayer data={chartMonthlytrends}>
         <CartesianGrid vertical={false} />
         <XAxis
           dataKey="month"
@@ -45,8 +23,9 @@ export function ChartBarMultiple() {
           cursor={false}
           content={<ChartTooltipContent indicator="dashed" />}
         />
-        <Bar dataKey="desktop" fill="var(--color-desktop)" radius={4} />
-        <Bar dataKey="mobile" fill="var(--color-mobile)" radius={4} />
+        <Bar dataKey="fuel" fill="var(--color-fuel)" radius={4} />
+        <Bar dataKey="Insurance" fill="var(--color-insurance)" radius={4} />
+        <Bar dataKey="Parking" fill="var(--color-parking)" radius={4} />
       </BarChart>
     </ChartContainer>
   );

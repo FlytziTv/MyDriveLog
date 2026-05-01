@@ -2,35 +2,21 @@
 
 import { CartesianGrid, Line, LineChart, XAxis } from "recharts";
 
+import { ChartContainer, ChartTooltip, ChartTooltipContent } from "../ui/chart";
 import {
-  ChartContainer,
-  ChartTooltip,
-  ChartTooltipContent,
-  type ChartConfig,
-} from "../ui/chart";
-
-const chartData = [
-  { month: "January", desktop: 186, mobile: 80 },
-  { month: "February", desktop: 305, mobile: 200 },
-  { month: "March", desktop: 237, mobile: 120 },
-  { month: "April", desktop: 73, mobile: 190 },
-  { month: "May", desktop: 209, mobile: 130 },
-  { month: "June", desktop: 214, mobile: 140 },
-];
-
-const chartConfig = {
-  desktop: {
-    label: "Desktop",
-    color: "var(--color-sz-1)",
-  },
-} satisfies ChartConfig;
+  chartExpensesOverTime,
+  chartExpensesOverTimeConfig,
+} from "../../fake/DataChart";
 
 export function ChartLineDots() {
   return (
-    <ChartContainer className="aspect-16/6" config={chartConfig}>
+    <ChartContainer
+      className="aspect-16/6"
+      config={chartExpensesOverTimeConfig}
+    >
       <LineChart
         accessibilityLayer
-        data={chartData}
+        data={chartExpensesOverTime}
         margin={{
           left: 12,
           right: 12,
@@ -49,7 +35,7 @@ export function ChartLineDots() {
           content={<ChartTooltipContent hideLabel />}
         />
         <Line
-          dataKey="desktop"
+          dataKey="amount"
           type="natural"
           stroke="var(--color-desktop)"
           strokeWidth={2}

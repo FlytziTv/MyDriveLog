@@ -8,33 +8,13 @@ import {
   ChartLegendContent,
   ChartTooltip,
   ChartTooltipContent,
-  type ChartConfig,
 } from "../ui/chart";
-
-const chartData = [
-  { month: "January", desktop: 186, mobile: 80 },
-  { month: "February", desktop: 305, mobile: 200 },
-  { month: "March", desktop: 237, mobile: 120 },
-  { month: "April", desktop: 73, mobile: 190 },
-  { month: "May", desktop: 209, mobile: 130 },
-  { month: "June", desktop: 214, mobile: 140 },
-];
-
-const chartConfig = {
-  desktop: {
-    label: "Desktop",
-    color: "var(--chart-1)",
-  },
-  mobile: {
-    label: "Mobile",
-    color: "var(--chart-2)",
-  },
-} satisfies ChartConfig;
+import { chartCostTrendsConfig, chartCostTrends } from "../../fake/DataChart";
 
 export function ChartBarStacked() {
   return (
-    <ChartContainer className="aspect-16/6" config={chartConfig}>
-      <BarChart accessibilityLayer data={chartData}>
+    <ChartContainer className="aspect-16/6" config={chartCostTrendsConfig}>
+      <BarChart accessibilityLayer data={chartCostTrends}>
         <CartesianGrid vertical={false} />
         <XAxis
           dataKey="month"
@@ -46,17 +26,20 @@ export function ChartBarStacked() {
         <ChartTooltip content={<ChartTooltipContent hideLabel />} />
         <ChartLegend content={<ChartLegendContent />} />
         <Bar
-          dataKey="desktop"
+          dataKey="fuel"
           stackId="a"
-          fill="var(--color-desktop)"
+          fill="var(--color-fuel)"
           radius={[0, 0, 4, 4]}
         />
         <Bar
-          dataKey="mobile"
+          dataKey="maintenance"
           stackId="a"
-          fill="var(--color-mobile)"
+          fill="var(--color-maintenance)"
           radius={[4, 4, 0, 0]}
         />
+        <Bar dataKey="insurance" stackId="a" fill="var(--color-insurance)" />
+        <Bar dataKey="parking" stackId="a" fill="var(--color-parking)" />
+        <Bar dataKey="other" stackId="a" fill="var(--color-other)" />
       </BarChart>
     </ChartContainer>
   );

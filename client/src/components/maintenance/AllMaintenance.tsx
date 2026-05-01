@@ -1,10 +1,5 @@
-import {
-  Clock,
-  CheckCircle2,
-  AlertCircle,
-  Calendar,
-  Gauge,
-} from "lucide-react";
+import { Calendar, Gauge } from "lucide-react";
+import { MaintenanceStatusConfig } from "../../lib/colors";
 
 export function AllMaintenance({
   status,
@@ -21,34 +16,7 @@ export function AllMaintenance({
   dueMileage: number;
   estimatedCost: number;
 }) {
-  const statusConfig = {
-    upcoming: {
-      icon: Clock,
-      bg: "bg-blue-50 border-blue-200",
-      iconWrap: "bg-blue-100 text-blue-600",
-      title: "text-blue-900",
-      cost: "text-blue-900",
-      meta: "text-blue-600",
-    },
-    done: {
-      icon: CheckCircle2,
-      bg: "bg-green-50 border-green-200",
-      iconWrap: "bg-green-100 text-green-600",
-      title: "text-green-900",
-      cost: "text-green-900",
-      meta: "text-green-600",
-    },
-    overdue: {
-      icon: AlertCircle,
-      bg: "bg-red-50 border-red-200",
-      iconWrap: "bg-red-100 text-red-600",
-      title: "text-red-900",
-      cost: "text-red-900",
-      meta: "text-red-600",
-    },
-  };
-
-  const config = statusConfig[status];
+  const config = MaintenanceStatusConfig[status];
   const Icon = config.icon;
 
   return (
