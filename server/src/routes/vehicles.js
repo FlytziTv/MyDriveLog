@@ -2,26 +2,20 @@ const express = require("express");
 const router = express.Router();
 const db = require("../utils/db");
 
-// Recuperer les véhicules de l'utilisateur connecté
+// Récupérer les véhicules de l'utilisateur connecté
 router.get("/", async (req, res) => {
   try {
     const userId = req.userId;
     const result = await db.query(
-      `SELECT v.*, 
-        COUNT(DISTINCT i.id) as interventions_count,
-        COUNT(DISTINCT r.id) FILTER (WHERE r.is_done = false) as reminders_count,
-        COALESCE(SUM(i.cost), 0) as total_cost
-      FROM vehicles v
-      LEFT JOIN interventions i ON i.vehicle_id = v.id
-      LEFT JOIN reminders r ON r.vehicle_id = v.id
-      WHERE v.user_id = $1
-      GROUP BY v.id`,
+      `SELECT * FROM vehicles WHERE user_id = $1 ORDER BY created_at DESC`,
       [userId],
     );
     res.json(result.rows);
   } catch (err) {
-    console.error(err);
-    res.status(500).json({ message: "Erreur serveur" });
+    console.error("Erreur GET /vehicles:", err.message);
+    res
+      .status(500)
+      .json({ message: "Erreur lors de la récupération des véhicules" });
   }
 });
 
@@ -29,10 +23,25 @@ router.get("/", async (req, res) => {
 router.post("/", async (req, res) => {
   try {
     const userId = req.userId;
-    const { nickname, license_plate, brand, model, year, fuel_type } = req.body;
+    const {
+      name,
+      license_plate,
+      brand,
+      model,
+      year,
+      vin,
+      fuel_type,
+      purchase_mileage,
+      current_mileage,
+    } = req.body;
 
-    if (!license_plate) {
-      return res.status(400).json({ message: "License plate is required" });
+    // Validation basique
+    if (!license_plate || !name) {
+      return res
+        .status(400)
+        .json({
+          message: "Le nom et la plaque d'immatriculation sont obligatoires",
+        });
     }
 
     const licensePlateExist = await db.query(
@@ -41,21 +50,38 @@ router.post("/", async (req, res) => {
     );
 
     if (licensePlateExist.rows.length > 0) {
-      return res.status(400).json({ message: "License plate already exists" });
+      return res
+        .status(400)
+        .json({ message: "Cette plaque d'immatriculation existe déjà" });
     }
 
     const newVehicle = await db.query(
-      "INSERT INTO vehicles (user_id, nickname, license_plate, brand, model, year, fuel_type) VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING *",
-      [userId, nickname, license_plate, brand, model, year, fuel_type],
+      `INSERT INTO vehicles 
+      (user_id, name, license_plate, brand, model, year, vin, fuel_type, purchase_mileage, current_mileage) 
+      VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10) 
+      RETURNING *`,
+      [
+        userId,
+        name,
+        license_plate,
+        brand,
+        model,
+        year,
+        vin || null,
+        fuel_type || null,
+        purchase_mileage || 0,
+        current_mileage || 0,
+      ],
     );
+
     res.status(201).json(newVehicle.rows[0]);
   } catch (err) {
-    console.error(err);
-    res.status(500).json({ message: "Erreur serveur" });
+    console.error("Erreur POST /vehicles:", err.message);
+    res.status(500).json({ message: "Erreur lors de l'ajout du véhicule" });
   }
 });
 
-// Recuperer un véhicule spécifique de l'utilisateur connecté
+// Récupérer un véhicule spécifique de l'utilisateur connecté
 router.get("/:id", async (req, res) => {
   try {
     const userId = req.userId;
@@ -67,12 +93,12 @@ router.get("/:id", async (req, res) => {
     );
 
     if (vehicleResult.rows.length === 0) {
-      return res.status(404).json({ message: "Vehicle not found" });
+      return res.status(404).json({ message: "Véhicule introuvable" });
     }
 
     res.json(vehicleResult.rows[0]);
   } catch (err) {
-    console.error(err);
+    console.error("Erreur GET /vehicles/:id:", err.message);
     res.status(500).json({ message: "Erreur serveur" });
   }
 });
@@ -82,34 +108,56 @@ router.put("/:id", async (req, res) => {
   try {
     const userId = req.userId;
     const vehicleId = req.params.id;
-    const { nickname, license_plate, brand, model, year, fuel_type } = req.body;
+    const {
+      name,
+      license_plate,
+      brand,
+      model,
+      year,
+      vin,
+      fuel_type,
+      current_mileage,
+    } = req.body;
 
     const vehicleResult = await db.query(
-      "SELECT * FROM vehicles WHERE id = $1 AND user_id = $2",
+      "SELECT id FROM vehicles WHERE id = $1 AND user_id = $2",
       [vehicleId, userId],
     );
 
     if (vehicleResult.rows.length === 0) {
-      return res.status(404).json({ message: "Vehicle not found" });
+      return res.status(404).json({ message: "Véhicule introuvable" });
     }
 
     const updatedVehicle = await db.query(
-      "UPDATE vehicles SET nickname = COALESCE($1, nickname), license_plate = COALESCE($2, license_plate), brand = COALESCE($3, brand), model = COALESCE($4, model), year = COALESCE($5, year), fuel_type = COALESCE($6, fuel_type) WHERE id = $7 AND user_id = $8 RETURNING *",
+      `UPDATE vehicles SET 
+        name = COALESCE($1, name), 
+        license_plate = COALESCE($2, license_plate), 
+        brand = COALESCE($3, brand), 
+        model = COALESCE($4, model), 
+        year = COALESCE($5, year), 
+        vin = COALESCE($6, vin),
+        fuel_type = COALESCE($7, fuel_type),
+        current_mileage = COALESCE($8, current_mileage),
+        updated_at = NOW()
+      WHERE id = $9 AND user_id = $10 
+      RETURNING *`,
       [
-        nickname,
+        name,
         license_plate,
         brand,
         model,
         year,
+        vin,
         fuel_type,
+        current_mileage,
         vehicleId,
         userId,
       ],
     );
     res.json(updatedVehicle.rows[0]);
   } catch (err) {
-    console.error(err);
-    res.status(500).json({ message: "Erreur serveur" });
+    console.error("Erreur PUT /vehicles/:id:", err.message);
+    res.status(500).json({ message: "Erreur lors de la mise à jour" });
   }
 });
 
@@ -120,20 +168,23 @@ router.delete("/:id", async (req, res) => {
     const vehicleId = req.params.id;
 
     const vehicleResult = await db.query(
-      "SELECT * FROM vehicles WHERE id = $1 AND user_id = $2",
+      "SELECT id FROM vehicles WHERE id = $1 AND user_id = $2",
       [vehicleId, userId],
     );
+
     if (vehicleResult.rows.length === 0) {
-      return res.status(404).json({ message: "Vehicle not found" });
+      return res.status(404).json({ message: "Véhicule introuvable" });
     }
+
     await db.query("DELETE FROM vehicles WHERE id = $1 AND user_id = $2", [
       vehicleId,
       userId,
     ]);
-    res.json({ message: "Vehicle deleted successfully" });
+
+    res.json({ message: "Véhicule supprimé avec succès" });
   } catch (err) {
-    console.error(err);
-    res.status(500).json({ message: "Erreur serveur" });
+    console.error("Erreur DELETE /vehicles/:id:", err.message);
+    res.status(500).json({ message: "Erreur lors de la suppression" });
   }
 });
 
