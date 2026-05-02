@@ -1,14 +1,19 @@
 const express = require("express");
-const router = express.Router({ mergeParams: true });
+const router = express.Router();
 const db = require("../utils/db");
 
-router.get("/", async (req, res) => {
+// Récupérer les dépenses d'un véhicule spécifique
+router.get("/:vehicleId", async (req, res) => {
   try {
     const userId = req.userId;
-    const tripId = req.params.tripId;
+    const vehicleId = req.params.vehicleId;
+
     const expResult = await db.query(
-      `SELECT * FROM expenses WHERE trip_id = $1 AND trip_id IN (SELECT id FROM trips WHERE owner_id = $2)`,
-      [tripId, userId],
+      `SELECT e.* FROM expenses e
+      JOIN vehicles v ON e.vehicle_id = v.id
+      WHERE e.vehicle_id = $1 AND v.user_id = $2
+      ORDER BY e.date DESC`,
+      [vehicleId, userId],
     );
     res.json(expResult.rows);
   } catch (err) {
@@ -17,43 +22,32 @@ router.get("/", async (req, res) => {
   }
 });
 
-router.post("/", async (req, res) => {
+// Ajouter une dépense
+router.post("/:vehicleId", async (req, res) => {
   try {
     const userId = req.userId;
-    const tripId = req.params.tripId;
-    const {
-      title,
-      amount,
-      category,
-      paid_by_guest_name,
-      step_id,
-      split_between,
-    } = req.body;
+    const vehicleId = req.params.vehicleId;
+    const { title, amount, category, date } = req.body;
 
-    if (!title || !amount) {
-      return res.status(400).json({ message: "Missing required fields" });
+    if (!title || !amount || !date) {
+      return res
+        .status(400)
+        .json({ message: "Title, amount, and date are required" });
     }
 
-    const tripResult = await db.query(
-      "SELECT * FROM trips WHERE id = $1 AND owner_id = $2",
-      [tripId, userId],
+    const vehicleResult = await db.query(
+      "SELECT * FROM vehicles WHERE id = $1 AND user_id = $2",
+      [vehicleId, userId],
     );
-    if (tripResult.rows.length === 0) {
-      return res.status(404).json({ message: "Trip not found" });
+
+    if (vehicleResult.rows.length === 0) {
+      return res.status(404).json({ message: "Vehicle not found" });
     }
 
     const newExpense = await db.query(
-      `INSERT INTO expenses (trip_id, title, amount, category, paid_by_guest_name, step_id, split_between)
-      VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING *`,
-      [
-        tripId,
-        title,
-        amount,
-        category,
-        paid_by_guest_name,
-        step_id,
-        split_between,
-      ],
+      `INSERT INTO expenses (vehicle_id, title, amount, category, date)
+       VALUES ($1, $2, $3, $4, $5) RETURNING *`,
+      [vehicleId, title, amount, category, date],
     );
 
     res.status(201).json(newExpense.rows[0]);
@@ -63,18 +57,17 @@ router.post("/", async (req, res) => {
   }
 });
 
+// Modifier une dépense
 router.put("/:id", async (req, res) => {
   try {
     const userId = req.userId;
     const expenseId = req.params.id;
-
-    const { title, amount, category, paid_by_guest_name, split_between } =
-      req.body;
+    const { title, amount, category, date } = req.body;
 
     const expenseResult = await db.query(
       `SELECT e.* FROM expenses e
-      JOIN trips t ON e.trip_id = t.id
-      WHERE e.id = $1 AND t.owner_id = $2`,
+      JOIN vehicles v ON e.vehicle_id = v.id
+      WHERE e.id = $1 AND v.user_id = $2`,
       [expenseId, userId],
     );
 
@@ -83,9 +76,13 @@ router.put("/:id", async (req, res) => {
     }
 
     const updatedExpense = await db.query(
-      `UPDATE expenses SET title = COALESCE($1, title), amount = COALESCE($2, amount), category = COALESCE($3, category), paid_by_guest_name = COALESCE($4, paid_by_guest_name), split_between = COALESCE($5, split_between)
-      WHERE id = $6 RETURNING *`,
-      [title, amount, category, paid_by_guest_name, split_between, expenseId],
+      `UPDATE expenses SET 
+        title = COALESCE($1, title), 
+        amount = COALESCE($2, amount), 
+        category = COALESCE($3, category), 
+        date = COALESCE($4, date)
+       WHERE id = $5 RETURNING *`,
+      [title, amount, category, date, expenseId],
     );
 
     res.json(updatedExpense.rows[0]);
@@ -95,19 +92,23 @@ router.put("/:id", async (req, res) => {
   }
 });
 
+// Supprimer une dépense
 router.delete("/:id", async (req, res) => {
   try {
     const userId = req.userId;
     const expenseId = req.params.id;
+
     const expenseResult = await db.query(
       `SELECT e.* FROM expenses e
-      JOIN trips t ON e.trip_id = t.id
-      WHERE e.id = $1 AND t.owner_id = $2`,
+      JOIN vehicles v ON e.vehicle_id = v.id
+      WHERE e.id = $1 AND v.user_id = $2`,
       [expenseId, userId],
     );
+
     if (expenseResult.rows.length === 0) {
       return res.status(404).json({ message: "Expense not found" });
     }
+
     await db.query("DELETE FROM expenses WHERE id = $1", [expenseId]);
     res.json({ message: "Expense deleted" });
   } catch (err) {

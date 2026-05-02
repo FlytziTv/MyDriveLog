@@ -24,8 +24,8 @@ const authMiddleware = require("./middlewares/auth");
 const vehicleRoutes = require("./routes/vehicles");
 app.use("/api/vehicles", authMiddleware, vehicleRoutes);
 
-const interventionRoutes = require("./routes/interventions");
-app.use("/api/interventions", authMiddleware, interventionRoutes);
+const maintenanceRoutes = require("./routes/maintenance");
+app.use("/api/maintenance", authMiddleware, maintenanceRoutes);
 
 const reminderRoutes = require("./routes/reminders");
 app.use("/api/reminders", authMiddleware, reminderRoutes);
