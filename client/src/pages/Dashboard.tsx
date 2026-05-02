@@ -11,10 +11,12 @@ import { AddExpenseForm } from "../components/dialog/add/expense-form";
 import { ChartLineDots } from "../components/chart/chart-line-dots";
 import { ChartPieLegend } from "../components/chart/chart-pie-legend";
 import { useFakeInsightCard } from "../fake/InsightCard";
+import { useVehicles } from "../contexts/VehicleContext";
 
 export default function DashboardPage() {
   const { t } = useTranslation(["dashboard", "dialog"]);
   const [open, setOpen] = useState(false);
+  const { vehicles } = useVehicles();
 
   return (
     <div className="h-screen w-full flex">
@@ -80,6 +82,7 @@ export default function DashboardPage() {
           </div>
           <DialogContent title={t("dialog:add_expense.title")}>
             <AddExpenseForm
+              vehicles={vehicles}
               onSuccess={() => setOpen(false)}
               onCancel={() => setOpen(false)}
             />

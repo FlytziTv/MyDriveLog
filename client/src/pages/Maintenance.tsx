@@ -9,10 +9,12 @@ import { SmartMessage } from "../components/maintenance/SmartMessage";
 import Sidebar from "../components/layout/SideBar";
 import { useTranslation, Trans } from "react-i18next";
 import { AddTaskForm } from "../components/dialog/add/task-form";
+import { useVehicles } from "../contexts/VehicleContext";
 
 export default function Maintenance() {
   const { t } = useTranslation(["maintenance", "dialog"]);
   const [open, setOpen] = useState(false);
+  const { vehicles } = useVehicles();
 
   return (
     <div className="h-screen w-full flex">
@@ -84,6 +86,7 @@ export default function Maintenance() {
 
           <DialogContent title={t("dialog:add_task.title")}>
             <AddTaskForm
+              vehicles={vehicles}
               onSuccess={() => setOpen(false)}
               onCancel={() => setOpen(false)}
             />
