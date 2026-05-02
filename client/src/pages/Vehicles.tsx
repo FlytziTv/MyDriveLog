@@ -10,7 +10,7 @@ import { AddVehicleForm } from "../components/dialog/add/vehicle-form";
 
 type Vehicle = {
   id: string;
-  nickname: string;
+  name: string;
   brand: string;
   model: string;
   year: number;
@@ -59,12 +59,12 @@ export default function VehiclesPage() {
               <VehicleCard
                 key={vehicle.id}
                 id={vehicle.id}
-                name={vehicle.nickname}
+                name={vehicle.name}
                 model={vehicle.model}
                 year={vehicle.year}
                 image={vehicle.cover_photo_url ?? undefined}
                 mileage={vehicle.current_mileage}
-                totalCost={Number(vehicle.total_cost)}
+                totalCost={Number(vehicle.total_cost || 0)}
               />
             ))}
           </div>

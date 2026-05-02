@@ -2,19 +2,50 @@
   "add_vehicle": {
     "title": "Add a vehicle",
     "input": {
-      "name": "Vehicle name",
-      "name_placeholder": "Enter vehicle name",
+      "name": "Vehicle Name",
+      "name_placeholder": "Enter the vehicle name",
+
+      "brand": "Make",
+      "brand_placeholder": "Enter the vehicle make",
+
       "model": "Model",
-      "model_placeholder": "Enter vehicle model",
+      "model_placeholder": "Enter the vehicle model",
+
+      "license_plate": "License Plate",
+      "license_plate_placeholder": "Enter the license plate",
+
+      "vin": "VIN",
+      "vin_placeholder": "Enter the VIN",
+
       "year": "Year",
       "year_placeholder": "Select a year",
-      "mileage": "Current mileage (km)",
-      "mileage_placeholder": "Enter current mileage",
+
+      "fuel": "Fuel",
+      "fuel_placeholder": "Select a fuel type",
+
       "purchase_date": "Purchase date",
-      "purchase_date_placeholder": "Enter purchase date",
+      "purchase_date_placeholder": "Enter the purchase date",
+
       "purchase_price": "Purchase price (€)",
-      "purchase_price_placeholder": "Enter purchase price"
+      "purchase_price_placeholder": "Enter the purchase price",
+
+      "purchase_mileage": "Mileage at purchase (km)",
+      "purchase_mileage_placeholder": "Enter mileage at purchase",
+
+      "current_mileage": "Current mileage (km)",
+      "current_mileage_placeholder": "Enter current mileage"
     },
+
+    "select": {
+      "fuel_option": {
+        "gasoline": "Gasoline",
+        "diesel": "Diesel",
+        "electric": "Electric",
+        "hybrid": "Hybrid",
+        "other": "Other"
+      }
+    },
+
     "message": "You can add a photo and more details after creating the vehicle.",
     "submit": "Add vehicle"
   },

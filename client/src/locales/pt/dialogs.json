@@ -4,17 +4,48 @@
     "input": {
       "name": "Nome do veículo",
       "name_placeholder": "Introduza o nome do veículo",
+
+      "brand": "Marca",
+      "brand_placeholder": "Introduza a marca do veículo",
+
       "model": "Modelo",
       "model_placeholder": "Introduza o modelo do veículo",
+
+      "license_plate": "Matrícula",
+      "license_plate_placeholder": "Introduza a matrícula",
+
+      "vin": "Número de chassis",
+      "vin_placeholder": "Introduza o número de chassis",
+
       "year": "Ano",
       "year_placeholder": "Selecione um ano",
-      "mileage": "Quilometragem atual (km)",
-      "mileage_placeholder": "Introduza a quilometragem atual",
+
+      "fuel": "Combustível",
+      "fuel_placeholder": "Selecione um tipo de combustível",
+
       "purchase_date": "Data de compra",
-      "purchase_date_placeholder": "Introduza a data de compra",
+      "purchase_date_placeholder": "Insira a data de compra",
+
       "purchase_price": "Preço de compra (€)",
-      "purchase_price_placeholder": "Introduza o preço de compra"
+      "purchase_price_placeholder": "Introduza o preço de compra",
+
+      "purchase_mileage": "Quilometragem na compra (km)",
+      "purchase_mileage_placeholder": "Introduza a quilometragem na compra",
+
+      "current_mileage": "Quilometragem atual (km)",
+      "current_mileage_placeholder": "Introduza a quilometragem atual"
     },
+
+    "select": {
+      "fuel_option": {
+        "gasoline": "Gasolina",
+        "diesel": "Diesel",
+        "electric": "Elétrico",
+        "hybrid": "Híbrido",
+        "other": "Outro"
+      }
+    },
+
     "message": "Pode adicionar uma foto e mais detalhes após criar o veículo.",
     "submit": "Adicionar veículo"
   },

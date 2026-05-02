@@ -5,21 +5,47 @@
       "name": "Nom du véhicule",
       "name_placeholder": "Entrez le nom du véhicule",
 
+      "brand": "Marque",
+      "brand_placeholder": "Entrez la marque du véhicule",
+
       "model": "Modèle",
       "model_placeholder": "Entrez le modèle du véhicule",
+
+      "license_plate": "Plaque d'immatriculation",
+      "license_plate_placeholder": "Entrez la plaque d'immatriculation",
+
+      "vin": "Numéro de chassis",
+      "vin_placeholder": "Entrez le numéro de chassis",
 
       "year": "Année",
       "year_placeholder": "Sélectionnez une année",
 
-      "mileage": "Kilométrage actuel (km)",
-      "mileage_placeholder": "Entrez le kilométrage actuel",
+      "fuel": "Carburant",
+      "fuel_placeholder": "Sélectionnez un type de carburant",
 
       "purchase_date": "Date d'achat",
       "purchase_date_placeholder": "Entrez la date d'achat",
 
       "purchase_price": "Prix d'achat (€)",
-      "purchase_price_placeholder": "Entrez le prix d'achat"
+      "purchase_price_placeholder": "Entrez le prix d'achat",
+
+      "purchase_mileage": "Kilométrage à l'achat (km)",
+      "purchase_mileage_placeholder": "Entrez le kilométrage à l'achat",
+
+      "current_mileage": "Kilométrage actuel (km)",
+      "current_mileage_placeholder": "Entrez le kilométrage actuel"
     },
+
+    "select": {
+      "fuel_option": {
+        "gasoline": "Essence",
+        "diesel": " Diesel",
+        "electric": " Électrique",
+        "hybrid": " Hybride",
+        "other": "Autre"
+      }
+    },
+
     "message": "Vous pouvez ajouter une photo et plus de détails après avoir créé le véhicule.",
     "submit": "Ajouter un véhicule"
   },
