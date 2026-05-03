@@ -1,4 +1,5 @@
-import { useState, useEffect } from "react";
+import { useVehicles } from "../contexts/VehicleContext";
+import { useState, useEffect, useCallback } from "react";
 import * as Dialog from "@radix-ui/react-dialog";
 import DialogContent from "../components/layout/DialogContent";
 import { HeaderDashboard } from "../components/layout/HeaderDashboard";
@@ -11,11 +12,12 @@ import { MiniStatsCard } from "../components/layout/MiniStatsCard";
 
 type Vehicle = {
   id: string;
-  nickname: string;
+  name: string;
   brand: string;
   model: string;
   year: number;
   license_plate: string;
+  vin: string;
   cover_photo_url: string | null;
   current_mileage: number;
   total_cost: string;
@@ -30,28 +32,33 @@ export default function VehicleDetail() {
   const [vehicle, setVehicle] = useState<Vehicle | null>(null);
   const token = localStorage.getItem("token");
 
-  useEffect(() => {
-    const fetchVehicle = async () => {
-      try {
-        const response = await api.get(`/vehicles/${id}`, {
-          headers: { Authorization: `Bearer ${token}` },
-        });
-        setVehicle(response.data);
-      } catch (error) {
-        console.error("Error fetching vehicle:", error);
-      }
-    };
-    fetchVehicle();
+  const { vehicles, refreshVehicles } = useVehicles();
+
+  const fetchVehicle = useCallback(async () => {
+    try {
+      const response = await api.get(`/vehicles/${id}`, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+      setVehicle(response.data);
+    } catch (error) {
+      console.error("Error fetching vehicle:", error);
+    }
   }, [id, token]);
 
-  if (!vehicle) return <p>Chargement...</p>;
+  useEffect(() => {
+    fetchVehicle();
+  }, [fetchVehicle]);
+
+  const handleExpenseAdded = async () => {
+    setOpen(false);
+    await fetchVehicle();
+    await refreshVehicles();
+  };
+
+  if (!vehicle)
+    return <p className="p-6 text-muted-foreground">Chargement...</p>;
 
   return (
-    // <div>
-    //   <h1>{vehicle.nickname}</h1>
-    //   // affiche les autres infos ici
-    // </div>
-
     <div className="h-screen w-full flex">
       <Sidebar />
       <div className="flex-1 flex flex-col overflow-y-auto">
@@ -65,21 +72,23 @@ export default function VehicleDetail() {
 
             <div className="flex flex-row items-start justify-between mt-6 ">
               <div className="flex flex-row gap-4">
-                <div className="aspect-video h-38 rounded-lg ">
-                  {/* no image */}
-                  <div className="w-full h-full flex items-center border justify-center text-app-text/40 text-sm rounded-lg">
-                    {t("common:indisponible_message.images")}
-                  </div>
+                <div className="aspect-video h-38 rounded-lg overflow-hidden bg-muted">
+                  {vehicle.cover_photo_url ? (
+                    <img
+                      src={vehicle.cover_photo_url}
+                      alt={vehicle.name}
+                      className="w-full h-full object-cover"
+                    />
+                  ) : (
+                    <div className="w-full h-full flex items-center border justify-center text-app-text/40 text-sm rounded-lg">
+                      {t("common:indisponible_message.images")}
+                    </div>
+                  )}
                 </div>
 
                 <div className="flex flex-col gap-3">
                   <div className="flex flex-row gap-2 items-center">
-                    <h2 className="text-2xl font-semibold">
-                      {vehicle.nickname}
-                    </h2>
-                    {/* <span className="text-xs font-light text-green-600 bg-green-600/10 px-2.5 py-1 rounded-full">
-                      Active
-                    </span> */}
+                    <h2 className="text-2xl font-semibold">{vehicle.name} </h2>
                   </div>
 
                   <div className="flex flex-row gap-2 items-center text-sm text-muted-foreground">
@@ -89,11 +98,11 @@ export default function VehicleDetail() {
                   <div className="flex flex-row gap-6 ">
                     <MiniStats
                       label={t("info.vin")}
-                      value="5YJ3E1EA9MF123456"
+                      value={vehicle.vin || "Non renseigné"}
                     />
                     <MiniStats
                       label={t("info.license_plate")}
-                      value={vehicle.license_plate}
+                      value={vehicle.license_plate || "Non renseigné"}
                     />
                   </div>
                 </div>
@@ -105,13 +114,19 @@ export default function VehicleDetail() {
             <div className="w-full grid grid-cols-4 gap-4">
               <MiniStatsCard
                 title={t("stats.current_mileage")}
-                amount="24,500 km"
+                amount={`${vehicle.current_mileage?.toLocaleString("fr-FR") || 0} km`}
               />
-              <MiniStatsCard title={t("stats.total_spent")} amount="$8,450" />
-              <MiniStatsCard title={t("stats.this_month")} amount="$710" />
               <MiniStatsCard
-                title={t("stats.avg_cost_per_month")}
-                amount="$520"
+                title={t("stats.total_spent")}
+                amount={`${Number(vehicle.total_cost || 0).toFixed(2)} €`}
+              />
+              <MiniStatsCard
+                title={t("stats.interventions")}
+                amount={`${vehicle.interventions_count || 0}`}
+              />
+              <MiniStatsCard
+                title={t("stats.reminders")}
+                amount={`${vehicle.reminders_count || 0}`}
               />
             </div>
 
@@ -121,9 +136,11 @@ export default function VehicleDetail() {
             </div>
           </div>
 
+          {/* MODALE D'AJOUT */}
           <DialogContent title={t("dialog:add_expense.title")}>
             <AddExpenseForm
-              onSuccess={() => setOpen(false)}
+              vehicles={vehicles}
+              onSuccess={handleExpenseAdded}
               onCancel={() => setOpen(false)}
             />
           </DialogContent>

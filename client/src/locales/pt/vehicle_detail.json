@@ -20,8 +20,8 @@
   "stats": {
     "current_mileage": "Quilometragem atual",
     "total_spent": "Total gasto",
-    "this_month": "Este mês",
-    "avg_cost_per_month": "Custo médio mensal"
+    "intervenções": "Número de intervenções",
+    "lembretes": "Número de lembretes"
   },
 
   "tabsNames": {

@@ -20,8 +20,8 @@
   "stats": {
     "current_mileage": "Current mileage",
     "total_spent": "Total spent",
-    "this_month": "This month",
-    "avg_cost_per_month": "Average cost per month"
+    "interventions": "Number of interventions",
+    "reminders": "Number of reminders"
   },
 
   "tabsNames": {
