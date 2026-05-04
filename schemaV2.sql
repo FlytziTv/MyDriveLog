@@ -1,3 +1,4 @@
+CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
 
 CREATE TYPE user_currency AS ENUM ('USD', 'EUR');
 CREATE TYPE user_distance_unit AS ENUM ('km', 'miles');
