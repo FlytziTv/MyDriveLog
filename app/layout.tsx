@@ -25,7 +25,7 @@ export default function RootLayout({
   return (
     <html lang="fr" className={`${inter.variable} antialiased`}>
       <body>
-        <main className="w-full max-w-[430px] mx-auto min-h-screen relative overflow-hidden">
+        <main className="w-full max-w-[430px] mx-auto min-h-screen relative overflow-hidden flex flex-col">
           {children}
         </main>
       </body>
