@@ -36,6 +36,16 @@ interface DetailInterCardProps {
   km: number;
 }
 
+interface MiniaVehicleCardProps {
+  id: string;
+  name: string;
+  brand: string;
+  model: string;
+  year: number;
+  plate: string;
+  km: number;
+}
+
 export type {
   NavBarProps,
   SectionIconProfileProps,
@@ -43,4 +53,5 @@ export type {
   SectionProfileSupportProps,
   StatProfileProps,
   DetailInterCardProps,
+  MiniaVehicleCardProps,
 };
