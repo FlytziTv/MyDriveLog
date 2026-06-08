@@ -1,4 +1,8 @@
-import { Bell } from "lucide-react";
+import StatsCard from "@/components/dashboard/StatsCard";
+import { Bell, Car, TrendingUp } from "lucide-react";
+import SectionDash from "./SectionDash";
+import { VehicleVerticalCard } from "@/components/car/MiniaVehicleCard";
+import MiniInterCard from "@/components/Inter/MiniInterCard";
 
 export default function DashboardPage() {
   return (
@@ -14,6 +18,48 @@ export default function DashboardPage() {
           <span className="absolute top-1.5 right-1.5 w-2 h-2 bg-red-500 rounded-full"></span>
         </button>
       </div>
+
+      {/* Mini Stats */}
+      <div className="grid grid-cols-2 gap-4">
+        <StatsCard icon={Car} value="5" label="Véhicules" />
+        <StatsCard icon={TrendingUp} value="939€" label="Ce mois" />
+      </div>
+
+      <SectionDash title="Véhicules" link="/vehicles" textLink="Voir tous">
+        <div className="flex gap-3 overflow-x-auto scrollbar-hide">
+          <VehicleVerticalCard
+            id="1"
+            name="Véhicule 1"
+            brand="Marque 1"
+            model="Modèle 1"
+            year={2020}
+            plate="ABC-123"
+            km={50000}
+          />
+
+          <VehicleVerticalCard
+            id="1"
+            name="Véhicule 1"
+            brand="Marque 1"
+            model="Modèle 1"
+            year={2020}
+            plate="ABC-123"
+            km={500}
+          />
+        </div>
+      </SectionDash>
+
+      <SectionDash title="Activité récente">
+        <div className="flex flex-col gap-2">
+          <MiniInterCard
+            icon={Car}
+            type="Entretien"
+            vehicle="Véhicule 1"
+            cost={150}
+            date="2023-10-15"
+          />
+        </div>
+      </SectionDash>
     </>
   );
 }

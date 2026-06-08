@@ -36,6 +36,14 @@ interface DetailInterCardProps {
   km: number;
 }
 
+interface MiniInterCardProps {
+  icon: LucideIcon;
+  type: string;
+  vehicle: string;
+  cost: number;
+  date: string;
+}
+
 interface MiniaVehicleCardProps {
   id: string;
   name: string;
@@ -46,6 +54,19 @@ interface MiniaVehicleCardProps {
   km: number;
 }
 
+interface StatCardProps {
+  icon: LucideIcon;
+  value: string | number;
+  label: string;
+}
+
+interface SectionDashProps {
+  title: string;
+  link?: string;
+  textLink?: string;
+  children: React.ReactNode;
+}
+
 export type {
   NavBarProps,
   SectionIconProfileProps,
@@ -53,5 +74,8 @@ export type {
   SectionProfileSupportProps,
   StatProfileProps,
   DetailInterCardProps,
+  MiniInterCardProps,
   MiniaVehicleCardProps,
+  StatCardProps,
+  SectionDashProps,
 };
