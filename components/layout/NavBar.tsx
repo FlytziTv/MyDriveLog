@@ -7,7 +7,7 @@ import { usePathname } from "next/navigation";
 
 export default function NavBar() {
   return (
-    <div className="absolute bottom-0 left-0 right-0 p-4 bg-white border-t border-neutral-200">
+    <div className="fixed max-w-[430px] mx-auto bottom-0 left-0 right-0 p-4 bg-white border-t border-neutral-200">
       <div className="flex items-center justify-around">
         {NavBarItems.map((item) => (
           <NavItem key={item.name} {...item} />
