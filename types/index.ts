@@ -1,10 +1,10 @@
 import { LucideIcon } from "lucide-react";
 
-interface NavBar {
+interface NavBarProps {
   icon: LucideIcon;
   label: string;
   name: string;
   href: string;
 }
 
-export type { NavBar };
+export type { NavBarProps };

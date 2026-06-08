@@ -1,7 +1,7 @@
-import { NavBar } from "@/types";
+import { NavBarProps } from "@/types";
 import { House, Car, History, UserRound } from "lucide-react";
 
-export const NavBarItems: NavBar[] = [
+export const NavBarItems: NavBarProps[] = [
   {
     icon: House,
     label: "Accueil",
