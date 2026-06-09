@@ -20,9 +20,9 @@ const badges = [
 ];
 
 export default function Privacy() {
-  const [openPrivacySection, setOpenPrivacySection] = useState<number | null>(
-    0,
-  );
+  const [openPrivacySection, setOpenPrivacySection] = useState<
+    string | number | null
+  >(null);
   const openSection = openPrivacySection;
   const setOpenSection = setOpenPrivacySection;
 

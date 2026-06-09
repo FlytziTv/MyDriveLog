@@ -92,8 +92,8 @@ interface QuestionCardProps {
   title: string;
   content: string;
   open: boolean;
-  setOpenSection: (i: number | null) => void;
-  i: number;
+  setOpenSection: (id: string | number | null) => void;
+  i: string | number;
 }
 
 export type {

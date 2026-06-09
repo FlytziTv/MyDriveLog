@@ -31,7 +31,9 @@ const helpActions = [
 ];
 
 export default function Help() {
-  const [openHelpSection, setOpenHelpSection] = useState<number | null>(null);
+  const [openHelpSection, setOpenHelpSection] = useState<
+    string | number | null
+  >(null);
   const openSection = openHelpSection;
   const setOpenSection = setOpenHelpSection;
 
@@ -84,7 +86,8 @@ export default function Help() {
       {faqs.map((faq, index) => (
         <SectionProfile key={index} title={faq.category}>
           {faq.questions.map((question, i) => {
-            const open = openSection === i;
+            const uniqueId = `${index}-${i}`;
+            const open = openSection === uniqueId;
 
             return (
               <QuestionCard
@@ -93,7 +96,7 @@ export default function Help() {
                 content={question.a}
                 open={open}
                 setOpenSection={setOpenSection}
-                i={i}
+                i={uniqueId}
               />
             );
           })}
