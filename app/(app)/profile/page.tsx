@@ -12,10 +12,26 @@ const params = [
     icon: User,
     title: "Informations personnelles",
     subtitle: "Nom, email, téléphone",
+    href: "/profile/personal-info",
   },
-  { icon: Bell, title: "Notifications", subtitle: "Rappels et alertes" },
-  { icon: SettingsIcon, title: "Préférences", subtitle: "Unités, langue" },
-  { icon: Zap, title: "Abonnement", subtitle: "Premium · Actif" },
+  {
+    icon: Bell,
+    title: "Notifications",
+    subtitle: "Rappels et alertes",
+    href: "/profile/notifications",
+  },
+  {
+    icon: SettingsIcon,
+    title: "Préférences",
+    subtitle: "Unités, langue",
+    href: "/profile/preferences",
+  },
+  {
+    icon: Zap,
+    title: "Abonnement",
+    subtitle: "Premium · Actif",
+    href: "/profile/subscriptions",
+  },
 ];
 
 const helps = [
@@ -61,12 +77,14 @@ export default function ProfilePage() {
       {/* Sections Parameters */}
       <SectionProfile title="Paramètres">
         {params.map((param, index) => (
-          <SectionItemIcon
-            key={index}
-            icon={param.icon}
-            title={param.title}
-            subtitle={param.subtitle}
-          />
+          <Link href={param.href} key={index}>
+            <SectionItemIcon
+              key={index}
+              icon={param.icon}
+              title={param.title}
+              subtitle={param.subtitle}
+            />
+          </Link>
         ))}
       </SectionProfile>
 
