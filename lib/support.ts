@@ -35,3 +35,53 @@ export const question_privacy = [
       "Toute modification de cette politique sera notifiée via l'application avec un préavis d'au moins 30 jours. La date de dernière mise à jour est indiquée ci-dessous.",
   },
 ];
+
+export const faqs = [
+  {
+    category: "Démarrage",
+    questions: [
+      {
+        q: "Comment ajouter mon premier véhicule ?",
+        a: "Rendez-vous dans l'onglet Garage, puis appuyez sur le bouton « + Ajouter un véhicule ». Renseignez la marque, le modèle, l'année et la plaque d'immatriculation.",
+      },
+      {
+        q: "Comment enregistrer une intervention ?",
+        a: "Appuyez sur le bouton « + » central dans la barre de navigation. Sélectionnez le véhicule concerné, le type d'intervention, la date et le coût.",
+      },
+      {
+        q: "Puis-je gérer plusieurs véhicules ?",
+        a: "Oui, MyDriveLog vous permet de gérer une flotte illimitée de véhicules. Chaque véhicule dispose de son propre historique et de ses statistiques.",
+      },
+    ],
+  },
+  {
+    category: "Historique & données",
+    questions: [
+      {
+        q: "Comment exporter mon historique ?",
+        a: "Dans la section Historique, appuyez sur les trois points en haut à droite et sélectionnez « Exporter en PDF » ou « Exporter en CSV ».",
+      },
+      {
+        q: "Mes données sont-elles sauvegardées ?",
+        a: "Toutes vos données sont synchronisées en temps réel sur nos serveurs sécurisés. Vous pouvez accéder à votre compte depuis n'importe quel appareil.",
+      },
+      {
+        q: "Comment supprimer une intervention ?",
+        a: "Dans l'historique, appuyez sur l'intervention concernée, puis sur l'icône de corbeille en haut à droite.",
+      },
+    ],
+  },
+  {
+    category: "Abonnement",
+    questions: [
+      {
+        q: "Quelles sont les fonctionnalités Premium ?",
+        a: "Le plan Premium inclut les alertes personnalisées, l'export illimité, les statistiques avancées, la gestion de flotte et le support prioritaire.",
+      },
+      {
+        q: "Comment annuler mon abonnement ?",
+        a: "Rendez-vous dans Profil → Abonnement → Gérer. Vous pouvez annuler à tout moment ; votre accès reste actif jusqu'à la fin de la période payée.",
+      },
+    ],
+  },
+];

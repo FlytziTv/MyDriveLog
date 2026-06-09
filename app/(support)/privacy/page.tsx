@@ -3,7 +3,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import { ArrowLeft, Shield, Lock } from "lucide-react";
-import { question_privacy } from "@/lib/privacy";
+import { question_privacy } from "@/lib/support";
 import QuestionCard from "@/components/help/questionCard";
 
 const badges = [
