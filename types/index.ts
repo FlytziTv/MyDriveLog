@@ -88,6 +88,14 @@ interface MiniStatsCarProps {
   total: string | number;
 }
 
+interface QuestionCardProps {
+  title: string;
+  content: string;
+  open: boolean;
+  setOpenSection: (i: number | null) => void;
+  i: number;
+}
+
 export type {
   NavBarProps,
   SectionIconProfileProps,
@@ -102,4 +110,5 @@ export type {
   CategoryProps,
   HistoryItem,
   MiniStatsCarProps,
+  QuestionCardProps,
 };

@@ -2,8 +2,9 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { ArrowLeft, Shield, Lock, ChevronDown } from "lucide-react";
+import { ArrowLeft, Shield, Lock } from "lucide-react";
 import { question_privacy } from "@/lib/privacy";
+import QuestionCard from "@/components/help/questionCard";
 
 const badges = [
   {
@@ -83,30 +84,38 @@ export default function Privacy() {
         {question_privacy.map((section, i) => {
           const open = openSection === i;
           return (
-            <div
+            // <div
+            //   key={i}
+            //   className="bg-white border border-neutral-200 rounded-xl overflow-hidden"
+            // >
+            //   <button
+            //     onClick={() => setOpenSection(open ? null : i)}
+            //     className="w-full p-4 flex items-center gap-3 text-left"
+            //   >
+            //     <p className="flex-1 text-sm font-medium text-neutral-900">
+            //       {section.title}
+            //     </p>
+            //     <ChevronDown
+            //       className={`w-4 h-4 text-neutral-400 shrink-0 transition-transform ${open ? "rotate-180" : ""}`}
+            //       strokeWidth={1.5}
+            //     />
+            //   </button>
+            //   {open && (
+            //     <div className="px-4 pb-4 border-t border-neutral-100">
+            //       <p className="text-xs text-neutral-600 leading-relaxed pt-3">
+            //         {section.content}
+            //       </p>
+            //     </div>
+            //   )}
+            // </div>
+            <QuestionCard
               key={i}
-              className="bg-white border border-neutral-200 rounded-xl overflow-hidden"
-            >
-              <button
-                onClick={() => setOpenSection(open ? null : i)}
-                className="w-full p-4 flex items-center gap-3 text-left"
-              >
-                <p className="flex-1 text-sm font-medium text-neutral-900">
-                  {section.title}
-                </p>
-                <ChevronDown
-                  className={`w-4 h-4 text-neutral-400 shrink-0 transition-transform ${open ? "rotate-180" : ""}`}
-                  strokeWidth={1.5}
-                />
-              </button>
-              {open && (
-                <div className="px-4 pb-4 border-t border-neutral-100">
-                  <p className="text-xs text-neutral-600 leading-relaxed pt-3">
-                    {section.content}
-                  </p>
-                </div>
-              )}
-            </div>
+              title={section.title}
+              content={section.content}
+              open={open}
+              setOpenSection={setOpenSection}
+              i={i}
+            />
           );
         })}
       </div>
