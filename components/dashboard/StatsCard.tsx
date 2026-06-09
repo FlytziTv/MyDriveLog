@@ -4,11 +4,11 @@ export default function StatsCard({ icon, value, label }: StatCardProps) {
   const Icon = icon;
 
   return (
-    <div className="bg-white border border-neutral-200 flex flex-row gap-2 rounded-xl p-4 relative overflow-hidden">
+    <div className="bg-white border border-neutral-200 flex flex-row gap-1 rounded-xl p-4 relative overflow-hidden">
       {/* Content */}
-      <div className="flex flex-col gap-2 w-full">
+      <div className="flex flex-col gap-2 w-full min-w-0">
         <p className="text-xs text-neutral-400 ">{label}</p>
-        <p className="text-2xl font-semibold text-neutral-900 leading-none">
+        <p className="text-xl font-semibold text-neutral-900 leading-none truncate">
           {value}
         </p>
       </div>
