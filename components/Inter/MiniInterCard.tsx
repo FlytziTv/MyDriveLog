@@ -3,9 +3,8 @@ import { MiniInterCardProps } from "@/types";
 export default function MiniInterCard({
   icon,
   type,
-  vehicle,
+  data,
   cost,
-  date,
 }: MiniInterCardProps) {
   const Icon = icon;
   return (
@@ -23,9 +22,7 @@ export default function MiniInterCard({
             <p className="text-sm font-medium text-neutral-900 truncate">
               {type}
             </p>
-            <p className="text-xs text-neutral-500 truncate">
-              {vehicle} · {date}
-            </p>
+            <p className="text-xs text-neutral-500 truncate">{data}</p>
           </div>
 
           {/* Prix */}

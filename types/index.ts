@@ -40,9 +40,8 @@ interface DetailInterCardProps {
 interface MiniInterCardProps {
   icon: LucideIcon;
   type: string;
-  vehicle: string;
+  data: string | number;
   cost: number;
-  date: string;
 }
 
 interface MiniaVehicleCardProps {
