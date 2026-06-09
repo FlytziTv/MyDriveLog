@@ -68,13 +68,13 @@ export default function DashboardPage() {
                 key={item.id}
                 icon={icon}
                 type={label}
-                vehicle={vehicle?.name ?? "Véhicule inconnu"}
-                cost={item.cost}
-                date={new Date(item.date).toLocaleDateString("fr-FR", {
+                data={`${vehicle?.name ?? "Véhicule inconnu"} · ${new Date(
+                  item.date,
+                ).toLocaleDateString("fr-FR", {
                   day: "numeric",
-                  month: "long",
-                  year: "numeric",
-                })}
+                  month: "short",
+                })}`}
+                cost={item.cost}
               />
             );
           })}
