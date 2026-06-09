@@ -42,10 +42,12 @@ export default function DetailInterCard({
           {date}
         </div>
 
-        <div className="flex items-center gap-1.5 text-[12px] text-neutral-500">
-          <MapPin size={14} />
-          {km.toLocaleString()} km
-        </div>
+        {km !== undefined && (
+          <div className="flex items-center gap-1.5 text-[12px] text-neutral-500">
+            <MapPin size={14} />
+            {km.toLocaleString()} km
+          </div>
+        )}
       </div>
     </div>
   );
