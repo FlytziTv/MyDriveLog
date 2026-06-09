@@ -83,22 +83,20 @@ export default function HistoriquePage() {
       </div>
 
       {/* Filter Pills */}
-      <div className=" border-b border-neutral-100">
-        <div className="flex gap-2 overflow-x-auto scrollbar-hide">
-          {HistoryFilter.map((filter) => (
-            <button
-              key={filter.value}
-              onClick={() => setActiveFilter(filter.value)}
-              className={`px-4 py-2 rounded-lg text-[13px] font-medium whitespace-nowrap transition-colors ${
-                activeFilter === filter.value
-                  ? "bg-neutral-900 text-white"
-                  : "bg-transparent text-neutral-600 hover:bg-neutral-200"
-              }`}
-            >
-              {filter.label}
-            </button>
-          ))}
-        </div>
+      <div className="flex gap-2 overflow-x-auto scrollbar-hide">
+        {HistoryFilter.map((filter) => (
+          <button
+            key={filter.value}
+            onClick={() => setActiveFilter(filter.value)}
+            className={`px-4 py-2 rounded-lg text-[13px] font-medium whitespace-nowrap transition-colors ${
+              activeFilter === filter.value
+                ? "bg-neutral-900 text-white"
+                : "bg-transparent text-neutral-600 hover:bg-neutral-200"
+            }`}
+          >
+            {filter.label}
+          </button>
+        ))}
       </div>
 
       {/* History Items */}
