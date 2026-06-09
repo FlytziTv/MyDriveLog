@@ -5,19 +5,11 @@ import DetailInterCard from "@/components/Inter/DetailInterCard";
 import { SectionProfile } from "@/components/profile/Sections";
 import { HistoryFilter } from "@/lib/data";
 import { Settings } from "lucide-react";
-import { MaintenanceMeta, ExpenseMeta } from "@/lib/category";
+import { resolveMeta } from "@/lib/category";
 import { FakeHistory, FakeVehicles } from "@/lib/fake";
-import { ExpenseCategory, MaintenanceType } from "@prisma/client";
 import { HistoryItem } from "@/types";
 
-// Fonction pour résoudre les métadonnées d'un item d'historique
-function resolveMeta(item: HistoryItem) {
-  return item.kind === "maintenance"
-    ? MaintenanceMeta[item.type as MaintenanceType]
-    : ExpenseMeta[item.type as ExpenseCategory];
-}
-
-// Fonction pour filtrer l'historique en fonction du filtre actif
+// Permet de filtrer les interventions selon le type sélectionné (entretien, dépense, ce mois ci)
 function filterHistory(items: HistoryItem[], filter: string) {
   switch (filter) {
     case "maintenance":
@@ -27,8 +19,11 @@ function filterHistory(items: HistoryItem[], filter: string) {
     case "this_month": {
       const now = new Date();
       return items.filter((i) => {
-        const [, month, year] = i.date.split("/").map(Number);
-        return month === now.getMonth() + 1 && year === now.getFullYear();
+        const date = new Date(i.date);
+        return (
+          date.getMonth() === now.getMonth() &&
+          date.getFullYear() === now.getFullYear()
+        );
       });
     }
     default:
@@ -36,21 +31,15 @@ function filterHistory(items: HistoryItem[], filter: string) {
   }
 }
 
-// Fonction pour grouper les items d'historique par mois et année
+// Permet de grouper les interventions par mois et année pour un affichage plus lisible dans l'historique
 function groupByMonth(items: HistoryItem[]) {
-  // Tri des items par date (du plus récent au plus ancien)
-  const sorted = [...items].sort((a, b) => {
-    const [dA, mA, yA] = a.date.split("/").map(Number);
-    const [dB, mB, yB] = b.date.split("/").map(Number);
-    return (
-      new Date(yB, mB - 1, dB).getTime() - new Date(yA, mA - 1, dA).getTime()
-    );
-  });
+  const sorted = [...items].sort(
+    (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime(),
+  );
 
-  // Groupement par mois et année
   return sorted.reduce<Record<string, HistoryItem[]>>((acc, item) => {
-    const [, month, year] = item.date.split("/").map(Number);
-    const key = new Date(year, month - 1).toLocaleDateString("fr-FR", {
+    const date = new Date(item.date);
+    const key = date.toLocaleDateString("fr-FR", {
       month: "long",
       year: "numeric",
     });
@@ -113,7 +102,10 @@ export default function HistoriquePage() {
                 type={label}
                 vehicle={vehicle?.name ?? "Véhicule inconnu"}
                 cost={item.cost}
-                date={item.date}
+                date={new Date(item.date).toLocaleDateString("fr-FR", {
+                  day: "numeric",
+                  month: "short",
+                })}
                 km={item.km}
               />
             );
