@@ -96,6 +96,15 @@ interface QuestionCardProps {
   i: string | number;
 }
 
+interface SubscriptionCardProps {
+  title: string;
+  description: string;
+  price: number;
+  priceAnnual?: number;
+  features: string[];
+  actif?: boolean;
+}
+
 export type {
   NavBarProps,
   SectionIconProfileProps,
@@ -111,4 +120,5 @@ export type {
   HistoryItem,
   MiniStatsCarProps,
   QuestionCardProps,
+  SubscriptionCardProps,
 };
