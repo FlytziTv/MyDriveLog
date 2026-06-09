@@ -6,6 +6,7 @@ import { FakeHistory } from "@/lib/fake";
 import { HistoryItem } from "@/types";
 import { resolveMeta } from "@/lib/category";
 import MiniInterCard from "../Inter/MiniInterCard";
+import DetailInterCard from "../Inter/DetailInterCard";
 
 // Permet de filtrer les interventions selon le type sélectionné (entretien, dépense)
 function filterHistory(items: HistoryItem[], filter: string) {
@@ -19,7 +20,13 @@ function filterHistory(items: HistoryItem[], filter: string) {
   }
 }
 
-export default function HistoryCar({ id }: { id: string }) {
+export default function HistoryCar({
+  id,
+  vehicleName,
+}: {
+  id: string;
+  vehicleName: string;
+}) {
   const [activeFilter, setActiveFilter] = useState("maintenance");
   const filtered = filterHistory(
     FakeHistory.filter((item) => item.vehicleId === id),
@@ -47,17 +54,30 @@ export default function HistoryCar({ id }: { id: string }) {
       <div className="flex flex-col gap-2">
         {filtered.map((item) => {
           const { label, icon } = resolveMeta(item);
-          // const vehicle = await prisma.vehicle.findUnique({ where: { id: item.vehicleId } });
+          const formattedDate = new Date(item.date).toLocaleDateString(
+            "fr-FR",
+            {
+              day: "numeric",
+              month: "short",
+            },
+          );
 
-          return (
+          return item.kind === "maintenance" ? (
+            <DetailInterCard
+              key={item.id}
+              icon={icon}
+              type={label}
+              vehicle={vehicleName}
+              cost={item.cost}
+              date={formattedDate}
+              km={item.km}
+            />
+          ) : (
             <MiniInterCard
               key={item.id}
               icon={icon}
               type={label}
-              data={`${new Date(item.date).toLocaleDateString("fr-FR", {
-                day: "numeric",
-                month: "short",
-              })} · ${item.km} km`}
+              data={formattedDate}
               cost={item.cost}
             />
           );

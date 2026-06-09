@@ -74,7 +74,7 @@ export default async function VehiclePage({
 
         <MiniStatsTabs km={vehicle.km} date={lastMaintenance} total={total} />
 
-        <HistoryCar id={id} />
+        <HistoryCar id={id} vehicleName={vehicle.name} />
       </div>
     </>
   );
