@@ -1,3 +1,5 @@
+// Preference profil -> Preferences
+
 const pref_unit = [
   { value: "km", label: "Kilomètres" },
   { value: "mi", label: "Miles" },
@@ -22,4 +24,35 @@ const pref_theme = [
   { value: "system", label: "Système" },
 ];
 
-export { pref_unit, pref_devise, pref_langue, pref_theme };
+// Preference Notifications -> Notifications
+
+const notif_preferences = [
+  {
+    group: "Alertes véhicule",
+    context: [
+      {
+        title: "Rappels entretien",
+        description: "Alerte avant échéance de révision",
+      },
+      {
+        title: "Alertes kilométrage",
+        description: "Notification au seuil programmé",
+      },
+    ],
+  },
+  {
+    group: "Informations",
+    context: [
+      {
+        title: "Résumé mensuel",
+        description: "Récapitulatif de vos dépenses",
+      },
+      {
+        title: "Nouveautés MyDriveLog",
+        description: "Nouvelles fonctionnalités et mises à jour",
+      },
+    ],
+  },
+];
+
+export { pref_unit, pref_devise, pref_langue, pref_theme, notif_preferences };
