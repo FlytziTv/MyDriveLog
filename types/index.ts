@@ -1,4 +1,5 @@
 import { LucideIcon } from "lucide-react";
+import { MaintenanceType, ExpenseCategory } from "@prisma/client";
 
 interface NavBarProps {
   icon: LucideIcon;
@@ -67,6 +68,21 @@ interface SectionDashProps {
   children: React.ReactNode;
 }
 
+interface CategoryProps {
+  label: string;
+  icon: LucideIcon;
+}
+
+interface HistoryItem {
+  id: string;
+  kind: "maintenance" | "expense";
+  type: MaintenanceType | ExpenseCategory;
+  vehicle: string;
+  cost: number;
+  date: string;
+  km: number;
+}
+
 export type {
   NavBarProps,
   SectionIconProfileProps,
@@ -78,4 +94,6 @@ export type {
   MiniaVehicleCardProps,
   StatCardProps,
   SectionDashProps,
+  CategoryProps,
+  HistoryItem,
 };
