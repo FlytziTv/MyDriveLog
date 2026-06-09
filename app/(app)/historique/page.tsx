@@ -8,6 +8,7 @@ import { Settings } from "lucide-react";
 import { resolveMeta } from "@/lib/category";
 import { FakeHistory, FakeVehicles } from "@/lib/fake";
 import { HistoryItem } from "@/types";
+import MiniInterCard from "@/components/Inter/MiniInterCard";
 
 // Permet de filtrer les interventions selon le type sélectionné (entretien, dépense, ce mois ci)
 function filterHistory(items: HistoryItem[], filter: string) {
@@ -93,20 +94,33 @@ export default function HistoriquePage() {
         <SectionProfile key={month} title={month}>
           {items.map((item) => {
             const { label, icon } = resolveMeta(item);
-            // const vehicle = await prisma.vehicle.findUnique({ where: { id: item.vehicleId } });
             const vehicle = FakeVehicles.find((v) => v.id === item.vehicleId);
-            return (
+            const vehicleName = vehicle?.name ?? "Véhicule inconnu";
+            const formattedDate = new Date(item.date).toLocaleDateString(
+              "fr-FR",
+              {
+                day: "numeric",
+                month: "short",
+              },
+            );
+
+            return item.kind === "maintenance" ? (
               <DetailInterCard
                 key={item.id}
                 icon={icon}
                 type={label}
-                vehicle={vehicle?.name ?? "Véhicule inconnu"}
+                vehicle={vehicleName}
                 cost={item.cost}
-                date={new Date(item.date).toLocaleDateString("fr-FR", {
-                  day: "numeric",
-                  month: "short",
-                })}
+                date={formattedDate}
                 km={item.km}
+              />
+            ) : (
+              <MiniInterCard
+                key={item.id}
+                icon={icon}
+                type={label}
+                data={`${vehicleName} · ${formattedDate}`}
+                cost={item.cost}
               />
             );
           })}

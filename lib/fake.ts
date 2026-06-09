@@ -57,7 +57,6 @@ export const FakeHistory: HistoryItem[] = [
     vehicleId: "2",
     cost: 72,
     date: "2026-06-05",
-    km: 30000,
   },
   {
     id: "3",
@@ -129,7 +128,6 @@ export const FakeHistory: HistoryItem[] = [
     vehicleId: "1",
     cost: 72,
     date: "2024-05-15",
-    km: 25000,
   },
   {
     id: "11",
@@ -138,7 +136,6 @@ export const FakeHistory: HistoryItem[] = [
     vehicleId: "2",
     cost: 520,
     date: "2024-01-01",
-    km: 29000,
   },
   {
     id: "12",
@@ -147,7 +144,6 @@ export const FakeHistory: HistoryItem[] = [
     vehicleId: "3",
     cost: 15,
     date: "2024-04-10",
-    km: 15000,
   },
   {
     id: "13",
@@ -156,7 +152,6 @@ export const FakeHistory: HistoryItem[] = [
     vehicleId: "1",
     cost: 8,
     date: "2024-02-20",
-    km: 24000,
   },
   {
     id: "14",
@@ -165,7 +160,6 @@ export const FakeHistory: HistoryItem[] = [
     vehicleId: "2",
     cost: 135,
     date: "2024-02-14",
-    km: 29500,
   },
   {
     id: "15",
@@ -174,7 +168,6 @@ export const FakeHistory: HistoryItem[] = [
     vehicleId: "3",
     cost: 35,
     date: "2023-12-05",
-    km: 13800,
   },
   {
     id: "16",
@@ -183,7 +176,6 @@ export const FakeHistory: HistoryItem[] = [
     vehicleId: "1",
     cost: 50,
     date: "2023-11-28",
-    km: 22500,
   },
   {
     id: "17",
@@ -192,6 +184,5 @@ export const FakeHistory: HistoryItem[] = [
     vehicleId: "1",
     cost: 50,
     date: "2026-06-02",
-    km: 22500,
   },
 ];

@@ -34,7 +34,7 @@ interface DetailInterCardProps {
   vehicle: string;
   cost: number;
   date: string;
-  km: number;
+  km?: number;
 }
 
 interface MiniInterCardProps {
@@ -79,7 +79,7 @@ interface HistoryItem {
   vehicleId: string;
   cost: number;
   date: string;
-  km: number;
+  km?: number;
 }
 
 interface MiniStatsCarProps {
