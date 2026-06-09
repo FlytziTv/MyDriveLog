@@ -1,35 +1,6 @@
 import MiniaVehicleCard from "@/components/car/MiniaVehicleCard";
+import { FakeVehicles } from "@/lib/fake";
 import { Plus } from "lucide-react";
-
-const FakeVehicles = [
-  {
-    id: "1",
-    name: "Ma Camry",
-    brand: "Toyota",
-    model: "Camry",
-    year: 2020,
-    plate: "ABC-123",
-    km: 50000,
-  },
-  {
-    id: "2",
-    name: "Ma Civic",
-    brand: "Honda",
-    model: "Civic",
-    year: 2019,
-    plate: "DEF-456",
-    km: 30000,
-  },
-  {
-    id: "3",
-    name: "Ma Focus",
-    brand: "Ford",
-    model: "Focus",
-    year: 2018,
-    plate: "GHI-789",
-    km: 40000,
-  },
-];
 
 export default function VehiclesPage() {
   return (
