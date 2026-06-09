@@ -17,7 +17,13 @@ import {
   CircleEllipsis,
 } from "lucide-react";
 import { MaintenanceType, ExpenseCategory } from "@prisma/client";
-import { CategoryProps } from "@/types";
+import { CategoryProps, HistoryItem } from "@/types";
+
+export function resolveMeta(item: HistoryItem) {
+  return item.kind === "maintenance"
+    ? MaintenanceMeta[item.type as MaintenanceType]
+    : ExpenseMeta[item.type as ExpenseCategory];
+}
 
 export const MaintenanceMeta: Record<MaintenanceType, CategoryProps> = {
   OIL_CHANGE: { label: "Vidange", icon: Droplets },

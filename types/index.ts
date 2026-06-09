@@ -50,7 +50,7 @@ interface MiniaVehicleCardProps {
   name: string;
   brand: string;
   model: string;
-  year: number;
+  year: number | string;
   plate: string;
   km: number;
 }

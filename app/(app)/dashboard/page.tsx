@@ -1,10 +1,20 @@
 import StatsCard from "@/components/dashboard/StatsCard";
 import { Bell, Car, TrendingUp } from "lucide-react";
-import SectionDash from "./SectionDash";
+import SectionDash from "../../../components/dashboard/SectionDash";
 import { VehicleVerticalCard } from "@/components/car/MiniaVehicleCard";
 import MiniInterCard from "@/components/Inter/MiniInterCard";
+import { FakeHistory, FakeVehicles } from "@/lib/fake";
+import { resolveMeta } from "@/lib/category";
 
 export default function DashboardPage() {
+  // Calcule la somme totale des dépenses pour tous les véhicules
+  const total = FakeVehicles.reduce((acc, vehicle) => {
+    const vehicleHistory = FakeHistory.filter(
+      (item) => item.vehicleId === vehicle.id,
+    );
+    return acc + vehicleHistory.reduce((sum, item) => sum + item.cost, 0);
+  }, 0);
+
   return (
     <>
       {/* Header */}
@@ -21,43 +31,53 @@ export default function DashboardPage() {
 
       {/* Mini Stats */}
       <div className="grid grid-cols-2 gap-4">
-        <StatsCard icon={Car} value="5" label="Véhicules" />
-        <StatsCard icon={TrendingUp} value="939€" label="Ce mois" />
+        <StatsCard icon={Car} value={FakeVehicles.length} label="Véhicules" />
+        <StatsCard
+          icon={TrendingUp}
+          value={`${total.toFixed(2)}€`}
+          label="Ce mois"
+        />
       </div>
 
       <SectionDash title="Véhicules" link="/vehicles" textLink="Voir tous">
         <div className="flex gap-3 overflow-x-auto scrollbar-hide">
-          <VehicleVerticalCard
-            id="1"
-            name="Véhicule 1"
-            brand="Marque 1"
-            model="Modèle 1"
-            year={2020}
-            plate="ABC-123"
-            km={50000}
-          />
-
-          <VehicleVerticalCard
-            id="1"
-            name="Véhicule 1"
-            brand="Marque 1"
-            model="Modèle 1"
-            year={2020}
-            plate="ABC-123"
-            km={500}
-          />
+          {FakeVehicles.slice(0, 3).map((vehicle) => (
+            <VehicleVerticalCard
+              key={vehicle.id}
+              id={vehicle.id}
+              name={vehicle.name}
+              brand={vehicle.brand}
+              model={vehicle.model}
+              year={vehicle.year}
+              plate={vehicle.plate}
+              km={vehicle.km}
+            />
+          ))}
         </div>
       </SectionDash>
 
       <SectionDash title="Activité récente">
         <div className="flex flex-col gap-2">
-          <MiniInterCard
-            icon={Car}
-            type="Entretien"
-            vehicle="Véhicule 1"
-            cost={150}
-            date="2023-10-15"
-          />
+          {/* Affiche les 6 dernières activités (entretien + dépenses) de tous les véhicules */}
+          {FakeHistory.slice(0, 6).map((item) => {
+            const { label, icon } = resolveMeta(item);
+            const vehicle = FakeVehicles.find((v) => v.id === item.vehicleId);
+
+            return (
+              <MiniInterCard
+                key={item.id}
+                icon={icon}
+                type={label}
+                vehicle={vehicle?.name ?? "Véhicule inconnu"}
+                cost={item.cost}
+                date={new Date(item.date).toLocaleDateString("fr-FR", {
+                  day: "numeric",
+                  month: "long",
+                  year: "numeric",
+                })}
+              />
+            );
+          })}
         </div>
       </SectionDash>
     </>
