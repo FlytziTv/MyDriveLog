@@ -1,4 +1,12 @@
-import { Eye, EyeOff } from "lucide-react";
+import { ChevronDown, Eye, EyeOff } from "lucide-react";
+
+function LabelBase({ label }: { label: string }) {
+  return (
+    <label className="block text-xs font-medium text-neutral-500 px-1">
+      {label}
+    </label>
+  );
+}
 
 function InputBase({
   type,
@@ -9,7 +17,7 @@ function InputBase({
     <input
       type={type}
       placeholder={placeholder}
-      className="w-full h-10 px-3.5 bg-white border border-neutral-200 rounded-lg text-sm text-neutral-900 placeholder:text-neutral-400 focus:outline-none focus:ring-2 focus:ring-neutral-900 focus:border-transparent transition-all"
+      className="w-full h-10 px-3.5 bg-white border border-neutral-200 rounded-lg text-sm text-neutral-900 placeholder:text-neutral-400 focus:outline-none focus:ring-1 focus:ring-neutral-900 focus:border-transparent transition-all"
       {...props}
     />
   );
@@ -30,7 +38,7 @@ function PasswordInput({
       <input
         type={showPassword ? "text" : "password"}
         placeholder={placeholder}
-        className="w-full h-10 px-3.5 bg-white border border-neutral-200 rounded-lg text-sm text-neutral-900 placeholder:text-neutral-400 focus:outline-none focus:ring-2 focus:ring-neutral-900 focus:border-transparent transition-all"
+        className="w-full h-10 px-3.5 bg-white border border-neutral-200 rounded-lg text-sm text-neutral-900 placeholder:text-neutral-400 focus:outline-none focus:ring-1 focus:ring-neutral-900 focus:border-transparent transition-all"
         {...props}
       />
       <button
@@ -47,4 +55,54 @@ function PasswordInput({
   );
 }
 
-export { InputBase, PasswordInput };
+function SelectBase({
+  options,
+  ...props
+}: {
+  options: { value: string; label: string }[];
+} & React.SelectHTMLAttributes<HTMLSelectElement>) {
+  return (
+    <div className="relative">
+      <select
+        className="w-full h-10 px-3.5 bg-white border border-neutral-200 rounded-lg text-sm text-neutral-900 placeholder:text-neutral-400 focus:outline-none focus:ring-1 focus:ring-neutral-900 focus:border-transparent transition-all appearance-none"
+        {...props}
+      >
+        {options.map((option) => (
+          <option key={option.value} value={option.value}>
+            {option.label}
+          </option>
+        ))}
+      </select>
+      <ChevronDown
+        className="absolute right-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-neutral-400 pointer-events-none"
+        strokeWidth={1.5}
+      />
+    </div>
+  );
+}
+
+function TextareaBase({
+  placeholder,
+  ...props
+}: React.TextareaHTMLAttributes<HTMLTextAreaElement>) {
+  return (
+    <textarea
+      placeholder={placeholder}
+      className="w-full px-4.5 py-3.5 bg-white border border-neutral-200 rounded-lg text-sm text-neutral-900 placeholder-neutral-400 focus:outline-none focus:ring-1 focus:ring-neutral-900 focus:border-transparent transition-all resize-none"
+      {...props}
+    />
+  );
+}
+
+function GroupInput({ children }: { children: React.ReactNode }) {
+  return <div className="flex flex-col gap-1.5">{children}</div>;
+}
+
+export {
+  LabelBase,
+  InputBase,
+  PasswordInput,
+  SelectBase,
+  TextareaBase,
+  GroupInput,
+};
