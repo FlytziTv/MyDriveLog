@@ -77,10 +77,16 @@ interface HistoryItem {
   id: string;
   kind: "maintenance" | "expense";
   type: MaintenanceType | ExpenseCategory;
-  vehicle: string;
+  vehicleId: string;
   cost: number;
   date: string;
   km: number;
+}
+
+interface MiniStatsCarProps {
+  km: number;
+  date: string;
+  total: string | number;
 }
 
 export type {
@@ -96,4 +102,5 @@ export type {
   SectionDashProps,
   CategoryProps,
   HistoryItem,
+  MiniStatsCarProps,
 };

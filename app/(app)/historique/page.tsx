@@ -6,7 +6,7 @@ import { SectionProfile } from "@/components/profile/Sections";
 import { HistoryFilter } from "@/lib/data";
 import { Settings } from "lucide-react";
 import { MaintenanceMeta, ExpenseMeta } from "@/lib/category";
-import { FakeHistory } from "@/lib/fake";
+import { FakeHistory, FakeVehicles } from "@/lib/fake";
 import { ExpenseCategory, MaintenanceType } from "@prisma/client";
 import { HistoryItem } from "@/types";
 
@@ -104,12 +104,14 @@ export default function HistoriquePage() {
         <SectionProfile key={month} title={month}>
           {items.map((item) => {
             const { label, icon } = resolveMeta(item);
+            // const vehicle = await prisma.vehicle.findUnique({ where: { id: item.vehicleId } });
+            const vehicle = FakeVehicles.find((v) => v.id === item.vehicleId);
             return (
               <DetailInterCard
                 key={item.id}
                 icon={icon}
                 type={label}
-                vehicle={item.vehicle}
+                vehicle={vehicle?.name ?? "Véhicule inconnu"}
                 cost={item.cost}
                 date={item.date}
                 km={item.km}
