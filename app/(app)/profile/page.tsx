@@ -3,6 +3,7 @@ import {
   SectionItem,
   SectionItemIcon,
 } from "@/components/profile/Sections";
+import Link from "next/link";
 import { StatProfile } from "@/components/profile/StatsCard";
 import { ChevronRight, User, Bell, SettingsIcon, Zap } from "lucide-react";
 
@@ -18,9 +19,9 @@ const params = [
 ];
 
 const helps = [
-  { title: "Centre d'aide" },
-  { title: "Contactez-nous" },
-  { title: "Confidentialité" },
+  { title: "Centre d'aide", href: "/help" },
+  { title: "Contactez-nous", href: "/contact" },
+  { title: "Confidentialité", href: "/privacy" },
 ];
 
 export default function ProfilePage() {
@@ -72,7 +73,9 @@ export default function ProfilePage() {
       {/* Sections Helps */}
       <SectionProfile title="Aide">
         {helps.map((help, index) => (
-          <SectionItem key={index} title={help.title} />
+          <Link href={help.href} key={index}>
+            <SectionItem title={help.title} />
+          </Link>
         ))}
       </SectionProfile>
 
