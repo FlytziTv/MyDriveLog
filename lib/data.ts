@@ -5,4 +5,9 @@ const HistoryFilter = [
   { label: "Dépenses", value: "expenses" },
 ];
 
-export { HistoryFilter };
+const DepenseCarFilter = [
+  { label: "Entretien", value: "maintenance" },
+  { label: "Dépenses", value: "expenses" },
+];
+
+export { HistoryFilter, DepenseCarFilter };
