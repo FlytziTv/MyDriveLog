@@ -6,6 +6,7 @@ import {
 import Link from "next/link";
 import { StatProfile } from "@/components/profile/StatsCard";
 import { ChevronRight, User, Bell, SettingsIcon, Zap } from "lucide-react";
+import { FakeHistory, FakeVehicles } from "@/lib/fake";
 
 const params = [
   {
@@ -67,9 +68,9 @@ export default function ProfilePage() {
 
       {/* Stats */}
       <div className="bg-white border border-neutral-200 rounded-2xl p-4 flex flex-row items-center justify-around">
-        <StatProfile value="3" label="Véhicules" />
+        <StatProfile value={FakeVehicles.length} label="Véhicules" />
         <div className="w-px bg-neutral-200 self-stretch my-1" />
-        <StatProfile value="0" label="Entretiens" />
+        <StatProfile value={FakeHistory.length} label="Entretiens" />
         <div className="w-px bg-neutral-200 self-stretch my-1" />
         <StatProfile value="3" label="Mois" />
       </div>
