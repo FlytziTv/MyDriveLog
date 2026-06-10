@@ -1,6 +1,7 @@
 import MiniaVehicleCard from "@/components/car/MiniaVehicleCard";
 import { FakeVehicles } from "@/lib/fake";
 import { Plus } from "lucide-react";
+import Link from "next/link";
 
 export default function VehiclesPage() {
   return (
@@ -14,9 +15,12 @@ export default function VehiclesPage() {
           </p>
         </div>
 
-        <button className="w-10 h-10 rounded-lg hover:bg-neutral-100 flex items-center justify-center relative transition-colors">
+        <Link
+          href="/new"
+          className="w-10 h-10 rounded-lg hover:bg-neutral-100 flex items-center justify-center relative transition-colors"
+        >
           <Plus className="w-5 h-5 text-neutral-700" strokeWidth={1.5} />
-        </button>
+        </Link>
       </div>
 
       <div className="flex flex-col gap-2">
