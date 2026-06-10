@@ -8,9 +8,11 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "My DriveLog",
-  description:
-    "My DriveLog est une application de journal de bord pour les conducteurs.",
+  title: {
+    default: "MyDriveLog",
+    template: "%s | MyDriveLog",
+  },
+  description: "Suivi d'entretien et de dépenses pour vos véhicules.",
   icons: {
     icon: "/sz-icon.svg",
     apple: "/sz-icon.svg",
