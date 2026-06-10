@@ -1,4 +1,4 @@
-import { ArrowLeft, Check } from "lucide-react";
+import { ArrowLeft } from "lucide-react";
 import Link from "next/link";
 import { SectionProfile } from "@/components/profile/Sections";
 import SubscriptionCard from "@/components/profile/subscriptionsCard";
