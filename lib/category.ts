@@ -46,3 +46,11 @@ export const ExpenseMeta: Record<ExpenseCategory, CategoryProps> = {
   WASH: { label: "Lavage", icon: Sparkles },
   OTHER: { label: "Autre", icon: CircleEllipsis },
 };
+
+export const MaintenanceOptions = Object.entries(MaintenanceMeta).map(
+  ([value, { label }]) => ({ value, label }),
+);
+
+export const ExpenseOptions = Object.entries(ExpenseMeta).map(
+  ([value, { label }]) => ({ value, label }),
+);

@@ -186,3 +186,8 @@ export const FakeHistory: HistoryItem[] = [
     date: "2026-06-02",
   },
 ];
+
+export const VehicleOptions = FakeVehicles.map((v) => ({
+  value: v.id,
+  label: v.name,
+}));
