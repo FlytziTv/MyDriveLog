@@ -3,10 +3,37 @@
 import { ArrowLeft } from "lucide-react";
 import { useState } from "react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { InputBase, PasswordInput } from "@/components/ui/Input";
+import { authClient } from "@/lib/auth-client";
 
 export default function LoginPage() {
   const [showPassword, setShowPassword] = useState(false);
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState<string | null>(null);
+  const [loading, setLoading] = useState(false);
+  const router = useRouter();
+
+  async function handleRegister() {
+    setError(null);
+    setLoading(true);
+
+    const { error } = await authClient.signUp.email({ name, email, password });
+
+    if (error) {
+      setError("Une erreur est survenue. Veuillez réessayer.");
+      setLoading(false);
+      return;
+    }
+
+    router.push("/dashboard");
+  }
+
+  async function handleGoogle() {
+    await authClient.signIn.social({ provider: "google" });
+  }
 
   return (
     <div className="min-h-screen px-6 py-8">
@@ -28,22 +55,40 @@ export default function LoginPage() {
       <div className="flex flex-col gap-4">
         <div className="flex flex-col gap-2">
           {/* Name Input */}
-          <InputBase placeholder="Nom" type="text" />
+          <InputBase
+            placeholder="Nom"
+            type="text"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+          />
 
           {/* Email Input */}
-          <InputBase placeholder="Email" type="email" />
+          <InputBase
+            placeholder="Email"
+            type="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+          />
 
           {/* Password Input */}
           <PasswordInput
             placeholder="Mot de passe"
             showPassword={showPassword}
             setShowPassword={setShowPassword}
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
           />
         </div>
 
+        {error && <p className="text-xs text-red-500">{error}</p>}
+
         {/* Connect Button */}
-        <button className="w-full h-10 text-sm bg-neutral-900 text-white rounded-lg font-medium hover:bg-neutral-800 transition-colors">
-          S&apos;inscrire
+        <button
+          onClick={handleRegister}
+          disabled={!name || !email || !password || loading}
+          className="w-full h-10 text-sm bg-neutral-900 text-white rounded-lg font-medium hover:bg-neutral-800 transition-colors"
+        >
+          {loading ? "Inscription..." : "S'inscrire"}
         </button>
       </div>
 
@@ -55,7 +100,10 @@ export default function LoginPage() {
       </div>
 
       {/* Button Google */}
-      <button className="w-full text-sm h-10 bg-white hover:bg-neutral-100 border border-neutral-200 rounded-lg font-medium text-neutral-900 flex items-center justify-center gap-3  transition-colors">
+      <button
+        onClick={handleGoogle}
+        className="w-full text-sm h-10 bg-white hover:bg-neutral-100 border border-neutral-200 rounded-lg font-medium text-neutral-900 flex items-center justify-center gap-3  transition-colors"
+      >
         <svg className="w-4.5 h-4.5" viewBox="0 0 24 24">
           <path
             fill="#4285F4"
