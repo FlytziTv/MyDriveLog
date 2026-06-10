@@ -23,6 +23,27 @@ function InputBase({
   );
 }
 
+function InputUnit({
+  type,
+  placeholder,
+  unit,
+  ...props
+}: React.InputHTMLAttributes<HTMLInputElement> & { unit: string }) {
+  return (
+    <div className="relative">
+      <input
+        type={type}
+        placeholder={placeholder}
+        className="w-full h-10 px-3.5 pr-12 bg-white border border-neutral-200 rounded-lg text-sm text-neutral-900 placeholder:text-neutral-400 focus:outline-none focus:ring-1 focus:ring-neutral-900 focus:border-transparent transition-all"
+        {...props}
+      />
+      <span className="absolute right-4 top-1/2 -translate-y-1/2 text-neutral-400 text-[14px]">
+        {unit}
+      </span>
+    </div>
+  );
+}
+
 function PasswordInput({
   placeholder,
   showPassword,
@@ -101,6 +122,7 @@ function GroupInput({ children }: { children: React.ReactNode }) {
 export {
   LabelBase,
   InputBase,
+  InputUnit,
   PasswordInput,
   SelectBase,
   TextareaBase,
