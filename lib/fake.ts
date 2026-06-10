@@ -1,5 +1,6 @@
 import { HistoryItem } from "@/types";
 import { MaintenanceType, ExpenseCategory } from "@prisma/client";
+import { Calendar, DollarSign, Fuel, Wrench, Zap } from "lucide-react";
 
 export const FakeVehicles = [
   {
@@ -184,6 +185,69 @@ export const FakeHistory: HistoryItem[] = [
     vehicleId: "1",
     cost: 50,
     date: "2026-06-02",
+  },
+];
+
+export const FakeNotifications = [
+  {
+    id: 1,
+    unread: true,
+    icon: Wrench,
+    color: "bg-amber-50 text-amber-600",
+    title: "Révision à prévoir",
+    body: "Peugeot 308 approche de son échéance de révision (45 000 km).",
+    time: "À l'instant",
+    category: "entretien",
+  },
+  {
+    id: 2,
+    unread: true,
+    icon: Fuel,
+    color: "bg-blue-50 text-blue-600",
+    title: "Seuil kilométrique atteint",
+    body: "Renault Clio a franchi les 62 000 km. Pensez à vérifier les filtres.",
+    time: "2h",
+    category: "alerte",
+  },
+  {
+    id: 3,
+    unread: true,
+    icon: DollarSign,
+    color: "bg-green-50 text-green-600",
+    title: "Résumé mai 2025",
+    body: "Total dépenses : 939 € sur 3 véhicules. Voir le détail.",
+    time: "1j",
+    category: "résumé",
+  },
+  {
+    id: 4,
+    unread: false,
+    icon: Calendar,
+    color: "bg-purple-50 text-purple-600",
+    title: "Contrôle technique",
+    body: "BMW 320d — contrôle technique à renouveler avant le 15 juillet 2025.",
+    time: "3j",
+    category: "alerte",
+  },
+  {
+    id: 5,
+    unread: false,
+    icon: Zap,
+    color: "bg-neutral-100 text-neutral-600",
+    title: "Nouveauté MyDriveLog",
+    body: "Vous pouvez maintenant exporter votre historique en CSV directement depuis l'historique.",
+    time: "5j",
+    category: "info",
+  },
+  {
+    id: 6,
+    unread: false,
+    icon: Wrench,
+    color: "bg-amber-50 text-amber-600",
+    title: "Vidange effectuée",
+    body: "Peugeot 308 — vidange enregistrée le 12 mai. Prochain rappel dans 10 000 km.",
+    time: "8j",
+    category: "entretien",
   },
 ];
 
