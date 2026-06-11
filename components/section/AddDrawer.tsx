@@ -3,16 +3,8 @@
 import { useState } from "react";
 import { Drawer } from "vaul";
 import SegmentedControl from "../ui/SegmentedControl";
-import {
-  LabelBase,
-  InputBase,
-  SelectBase,
-  TextareaBase,
-  GroupInput,
-  InputUnit,
-} from "../ui/Input";
-import { ExpenseOptions, MaintenanceOptions } from "@/lib/category";
-import { VehicleOptions } from "@/lib/fake";
+import AddExpense from "./AddExpense";
+import AddMaintenance from "./AddMaintenance";
 
 const typeInter = [
   { value: "maintenance", label: "Entretien" },
@@ -22,9 +14,11 @@ const typeInter = [
 export default function AddDrawer({
   open,
   setOpen,
+  vehicles,
 }: {
   open: boolean;
   setOpen: (open: boolean) => void;
+  vehicles: { id: string; name: string }[];
 }) {
   const [TypeInter, setTypeInter] = useState("maintenance");
 
@@ -53,102 +47,12 @@ export default function AddDrawer({
           </div>
 
           {TypeInter === "maintenance" ? (
-            <form className="w-full mx-auto pb-26 flex flex-col gap-4 overflow-auto p-4 rounded-t-sm">
-              <GroupInput>
-                <LabelBase label="Type" />
-                <SelectBase options={MaintenanceOptions} />
-              </GroupInput>
-
-              <GroupInput>
-                <LabelBase label="Véhicule" />
-                <SelectBase options={VehicleOptions} />
-              </GroupInput>
-
-              <GroupInput>
-                <LabelBase label="Date" />
-                <InputBase type="date" />
-              </GroupInput>
-
-              <GroupInput>
-                <LabelBase label="Kilométrage" />
-                <InputUnit
-                  type="number"
-                  min={0}
-                  placeholder="Kilométrage au moment de l'intervention"
-                  unit="km"
-                />
-              </GroupInput>
-
-              <GroupInput>
-                <LabelBase label="Montant" />
-                <InputUnit
-                  type="number"
-                  min={0}
-                  placeholder="Montant de l'intervention"
-                  unit="€"
-                />
-              </GroupInput>
-
-              <GroupInput>
-                <LabelBase label="Garage (optionnel)" />
-                <InputBase placeholder="Nom du garage" />
-              </GroupInput>
-
-              <GroupInput>
-                <LabelBase label="Notes (optionnel)" />
-                <TextareaBase placeholder="Détails de l'intervention" />
-              </GroupInput>
-
-              <div className="fixed bottom-0 left-0 right-0 p-6 bg-white border-t border-neutral-100 max-w-[430px] mx-auto">
-                <button
-                  // disabled={!form.subject || !form.message || !form.email}
-                  className="w-full h-10 bg-neutral-900 text-white rounded-lg text-sm font-medium disabled:opacity-40 disabled:cursor-not-allowed transition-opacity"
-                >
-                  Ajouter l&apos;intervention
-                </button>
-              </div>
-            </form>
+            <AddMaintenance
+              vehicles={vehicles}
+              onSuccess={() => setOpen(false)}
+            />
           ) : (
-            <form className="w-full mx-auto pb-26 flex flex-col gap-4 overflow-auto p-4 rounded-t-sm">
-              <GroupInput>
-                <LabelBase label="Catégorie" />
-                <SelectBase options={ExpenseOptions} />
-              </GroupInput>
-
-              <GroupInput>
-                <LabelBase label="Véhicule" />
-                <SelectBase options={VehicleOptions} />
-              </GroupInput>
-
-              <GroupInput>
-                <LabelBase label="Date" />
-                <InputBase type="date" />
-              </GroupInput>
-
-              <GroupInput>
-                <LabelBase label="Montant" />
-                <InputUnit
-                  type="number"
-                  min={0}
-                  placeholder="Montant de la dépense"
-                  unit="€"
-                />
-              </GroupInput>
-
-              <GroupInput>
-                <LabelBase label="Notes (optionnel)" />
-                <TextareaBase placeholder="Détails de l'intervention" />
-              </GroupInput>
-
-              <div className="fixed bottom-0 left-0 right-0 p-6 bg-white border-t border-neutral-100 max-w-[430px] mx-auto">
-                <button
-                  // disabled={!form.subject || !form.message || !form.email}
-                  className="w-full h-10 bg-neutral-900 text-white rounded-lg text-sm font-medium disabled:opacity-40 disabled:cursor-not-allowed transition-opacity"
-                >
-                  Ajouter la dépense
-                </button>
-              </div>
-            </form>
+            <AddExpense vehicles={vehicles} onSuccess={() => setOpen(false)} />
           )}
         </Drawer.Content>
       </Drawer.Portal>

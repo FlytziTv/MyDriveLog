@@ -8,7 +8,11 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import AddDrawer from "../section/AddDrawer";
 
-export default function NavBar() {
+export default function NavBar({
+  vehicles,
+}: {
+  vehicles: { id: string; name: string }[];
+}) {
   const [open, setOpen] = useState(false);
   const leftItems = NavBarItems.slice(0, 2);
   const rightItems = NavBarItems.slice(2);
@@ -34,7 +38,7 @@ export default function NavBar() {
         </div>
       </div>
 
-      <AddDrawer open={open} setOpen={setOpen} />
+      <AddDrawer open={open} setOpen={setOpen} vehicles={vehicles} />
     </>
   );
 }
