@@ -7,6 +7,7 @@ import Link from "next/link";
 import { StatProfile } from "@/components/profile/StatsCard";
 import { ChevronRight, User, Bell, SettingsIcon, Zap } from "lucide-react";
 import { FakeHistory, FakeVehicles } from "@/lib/fake";
+import { getVehicles } from "@/server/queries/vehicle";
 
 const params = [
   {
@@ -41,7 +42,9 @@ const helps = [
   { title: "Confidentialité", href: "/privacy" },
 ];
 
-export default function ProfilePage() {
+export default async function ProfilePage() {
+  const vehicles = await getVehicles();
+
   return (
     <>
       {/* Profile Header */}
@@ -68,7 +71,7 @@ export default function ProfilePage() {
 
       {/* Stats */}
       <div className="bg-white border border-neutral-200 rounded-2xl p-4 flex flex-row items-center justify-around">
-        <StatProfile value={FakeVehicles.length} label="Véhicules" />
+        <StatProfile value={vehicles.length} label="Véhicules" />
         <div className="w-px bg-neutral-200 self-stretch my-1" />
         <StatProfile value={FakeHistory.length} label="Entretiens" />
         <div className="w-px bg-neutral-200 self-stretch my-1" />

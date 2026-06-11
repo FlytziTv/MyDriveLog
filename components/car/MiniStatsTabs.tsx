@@ -8,10 +8,14 @@ export default function MiniStatsTabs({ km, date, total }: MiniStatsCarProps) {
       <div className="w-px bg-neutral-200 self-stretch my-1" />
 
       <Stats
-        value={new Date(date || "-").toLocaleDateString("fr-FR", {
-          day: "numeric",
-          month: "short",
-        })}
+        value={
+          date
+            ? new Date(date).toLocaleDateString("fr-FR", {
+                day: "numeric",
+                month: "short",
+              })
+            : "Aucune"
+        }
         label="Dernière"
       />
 

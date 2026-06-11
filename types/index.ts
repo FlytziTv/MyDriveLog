@@ -50,7 +50,7 @@ interface MiniaVehicleCardProps {
   brand: string;
   model: string;
   year: number | string;
-  plate: string;
+  plate?: string;
   km: number;
 }
 
@@ -84,7 +84,7 @@ interface HistoryItem {
 
 interface MiniStatsCarProps {
   km: number;
-  date: string;
+  date?: string | null;
   total: string | number;
 }
 

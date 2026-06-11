@@ -6,8 +6,11 @@ import MiniInterCard from "@/components/Inter/MiniInterCard";
 import { FakeHistory, FakeVehicles } from "@/lib/fake";
 import { resolveMeta } from "@/lib/category";
 import Link from "next/link";
+import { getVehicles } from "@/server/queries/vehicle";
 
-export default function DashboardPage() {
+export default async function DashboardPage() {
+  const vehicles = await getVehicles();
+
   // Calcule la somme totale des dépenses pour tous les véhicules
   const total = FakeVehicles.reduce((acc, vehicle) => {
     const vehicleHistory = FakeHistory.filter(
@@ -35,7 +38,7 @@ export default function DashboardPage() {
 
       {/* Mini Stats */}
       <div className="grid grid-cols-2 gap-4">
-        <StatsCard icon={Car} value={FakeVehicles.length} label="Véhicules" />
+        <StatsCard icon={Car} value={vehicles.length} label="Véhicules" />
         <StatsCard
           icon={TrendingUp}
           value={`${total.toFixed(2)}€`}
@@ -43,22 +46,24 @@ export default function DashboardPage() {
         />
       </div>
 
-      <SectionDash title="Véhicules" link="/vehicles" textLink="Voir tous">
-        <div className="flex gap-3 overflow-x-auto scrollbar-hide">
-          {FakeVehicles.slice(0, 3).map((vehicle) => (
-            <VehicleVerticalCard
-              key={vehicle.id}
-              id={vehicle.id}
-              name={vehicle.name}
-              brand={vehicle.brand}
-              model={vehicle.model}
-              year={vehicle.year}
-              plate={vehicle.plate}
-              km={vehicle.km}
-            />
-          ))}
-        </div>
-      </SectionDash>
+      {vehicles.length > 0 && (
+        <SectionDash title="Véhicules" link="/vehicles" textLink="Voir tous">
+          <div className="flex gap-3 overflow-x-auto scrollbar-hide">
+            {vehicles.slice(0, 3).map((vehicle) => (
+              <VehicleVerticalCard
+                key={vehicle.id}
+                id={vehicle.id}
+                name={vehicle.name}
+                brand={vehicle.brand}
+                model={vehicle.model}
+                year={vehicle.year}
+                plate={vehicle.plate ?? undefined}
+                km={vehicle.mileage}
+              />
+            ))}
+          </div>
+        </SectionDash>
+      )}
 
       <SectionDash title="Activité récente">
         <div className="flex flex-col gap-2">
