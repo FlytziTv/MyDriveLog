@@ -3,21 +3,39 @@ import { Bell, Car, TrendingUp } from "lucide-react";
 import SectionDash from "../../../components/dashboard/SectionDash";
 import { VehicleVerticalCard } from "@/components/car/MiniaVehicleCard";
 import MiniInterCard from "@/components/Inter/MiniInterCard";
-import { FakeHistory, FakeVehicles } from "@/lib/fake";
 import { resolveMeta } from "@/lib/category";
 import Link from "next/link";
 import { getVehicles } from "@/server/queries/vehicle";
+import { getAllMaintenancesForUser } from "@/server/queries/maintenance";
+import { getAllExpensesForUser } from "@/server/queries/expense";
+import { formatToHistoryItems } from "@/lib/history-utils";
 
 export default async function DashboardPage() {
-  const vehicles = await getVehicles();
+  // Récupère les données nécessaires pour le dashboard
+  const [vehicles, maintenances, expenses] = await Promise.all([
+    getVehicles(),
+    getAllMaintenancesForUser(),
+    getAllExpensesForUser(),
+  ]);
 
-  // Calcule la somme totale des dépenses pour tous les véhicules
-  const total = FakeVehicles.reduce((acc, vehicle) => {
-    const vehicleHistory = FakeHistory.filter(
-      (item) => item.vehicleId === vehicle.id,
+  // Calcule le total des dépenses du mois en cours
+  const globalHistory = formatToHistoryItems(maintenances, expenses);
+
+  // Filtre les éléments de l'historique pour ne garder que ceux du mois en cours
+  const now = new Date();
+  const currentMonthExpenses = globalHistory.filter((item) => {
+    const itemDate = new Date(item.date);
+    return (
+      itemDate.getMonth() === now.getMonth() &&
+      itemDate.getFullYear() === now.getFullYear()
     );
-    return acc + vehicleHistory.reduce((sum, item) => sum + item.cost, 0);
-  }, 0);
+  });
+
+  // Calcule le total des coûts pour le mois en cours
+  const totalCeMois = currentMonthExpenses.reduce(
+    (acc, item) => acc + (item.cost ?? 0),
+    0,
+  );
 
   return (
     <>
@@ -41,7 +59,7 @@ export default async function DashboardPage() {
         <StatsCard icon={Car} value={vehicles.length} label="Véhicules" />
         <StatsCard
           icon={TrendingUp}
-          value={`${total.toFixed(2)}€`}
+          value={`${totalCeMois.toFixed(2)}€`}
           label="Ce mois"
         />
       </div>
@@ -65,30 +83,32 @@ export default async function DashboardPage() {
         </SectionDash>
       )}
 
-      <SectionDash title="Activité récente">
-        <div className="flex flex-col gap-2">
-          {/* Affiche les 6 dernières activités (entretien + dépenses) de tous les véhicules */}
-          {FakeHistory.slice(0, 6).map((item) => {
-            const { label, icon } = resolveMeta(item);
-            const vehicle = FakeVehicles.find((v) => v.id === item.vehicleId);
+      {globalHistory.length > 0 && (
+        <SectionDash title="Activité récente">
+          <div className="flex flex-col gap-2">
+            {/* Affiche les 6 dernières activités (entretien + dépenses) de tous les véhicules */}
+            {globalHistory.slice(0, 6).map((item) => {
+              const { label, icon } = resolveMeta(item);
+              const vehicle = vehicles.find((v) => v.id === item.vehicleId);
 
-            return (
-              <MiniInterCard
-                key={item.id}
-                icon={icon}
-                type={label}
-                data={`${vehicle?.name ?? "Véhicule inconnu"} · ${new Date(
-                  item.date,
-                ).toLocaleDateString("fr-FR", {
-                  day: "numeric",
-                  month: "short",
-                })}`}
-                cost={item.cost}
-              />
-            );
-          })}
-        </div>
-      </SectionDash>
+              return (
+                <MiniInterCard
+                  key={item.id}
+                  icon={icon}
+                  type={label}
+                  data={`${vehicle?.name ?? "Véhicule inconnu"} · ${new Date(
+                    item.date,
+                  ).toLocaleDateString("fr-FR", {
+                    day: "numeric",
+                    month: "short",
+                  })}`}
+                  cost={item.cost}
+                />
+              );
+            })}
+          </div>
+        </SectionDash>
+      )}
     </>
   );
 }
