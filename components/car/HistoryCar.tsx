@@ -2,13 +2,11 @@
 
 import { useState } from "react";
 import { DepenseCarFilter } from "@/lib/data";
-import { FakeHistory } from "@/lib/fake";
-import { HistoryItem } from "@/types";
 import { resolveMeta } from "@/lib/category";
 import MiniInterCard from "../Inter/MiniInterCard";
 import DetailInterCard from "../Inter/DetailInterCard";
+import { HistoryItem } from "@/types";
 
-// Permet de filtrer les interventions selon le type sélectionné (entretien, dépense)
 function filterHistory(items: HistoryItem[], filter: string) {
   switch (filter) {
     case "maintenance":
@@ -21,17 +19,14 @@ function filterHistory(items: HistoryItem[], filter: string) {
 }
 
 export default function HistoryCar({
-  id,
   vehicleName,
+  initialHistory,
 }: {
-  id: string;
   vehicleName: string;
+  initialHistory: HistoryItem[];
 }) {
   const [activeFilter, setActiveFilter] = useState("maintenance");
-  const filtered = filterHistory(
-    FakeHistory.filter((item) => item.vehicleId === id),
-    activeFilter,
-  );
+  const filtered = filterHistory(initialHistory, activeFilter);
 
   return (
     <div className="flex flex-col gap-6">
@@ -52,36 +47,42 @@ export default function HistoryCar({
       </div>
 
       <div className="flex flex-col gap-2">
-        {filtered.map((item) => {
-          const { label, icon } = resolveMeta(item);
-          const formattedDate = new Date(item.date).toLocaleDateString(
-            "fr-FR",
-            {
-              day: "numeric",
-              month: "short",
-            },
-          );
+        {filtered.length === 0 ? (
+          <p className="text-center text-neutral-500 text-sm py-4">
+            Aucun historique trouvé.
+          </p>
+        ) : (
+          filtered.map((item) => {
+            const { label, icon } = resolveMeta(item);
+            const formattedDate = new Date(item.date).toLocaleDateString(
+              "fr-FR",
+              {
+                day: "numeric",
+                month: "short",
+              },
+            );
 
-          return item.kind === "maintenance" ? (
-            <DetailInterCard
-              key={item.id}
-              icon={icon}
-              type={label}
-              vehicle={vehicleName}
-              cost={item.cost}
-              date={formattedDate}
-              km={item.km}
-            />
-          ) : (
-            <MiniInterCard
-              key={item.id}
-              icon={icon}
-              type={label}
-              data={formattedDate}
-              cost={item.cost}
-            />
-          );
-        })}
+            return item.kind === "maintenance" ? (
+              <DetailInterCard
+                key={item.id}
+                icon={icon}
+                type={label}
+                vehicle={vehicleName}
+                cost={item.cost}
+                date={formattedDate}
+                km={item.km ?? undefined}
+              />
+            ) : (
+              <MiniInterCard
+                key={item.id}
+                icon={icon}
+                type={label}
+                data={formattedDate}
+                cost={item.cost}
+              />
+            );
+          })
+        )}
       </div>
     </div>
   );

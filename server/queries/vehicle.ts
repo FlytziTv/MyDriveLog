@@ -2,6 +2,7 @@ import { prisma } from "@/lib/prisma";
 import { auth } from "@/lib/auth";
 import { headers } from "next/headers";
 
+// Recupère tous les véhicules de l'utilisateur connecté
 export async function getVehicles() {
   const session = await auth.api.getSession({
     headers: await headers(),
@@ -15,6 +16,7 @@ export async function getVehicles() {
   });
 }
 
+// Recupère un véhicule par son ID en s'assurant que l'utilisateur est bien le propriétaire
 export async function getVehicleById(id: string) {
   const session = await auth.api.getSession({
     headers: await headers(),

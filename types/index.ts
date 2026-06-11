@@ -105,6 +105,11 @@ interface SubscriptionCardProps {
   actif?: boolean;
 }
 
+interface VehicleMinimal {
+  id: string;
+  name: string;
+}
+
 export type {
   NavBarProps,
   SectionIconProfileProps,
@@ -121,4 +126,5 @@ export type {
   MiniStatsCarProps,
   QuestionCardProps,
   SubscriptionCardProps,
+  VehicleMinimal,
 };
