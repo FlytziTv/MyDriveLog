@@ -6,6 +6,7 @@ import { prisma } from "@/lib/prisma";
 import { formatToHistoryItems } from "@/lib/history-utils";
 import { auth } from "@/lib/auth";
 import { headers } from "next/headers";
+import { getPreferences } from "@/server/queries/preferences";
 
 export default async function VehiclePage({
   params,
@@ -49,6 +50,8 @@ export default async function VehiclePage({
     select: { date: true },
   });
 
+  const preferences = await getPreferences();
+
   return (
     <>
       {/* Return page */}
@@ -82,11 +85,15 @@ export default async function VehiclePage({
           km={vehicleData.mileage}
           date={lastMaintenance?.date.toISOString().split("T")[0] ?? null}
           total={total}
+          currency={preferences?.currency ?? "EUR"}
+          distanceUnit={preferences?.distanceUnit ?? "KM"}
         />
 
         <HistoryCar
           vehicleName={vehicleData.name}
           initialHistory={vehicleHistory}
+          currency={preferences?.currency ?? "EUR"}
+          distanceUnit={preferences?.distanceUnit ?? "KM"}
         />
       </div>
     </>

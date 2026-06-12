@@ -5,7 +5,8 @@ import { DepenseCarFilter } from "@/lib/data";
 import { resolveMeta } from "@/lib/category";
 import MiniInterCard from "../Inter/MiniInterCard";
 import DetailInterCard from "../Inter/DetailInterCard";
-import { HistoryItem } from "@/types";
+import { HistoryCarProps, HistoryItem } from "@/types";
+import { formatCurrency, formatDistance } from "@/lib/format";
 
 function filterHistory(items: HistoryItem[], filter: string) {
   switch (filter) {
@@ -21,10 +22,9 @@ function filterHistory(items: HistoryItem[], filter: string) {
 export default function HistoryCar({
   vehicleName,
   initialHistory,
-}: {
-  vehicleName: string;
-  initialHistory: HistoryItem[];
-}) {
+  currency,
+  distanceUnit,
+}: HistoryCarProps) {
   const [activeFilter, setActiveFilter] = useState("maintenance");
   const filtered = filterHistory(initialHistory, activeFilter);
 
@@ -68,9 +68,10 @@ export default function HistoryCar({
                 icon={icon}
                 type={label}
                 vehicle={vehicleName}
-                cost={item.cost}
+                cost={formatCurrency(item.cost, currency)}
                 date={formattedDate}
-                km={item.km ?? undefined}
+                km={formatDistance(item.km, distanceUnit)}
+                // a changer
               />
             ) : (
               <MiniInterCard
@@ -78,7 +79,7 @@ export default function HistoryCar({
                 icon={icon}
                 type={label}
                 data={formattedDate}
-                cost={item.cost}
+                cost={formatCurrency(item.cost, currency)}
               />
             );
           })
