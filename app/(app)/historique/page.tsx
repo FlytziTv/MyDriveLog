@@ -3,20 +3,24 @@ import { getAllExpensesForUser } from "@/server/queries/expense";
 import HistoriqueClient from "@/components/SectionClient/HistoriqueClient";
 import { formatToHistoryItems } from "@/lib/history-utils";
 import { getVehicles } from "@/server/queries/vehicle";
+import { getPreferences } from "@/server/queries/preferences";
 
 export default async function HistoriquePage() {
-  const [maintenances, expenses] = await Promise.all([
+  const [maintenances, expenses, vehicles, preferences] = await Promise.all([
     getAllMaintenancesForUser(),
     getAllExpensesForUser(),
+    getVehicles(),
+    getPreferences(),
   ]);
-
-  // Récupération des véhicules pour afficher les noms dans l'historique
-  const vehicles = await getVehicles();
 
   // Utilisation de la fonction centralisée
   const initialHistory = formatToHistoryItems(maintenances, expenses);
 
   return (
-    <HistoriqueClient initialHistory={initialHistory} vehicles={vehicles} />
+    <HistoriqueClient
+      initialHistory={initialHistory}
+      vehicles={vehicles}
+      currency={preferences?.currency ?? "EUR"}
+    />
   );
 }
