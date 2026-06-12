@@ -10,14 +10,19 @@ import { getAllMaintenancesForUser } from "@/server/queries/maintenance";
 import { getAllExpensesForUser } from "@/server/queries/expense";
 import { formatToHistoryItems } from "@/lib/history-utils";
 import { getCurrentUser } from "@/server/queries/user";
+import { getPreferences } from "@/server/queries/preferences";
+import { formatCurrency, formatDistance } from "@/lib/format";
 
 export default async function DashboardPage() {
   // Récupère les données nécessaires pour le dashboard
-  const [vehicles, maintenances, expenses] = await Promise.all([
-    getVehicles(),
-    getAllMaintenancesForUser(),
-    getAllExpensesForUser(),
-  ]);
+  const [vehicles, maintenances, expenses, user, preferences] =
+    await Promise.all([
+      getVehicles(),
+      getAllMaintenancesForUser(),
+      getAllExpensesForUser(),
+      getCurrentUser(),
+      getPreferences(),
+    ]);
 
   // Calcule le total des dépenses du mois en cours
   const globalHistory = formatToHistoryItems(maintenances, expenses);
@@ -38,7 +43,8 @@ export default async function DashboardPage() {
     0,
   );
 
-  const user = await getCurrentUser();
+  const distanceUnit = preferences?.distanceUnit ?? "KM";
+  const currency = preferences?.currency ?? "EUR";
 
   return (
     <>
@@ -65,7 +71,7 @@ export default async function DashboardPage() {
         <StatsCard icon={Car} value={vehicles.length} label="Véhicules" />
         <StatsCard
           icon={TrendingUp}
-          value={`${totalCeMois.toFixed(2)}€`}
+          value={formatCurrency(totalCeMois, currency)}
           label="Ce mois"
         />
       </div>
@@ -82,7 +88,7 @@ export default async function DashboardPage() {
                 model={vehicle.model}
                 year={vehicle.year}
                 plate={vehicle.plate ?? undefined}
-                km={vehicle.mileage}
+                km={formatDistance(vehicle.mileage, distanceUnit)}
               />
             ))}
           </div>
@@ -108,7 +114,7 @@ export default async function DashboardPage() {
                     day: "numeric",
                     month: "short",
                   })}`}
-                  cost={item.cost}
+                  cost={formatCurrency(item.cost, currency)}
                 />
               );
             })}

@@ -52,7 +52,7 @@ interface MiniaVehicleCardProps {
   model: string;
   year: number | string;
   plate?: string;
-  km: number;
+  km: string;
 }
 
 interface StatCardProps {
