@@ -8,8 +8,8 @@ import { Settings } from "lucide-react";
 import { resolveMeta } from "@/lib/category";
 import { HistoryItem, VehicleMinimal } from "@/types";
 import MiniInterCard from "@/components/Inter/MiniInterCard";
-import { formatCurrency } from "@/lib/format";
-import { Currency } from "@prisma/client";
+import { formatCurrency, formatDistance } from "@/lib/format";
+import { Currency, DistanceUnit } from "@prisma/client";
 
 // Fonction pour filtrer les éléments d'historique en fonction du filtre sélectionné
 function filterHistory(items: HistoryItem[], filter: string) {
@@ -56,10 +56,12 @@ export default function HistoriqueClient({
   initialHistory,
   vehicles,
   currency,
+  distanceUnit,
 }: {
   initialHistory: HistoryItem[];
   vehicles: VehicleMinimal[];
   currency: Currency;
+  distanceUnit: DistanceUnit;
 }) {
   const [activeFilter, setActiveFilter] = useState("all");
   const filtered = filterHistory(initialHistory, activeFilter);
@@ -128,7 +130,7 @@ export default function HistoriqueClient({
                   vehicle={vehicleName}
                   cost={formatCurrency(item.cost, currency)}
                   date={formattedDate}
-                  km={item.km}
+                  km={formatDistance(item.km, distanceUnit)}
                 />
               ) : (
                 <MiniInterCard

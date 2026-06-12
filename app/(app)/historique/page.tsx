@@ -21,6 +21,7 @@ export default async function HistoriquePage() {
       initialHistory={initialHistory}
       vehicles={vehicles}
       currency={preferences?.currency ?? "EUR"}
+      distanceUnit={preferences?.distanceUnit ?? "KM"}
     />
   );
 }
