@@ -29,7 +29,8 @@ export async function middleware(request: NextRequest) {
   const isProtected = protectedRoutes.some((route) =>
     pathname.startsWith(route),
   );
-  const isAuthRoute = authRoutes.some((route) => pathname.startsWith(route));
+  const isAuthRoute =
+    authRoutes.some((route) => pathname.startsWith(route)) || pathname === "/";
 
   // Pas connecté sur une route protégée → login
   if (!session && isProtected) {
