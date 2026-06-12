@@ -3,7 +3,10 @@ import { auth } from "@/lib/auth";
 import { headers } from "next/headers";
 
 export async function getPreferences() {
-  const session = await auth.api.getSession({ headers: await headers() });
+  const session = await auth.api.getSession({
+    headers: await headers(),
+  });
+
   if (!session?.user?.id) return null;
 
   // upsert : crée les préférences par défaut si elles n'existent pas encore
