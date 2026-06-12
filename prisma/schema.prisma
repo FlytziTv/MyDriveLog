@@ -66,6 +66,7 @@ model User {
   vehicles      Vehicle[]
   sessions      Session[]
   accounts      Account[]
+  preferences Preferences?
 }
 
 model Vehicle {
@@ -112,6 +113,28 @@ model Expense {
   updatedAt DateTime        @updatedAt
 }
 
+model Preferences {
+  id     String @id @default(cuid())
+  userId String @unique
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  // Notifications
+  notifMaintenanceReminder Boolean @default(true)
+  notifMileageAlert        Boolean @default(true)
+  notifMonthlySummary      Boolean @default(true)
+  notifNews                Boolean @default(false)
+  reminderBefore           ReminderPeriod @default(SEVEN_DAYS)
+
+  // Personnalisation
+  distanceUnit DistanceUnit @default(KM)
+  currency     Currency     @default(EUR)
+  language     Language     @default(FR)
+  theme        Theme        @default(SYSTEM)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
 enum MaintenanceType {
   OIL_CHANGE
   TIRE_CHANGE
@@ -132,4 +155,34 @@ enum ExpenseCategory {
   FINE
   WASH
   OTHER
+}
+
+enum ReminderPeriod {
+  SEVEN_DAYS
+  FOURTEEN_DAYS
+  ONE_MONTH
+}
+
+enum DistanceUnit {
+  KM
+  MILES
+}
+
+enum Currency {
+  EUR
+  USD
+  GBP
+}
+
+enum Language {
+  FR
+  EN
+  ES
+  DE
+}
+
+enum Theme {
+  LIGHT
+  DARK
+  SYSTEM
 }
