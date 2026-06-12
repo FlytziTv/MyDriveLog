@@ -1,6 +1,6 @@
 import { getAllMaintenancesForUser } from "@/server/queries/maintenance";
 import { getAllExpensesForUser } from "@/server/queries/expense";
-import HistoriqueClient from "@/components/History/HistoriqueClient";
+import HistoriqueClient from "@/components/SectionClient/HistoriqueClient";
 import { formatToHistoryItems } from "@/lib/history-utils";
 import { getVehicles } from "@/server/queries/vehicle";
 
