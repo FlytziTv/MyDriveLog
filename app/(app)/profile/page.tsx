@@ -8,7 +8,7 @@ import { StatProfile } from "@/components/profile/StatsCard";
 import { ChevronRight, User, Bell, SettingsIcon, Zap } from "lucide-react";
 
 import { getUserStats } from "@/server/queries/stats";
-import { getVehicles } from "@/server/queries/vehicle";
+import { getCurrentUser } from "@/server/queries/user";
 
 const params = [
   {
@@ -45,7 +45,7 @@ const helps = [
 
 export default async function ProfilePage() {
   const stats = await getUserStats();
-  const vehicles = await getVehicles();
+  const user = await getCurrentUser();
 
   return (
     <>
@@ -64,9 +64,9 @@ export default async function ProfilePage() {
         </div>
         <div className="flex-1">
           <p className="text-base font-bold text-neutral-900">
-            Alexis DE JESUS
+            {user?.firstName} {user?.lastName}
           </p>
-          <p className="text-xs text-neutral-500">alexis.dejesus@gmail.com</p>
+          <p className="text-xs text-neutral-500">{user?.email}</p>
         </div>
         <ChevronRight className="w-5 h-5 text-neutral-300" />
       </div>

@@ -9,6 +9,7 @@ import { getVehicles } from "@/server/queries/vehicle";
 import { getAllMaintenancesForUser } from "@/server/queries/maintenance";
 import { getAllExpensesForUser } from "@/server/queries/expense";
 import { formatToHistoryItems } from "@/lib/history-utils";
+import { getCurrentUser } from "@/server/queries/user";
 
 export default async function DashboardPage() {
   // Récupère les données nécessaires pour le dashboard
@@ -37,13 +38,18 @@ export default async function DashboardPage() {
     0,
   );
 
+  const user = await getCurrentUser();
+
   return (
     <>
       {/* Header */}
       <div className="flex items-center justify-between">
         <div>
           <h2 className="text-2xl font-bold text-neutral-900">Dashboard</h2>
-          <p className="text-[14px] text-neutral-500">Bonjour Alexis</p>
+          <p className="text-[14px] text-neutral-500">
+            Bonjour{" "}
+            {user?.firstName || user?.name?.split(" ")[0] || "Utilisateur"} !
+          </p>
         </div>
         <Link
           href="/notifications"
