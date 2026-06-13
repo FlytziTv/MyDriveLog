@@ -7,6 +7,8 @@ import { SectionProfile } from "@/components/profile/Sections";
 import { ArrowLeft, Camera } from "lucide-react";
 import Link from "next/link";
 import { updatePersonalInfo } from "@/server/actions/user";
+import { deleteAccount } from "@/server/actions/user";
+import { authClient } from "@/lib/auth-client";
 
 const InfoItems = [
   { label: "Prénom", key: "firstName" as const, type: "text" },
@@ -28,6 +30,9 @@ export default function PersonalInfoClient({
   const router = useRouter();
   const [editing, setEditing] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [confirming, setConfirming] = useState(false);
+  const [loadingDel, setLoadingDel] = useState(false);
+
   const [draft, setDraft] = useState({
     firstName: user.firstName ?? "",
     lastName: user.lastName ?? "",
@@ -41,6 +46,13 @@ export default function PersonalInfoClient({
     setLoading(false);
     setEditing(false);
     router.refresh();
+  }
+
+  async function handleDelete() {
+    setLoadingDel(true);
+    await deleteAccount();
+    await authClient.signOut();
+    router.push("/");
   }
 
   return (
@@ -115,9 +127,30 @@ export default function PersonalInfoClient({
               Cette action est irréversible
             </p>
           </div>
-          <button className="h-8 px-3 border border-red-300 bg-red-500/10 text-red-600 rounded-lg text-[12px] font-medium cursor-pointer hover:bg-red-500/20 transition-colors duration-300">
-            Supprimer
-          </button>
+          {confirming ? (
+            <div className="flex gap-2">
+              <button
+                onClick={() => setConfirming(false)}
+                className="h-8 px-3 border border-neutral-200 text-neutral-600 rounded-lg text-[12px] font-medium hover:bg-neutral-50 transition-colors"
+              >
+                Annuler
+              </button>
+              <button
+                onClick={handleDelete}
+                disabled={loadingDel}
+                className="h-8 px-3 bg-red-600 text-white rounded-lg text-[12px] font-medium hover:bg-red-700 disabled:opacity-40 transition-colors"
+              >
+                {loadingDel ? "..." : "Confirmer"}
+              </button>
+            </div>
+          ) : (
+            <button
+              onClick={() => setConfirming(true)}
+              className="h-8 px-3 border border-red-300 bg-red-500/10 text-red-600 rounded-lg text-[12px] font-medium cursor-pointer hover:bg-red-500/20 transition-colors duration-300"
+            >
+              Supprimer
+            </button>
+          )}
         </div>
       </SectionProfile>
     </>
