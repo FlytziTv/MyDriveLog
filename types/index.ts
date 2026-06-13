@@ -120,6 +120,17 @@ interface VehicleMinimal {
   name: string;
 }
 
+interface NotifCardProps {
+  id: string;
+  unread: boolean;
+  icon: LucideIcon;
+  color: string;
+  title: string;
+  time: string;
+  body: string;
+  dismiss?: (id: string) => void;
+}
+
 export type {
   NavBarProps,
   SectionIconProfileProps,
@@ -138,4 +149,5 @@ export type {
   QuestionCardProps,
   SubscriptionCardProps,
   VehicleMinimal,
+  NotifCardProps,
 };

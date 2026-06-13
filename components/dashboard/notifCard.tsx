@@ -1,4 +1,5 @@
-import { LucideIcon, X } from "lucide-react";
+import { NotifCardProps } from "@/types";
+import { X } from "lucide-react";
 
 export default function NotifCard({
   id,
@@ -9,16 +10,7 @@ export default function NotifCard({
   time,
   body,
   dismiss,
-}: {
-  id: number;
-  unread: boolean;
-  icon: LucideIcon;
-  color: string;
-  title: string;
-  time: string;
-  body: string;
-  dismiss?: (id: number) => void;
-}) {
+}: NotifCardProps) {
   const Icon = icon;
 
   return (
