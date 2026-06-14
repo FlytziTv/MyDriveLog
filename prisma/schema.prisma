@@ -52,6 +52,11 @@ model Verification {
   updatedAt  DateTime @updatedAt
 }
 
+enum SubscriptionPlan {
+  FREE
+  PREMIUM
+}
+
 model User {
   id            String    @id @default(cuid())
   email         String    @unique
@@ -61,6 +66,8 @@ model User {
   lastName      String?
   phone         String?
   image         String?
+  plan          SubscriptionPlan @default(FREE)
+  planRenewsAt  DateTime?
   createdAt     DateTime  @default(now())
   updatedAt     DateTime  @updatedAt
   vehicles      Vehicle[]
@@ -69,6 +76,7 @@ model User {
   preferences Preferences?
   notifications Notification[]
 }
+
 
 model Vehicle {
   id           String        @id @default(cuid())
