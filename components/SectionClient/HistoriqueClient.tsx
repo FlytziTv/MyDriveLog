@@ -130,7 +130,11 @@ export default function HistoriqueClient({
                   vehicle={vehicleName}
                   cost={formatCurrency(item.cost, currency)}
                   date={formattedDate}
-                  km={formatDistance(item.km, distanceUnit)}
+                  km={
+                    item.km !== undefined
+                      ? formatDistance(item.km, distanceUnit)
+                      : undefined
+                  }
                 />
               ) : (
                 <MiniInterCard

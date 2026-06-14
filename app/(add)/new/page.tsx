@@ -39,8 +39,8 @@ export default function AddVehicle() {
         mileage: parseInt(form.mileage),
       });
       router.push("/vehicles");
-    } catch {
-      setError("Une erreur est survenue. Veuillez réessayer.");
+    } catch (err) {
+      setError(err instanceof Error ? err.message : "Une erreur est survenue.");
       setLoading(false);
     }
   }
