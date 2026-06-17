@@ -6,7 +6,9 @@ import {
 import Link from "next/link";
 import { StatProfile } from "@/components/profile/StatsCard";
 import { ChevronRight, User, Bell, SettingsIcon, Zap } from "lucide-react";
-import { FakeHistory, FakeVehicles } from "@/lib/fake";
+
+import { getUserStats } from "@/server/queries/stats";
+import { getCurrentUser } from "@/server/queries/user";
 
 const params = [
   {
@@ -41,7 +43,10 @@ const helps = [
   { title: "Confidentialité", href: "/privacy" },
 ];
 
-export default function ProfilePage() {
+export default async function ProfilePage() {
+  const stats = await getUserStats();
+  const user = await getCurrentUser();
+
   return (
     <>
       {/* Profile Header */}
@@ -59,18 +64,18 @@ export default function ProfilePage() {
         </div>
         <div className="flex-1">
           <p className="text-base font-bold text-neutral-900">
-            Alexis DE JESUS
+            {user?.firstName} {user?.lastName}
           </p>
-          <p className="text-xs text-neutral-500">alexis.dejesus@gmail.com</p>
+          <p className="text-xs text-neutral-500">{user?.email}</p>
         </div>
         <ChevronRight className="w-5 h-5 text-neutral-300" />
       </div>
 
       {/* Stats */}
       <div className="bg-white border border-neutral-200 rounded-2xl p-4 flex flex-row items-center justify-around">
-        <StatProfile value={FakeVehicles.length} label="Véhicules" />
+        <StatProfile value={stats.vehiclesCount} label="Véhicules" />
         <div className="w-px bg-neutral-200 self-stretch my-1" />
-        <StatProfile value={FakeHistory.length} label="Entretiens" />
+        <StatProfile value={stats.interventionsCount} label="Entretiens" />
         <div className="w-px bg-neutral-200 self-stretch my-1" />
         <StatProfile value="3" label="Mois" />
       </div>

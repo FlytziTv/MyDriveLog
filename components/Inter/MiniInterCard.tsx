@@ -27,7 +27,7 @@ export default function MiniInterCard({
 
           {/* Prix */}
           <p className="text-base font-semibold text-neutral-900 shrink-0">
-            {cost}€
+            {cost}
           </p>
         </div>
       </div>

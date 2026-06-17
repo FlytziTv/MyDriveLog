@@ -1,23 +1,34 @@
+import { formatCurrency, formatDistance } from "@/lib/format";
 import { MiniStatsCarProps, StatProfileProps } from "@/types";
 
-export default function MiniStatsTabs({ km, date, total }: MiniStatsCarProps) {
+export default function MiniStatsTabs({
+  km,
+  date,
+  total,
+  currency,
+  distanceUnit,
+}: MiniStatsCarProps) {
   return (
     <div className=" border-y border-neutral-200 p-4 flex flex-row items-center justify-around">
-      <Stats value={km || "-"} label="Kilomètres" />
+      <Stats value={formatDistance(km, distanceUnit)} label="Kilomètres" />
 
       <div className="w-px bg-neutral-200 self-stretch my-1" />
 
       <Stats
-        value={new Date(date || "-").toLocaleDateString("fr-FR", {
-          day: "numeric",
-          month: "short",
-        })}
+        value={
+          date
+            ? new Date(date).toLocaleDateString("fr-FR", {
+                day: "numeric",
+                month: "short",
+              })
+            : "Aucune"
+        }
         label="Dernière"
       />
 
       <div className="w-px bg-neutral-200 self-stretch my-1" />
 
-      <Stats value={total + " €" || "-"} label="Total" />
+      <Stats value={formatCurrency(total, currency)} label="Total" />
     </div>
   );
 }

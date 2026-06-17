@@ -1,5 +1,6 @@
 import { LucideIcon } from "lucide-react";
 import { MaintenanceType, ExpenseCategory } from "@prisma/client";
+import { Currency, DistanceUnit } from "@prisma/client";
 
 interface NavBarProps {
   icon: LucideIcon;
@@ -32,16 +33,16 @@ interface DetailInterCardProps {
   icon: LucideIcon;
   type: string;
   vehicle: string;
-  cost: number;
+  cost: string | number;
   date: string;
-  km?: number;
+  km?: string | number;
 }
 
 interface MiniInterCardProps {
   icon: LucideIcon;
   type: string;
   data: string | number;
-  cost: number;
+  cost: string | number;
 }
 
 interface MiniaVehicleCardProps {
@@ -50,8 +51,8 @@ interface MiniaVehicleCardProps {
   brand: string;
   model: string;
   year: number | string;
-  plate: string;
-  km: number;
+  plate?: string;
+  km: string;
 }
 
 interface StatCardProps {
@@ -84,8 +85,17 @@ interface HistoryItem {
 
 interface MiniStatsCarProps {
   km: number;
-  date: string;
-  total: string | number;
+  date?: string | null;
+  total: number;
+  currency: Currency;
+  distanceUnit: DistanceUnit;
+}
+
+interface HistoryCarProps {
+  vehicleName: string;
+  initialHistory: HistoryItem[];
+  currency: Currency;
+  distanceUnit: DistanceUnit;
 }
 
 interface QuestionCardProps {
@@ -105,6 +115,22 @@ interface SubscriptionCardProps {
   actif?: boolean;
 }
 
+interface VehicleMinimal {
+  id: string;
+  name: string;
+}
+
+interface NotifCardProps {
+  id: string;
+  unread: boolean;
+  icon: LucideIcon;
+  color: string;
+  title: string;
+  time: string;
+  body: string;
+  dismiss?: (id: string) => void;
+}
+
 export type {
   NavBarProps,
   SectionIconProfileProps,
@@ -119,6 +145,9 @@ export type {
   CategoryProps,
   HistoryItem,
   MiniStatsCarProps,
+  HistoryCarProps,
   QuestionCardProps,
   SubscriptionCardProps,
+  VehicleMinimal,
+  NotifCardProps,
 };

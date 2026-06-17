@@ -6,6 +6,7 @@
 generator client {
   provider = "prisma-client-js"
   output   = "../node_modules/.prisma/client"
+  previewFeatures = ["driverAdapters"]
 }
 
 datasource db {
@@ -51,28 +52,44 @@ model Verification {
   updatedAt  DateTime @updatedAt
 }
 
-model User {
-  id        String    @id @default(cuid())
-  email     String    @unique
-  name      String?
-  image     String?
-  createdAt DateTime  @default(now())
-  updatedAt DateTime  @updatedAt
-  vehicles  Vehicle[]
-  sessions  Session[]
-  accounts  Account[]
+enum SubscriptionPlan {
+  FREE
+  PREMIUM
 }
+
+model User {
+  id            String    @id @default(cuid())
+  email         String    @unique
+  emailVerified Boolean   @default(false)
+  name          String?
+  firstName     String?
+  lastName      String?
+  phone         String?
+  image         String?
+  plan          SubscriptionPlan @default(FREE)
+  planRenewsAt  DateTime?
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+  vehicles      Vehicle[]
+  sessions      Session[]
+  accounts      Account[]
+  preferences Preferences?
+  notifications Notification[]
+}
+
 
 model Vehicle {
   id           String        @id @default(cuid())
   userId       String
   user         User          @relation(fields: [userId], references: [id], onDelete: Cascade)
+  name         String
   brand        String
   model        String
   year         Int
   plate        String?
   mileage      Int
   photo        String?
+  notes        String?
   createdAt    DateTime      @default(now())
   updatedAt    DateTime      @updatedAt
   maintenances Maintenance[]
@@ -105,6 +122,47 @@ model Expense {
   updatedAt DateTime        @updatedAt
 }
 
+model Preferences {
+  id     String @id @default(cuid())
+  userId String @unique
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  // Notifications
+  notifMaintenanceReminder Boolean @default(true)
+  notifMileageAlert        Boolean @default(true)
+  notifMonthlySummary      Boolean @default(true)
+  notifNews                Boolean @default(false)
+  reminderBefore           ReminderPeriod @default(SEVEN_DAYS)
+
+  // Personnalisation
+  distanceUnit DistanceUnit @default(KM)
+  currency     Currency     @default(EUR)
+  language     Language     @default(FR)
+  theme        Theme        @default(SYSTEM)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Notification {
+  id        String           @id @default(cuid())
+  userId    String
+  user      User             @relation(fields: [userId], references: [id], onDelete: Cascade)
+  type      NotificationType
+  title     String
+  body      String
+  unread    Boolean          @default(true)
+  createdAt DateTime         @default(now())
+}
+
+enum NotificationType {
+  MAINTENANCE_DUE
+  MILEAGE_ALERT
+  MONTHLY_SUMMARY
+  CONTROL_TECHNIQUE
+  NEWS
+}
+
 enum MaintenanceType {
   OIL_CHANGE
   TIRE_CHANGE
@@ -125,4 +183,34 @@ enum ExpenseCategory {
   FINE
   WASH
   OTHER
+}
+
+enum ReminderPeriod {
+  SEVEN_DAYS
+  FOURTEEN_DAYS
+  ONE_MONTH
+}
+
+enum DistanceUnit {
+  KM
+  MILES
+}
+
+enum Currency {
+  EUR
+  USD
+  GBP
+}
+
+enum Language {
+  FR
+  EN
+  ES
+  DE
+}
+
+enum Theme {
+  LIGHT
+  DARK
+  SYSTEM
 }

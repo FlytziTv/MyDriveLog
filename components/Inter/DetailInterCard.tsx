@@ -30,7 +30,7 @@ export default function DetailInterCard({
 
           {/* Prix */}
           <p className="text-base font-semibold text-neutral-900 shrink-0">
-            {cost}€
+            {cost}
           </p>
         </div>
       </div>
@@ -45,7 +45,7 @@ export default function DetailInterCard({
         {km !== undefined && (
           <div className="flex items-center gap-1.5 text-[12px] text-neutral-500">
             <MapPin size={14} />
-            {km.toLocaleString()} km
+            {km}
           </div>
         )}
       </div>

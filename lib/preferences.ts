@@ -1,8 +1,6 @@
-// Preference profil -> Preferences
-
 const pref_unit = [
-  { value: "km", label: "Kilomètres" },
-  { value: "mi", label: "Miles" },
+  { value: "KM", label: "Kilomètres" },
+  { value: "MILES", label: "Miles" },
 ];
 
 const pref_devise = [
@@ -12,19 +10,23 @@ const pref_devise = [
 ];
 
 const pref_langue = [
-  { value: "fr", label: "Français" },
-  { value: "en", label: "English" },
-  { value: "es", label: "Español" },
-  { value: "de", label: "Deutsch" },
+  { value: "FR", label: "Français" },
+  { value: "EN", label: "English" },
+  { value: "ES", label: "Español" },
+  { value: "DE", label: "Deutsch" },
 ];
 
 const pref_theme = [
-  { value: "light", label: "Clair" },
-  { value: "dark", label: "Sombre" },
-  { value: "system", label: "Système" },
+  { value: "LIGHT", label: "Clair" },
+  { value: "DARK", label: "Sombre" },
+  { value: "SYSTEM", label: "Système" },
 ];
 
-// Preference Notifications -> Notifications
+const reminder_periods = [
+  { value: "SEVEN_DAYS", label: "7 jours" },
+  { value: "FOURTEEN_DAYS", label: "14 jours" },
+  { value: "ONE_MONTH", label: "1 mois" },
+];
 
 const notif_preferences = [
   {
@@ -33,10 +35,12 @@ const notif_preferences = [
       {
         title: "Rappels entretien",
         description: "Alerte avant échéance de révision",
+        key: "notifMaintenanceReminder" as const,
       },
       {
         title: "Alertes kilométrage",
         description: "Notification au seuil programmé",
+        key: "notifMileageAlert" as const,
       },
     ],
   },
@@ -46,13 +50,22 @@ const notif_preferences = [
       {
         title: "Résumé mensuel",
         description: "Récapitulatif de vos dépenses",
+        key: "notifMonthlySummary" as const,
       },
       {
         title: "Nouveautés MyDriveLog",
         description: "Nouvelles fonctionnalités et mises à jour",
+        key: "notifNews" as const,
       },
     ],
   },
 ];
 
-export { pref_unit, pref_devise, pref_langue, pref_theme, notif_preferences };
+export {
+  pref_unit,
+  pref_devise,
+  pref_langue,
+  pref_theme,
+  reminder_periods,
+  notif_preferences,
+};

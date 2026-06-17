@@ -49,7 +49,7 @@ export default function MiniaVehicleCard({
         {/* Kilometerage */}
         <div className="flex items-center gap-1.5 text-xs text-neutral-500">
           <MapPin size={14} />
-          {km.toLocaleString()} km
+          {km}
         </div>
       </div>
 
@@ -105,7 +105,7 @@ export function VehicleVerticalCard({
         {/* Kilometerage */}
         <div className="flex items-center gap-1.5 text-xs text-neutral-500">
           <MapPin size={14} />
-          {km.toLocaleString()} km
+          {km}
         </div>
       </div>
     </Link>

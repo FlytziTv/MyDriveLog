@@ -1,9 +1,17 @@
+import { getVehicles } from "@/server/queries/vehicle";
 import MiniaVehicleCard from "@/components/car/MiniaVehicleCard";
-import { FakeVehicles } from "@/lib/fake";
 import { Plus } from "lucide-react";
 import Link from "next/link";
+import { getPreferences } from "@/server/queries/preferences";
+import { formatDistance } from "@/lib/format";
 
-export default function VehiclesPage() {
+export default async function VehiclesPage() {
+  const [vehicles, preferences] = await Promise.all([
+    getVehicles(),
+    getPreferences(),
+  ]);
+
+  const distanceUnit = preferences?.distanceUnit ?? "KM";
   return (
     <>
       {/* Vehicles Header */}
@@ -11,7 +19,7 @@ export default function VehiclesPage() {
         <div>
           <h2 className="text-2xl font-bold text-neutral-900">Mon Garage</h2>
           <p className="text-[14px] text-neutral-500">
-            {FakeVehicles.length} Véhicules
+            {vehicles.length} Véhicules
           </p>
         </div>
 
@@ -24,18 +32,22 @@ export default function VehiclesPage() {
       </div>
 
       <div className="flex flex-col gap-2">
-        {FakeVehicles.map((vehicle) => (
-          <MiniaVehicleCard
-            key={vehicle.id}
-            id={vehicle.id}
-            name={vehicle.name}
-            brand={vehicle.brand}
-            model={vehicle.model}
-            year={vehicle.year}
-            plate={vehicle.plate}
-            km={vehicle.km}
-          />
-        ))}
+        {vehicles.length === 0 ? (
+          <p className="text-sm text-neutral-500">Aucun véhicule ajouté.</p>
+        ) : (
+          vehicles.map((vehicle) => (
+            <MiniaVehicleCard
+              key={vehicle.id}
+              id={vehicle.id}
+              name={vehicle.name}
+              brand={vehicle.brand}
+              model={vehicle.model}
+              year={vehicle.year}
+              plate={vehicle.plate ?? undefined}
+              km={formatDistance(vehicle.mileage, distanceUnit)}
+            />
+          ))
+        )}
       </div>
     </>
   );

@@ -1,8 +1,53 @@
+"use client";
+
 import Link from "next/link";
 import { ArrowLeft, Camera } from "lucide-react";
 import { GroupInput, InputBase, LabelBase } from "@/components/ui/Input";
+import { useState } from "react";
+import { useRouter } from "next/navigation";
+import { createVehicle } from "@/server/actions/vehicle";
 
 export default function AddVehicle() {
+  const router = useRouter();
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+  const [form, setForm] = useState({
+    name: "",
+    brand: "",
+    model: "",
+    year: "",
+    plate: "",
+    mileage: "",
+  });
+
+  function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
+    setForm((prev) => ({ ...prev, [e.target.name]: e.target.value }));
+  }
+
+  async function handleSubmit(e: React.FormEvent) {
+    e.preventDefault();
+    setError(null);
+    setLoading(true);
+
+    try {
+      await createVehicle({
+        name: form.name,
+        brand: form.brand,
+        model: form.model,
+        year: parseInt(form.year),
+        plate: form.plate || undefined,
+        mileage: parseInt(form.mileage),
+      });
+      router.push("/vehicles");
+    } catch (err) {
+      setError(err instanceof Error ? err.message : "Une erreur est survenue.");
+      setLoading(false);
+    }
+  }
+
+  const isValid =
+    form.name && form.brand && form.model && form.year && form.mileage;
+
   return (
     <>
       {/* Return page */}
@@ -25,52 +70,85 @@ export default function AddVehicle() {
         </div>
 
         {/* Form */}
-        <form className="flex flex-col gap-2 relative">
+        <form onSubmit={handleSubmit} className="flex flex-col gap-2 relative">
           <GroupInput>
             <LabelBase label="Nom du véhicule" />
-            <InputBase type="text" placeholder="Nom du véhicule (Pseudo)" />
+            <InputBase
+              name="name"
+              type="text"
+              placeholder="Nom du véhicule (Pseudo)"
+              value={form.name}
+              onChange={handleChange}
+            />
           </GroupInput>
 
           <GroupInput>
             <LabelBase label="Marque" />
-            <InputBase type="text" placeholder="Marque du véhicule" />
+            <InputBase
+              name="brand"
+              type="text"
+              placeholder="Marque du véhicule"
+              value={form.brand}
+              onChange={handleChange}
+            />
           </GroupInput>
 
           <GroupInput>
             <LabelBase label="Modèle" />
-            <InputBase type="text" placeholder="Modèle du véhicule" />
+            <InputBase
+              name="model"
+              type="text"
+              placeholder="Modèle du véhicule"
+              value={form.model}
+              onChange={handleChange}
+            />
           </GroupInput>
 
           <GroupInput>
             <LabelBase label="Année" />
             <InputBase
+              name="year"
               type="number"
               min={1899}
               max={new Date().getFullYear() + 1}
               placeholder="Année du véhicule"
+              value={form.year}
+              onChange={handleChange}
             />
           </GroupInput>
 
           <GroupInput>
             <LabelBase label="Immatriculation" />
-            <InputBase type="text" placeholder="Immatriculation du véhicule" />
+            <InputBase
+              name="plate"
+              type="text"
+              placeholder="Immatriculation du véhicule"
+              value={form.plate}
+              onChange={handleChange}
+            />
           </GroupInput>
 
           <GroupInput>
             <LabelBase label="Kilométrage actuel" />
             <InputBase
+              name="mileage"
               type="number"
               min={0}
               placeholder="Kilométrage actuel du véhicule"
+              value={form.mileage}
+              onChange={handleChange}
             />
           </GroupInput>
 
+          {error && <p className="text-xs text-red-500">{error}</p>}
+
           <div className="fixed bottom-0 left-0 right-0 p-6 bg-white border-t border-neutral-100 max-w-[430px] mx-auto">
             <button
-              // disabled={!form.subject || !form.message || !form.email}
+              type="submit"
+              disabled={!isValid || loading}
               className="w-full h-10 bg-neutral-900 text-white rounded-lg text-sm font-medium disabled:opacity-40 disabled:cursor-not-allowed transition-opacity"
             >
-              Ajouter le véhicule
+              {loading ? "Ajout en cours..." : "Ajouter le véhicule"}
             </button>
           </div>
         </form>
